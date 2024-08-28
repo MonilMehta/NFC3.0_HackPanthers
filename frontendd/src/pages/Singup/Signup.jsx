@@ -10,14 +10,21 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Link as Lk } from 'react-router-dom';
-
+//regex activation
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#0b1d41',
+      main: '#4285f4', // Google Blue
     },
     secondary: {
-      main: '#1c336b',
+      main: '#34a853', // Google Green
+    },
+    background: {
+      default: '#f5f5f5', // Google Light Gray Background
+    },
+    text: {
+      primary: '#202124', // Google Dark Gray
+      secondary: '#5f6368', // Google Light Gray
     },
   },
   typography: {
@@ -44,17 +51,17 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           '& label.Mui-focused': {
-            color: '#ffffff',
+            color: '#4285f4',
           },
           '& .MuiOutlinedInput-root': {
             '& fieldset': {
-              borderColor: '#ffffff',
+              borderColor: '#4285f4',
             },
             '&:hover fieldset': {
-              borderColor: '#b0bec5',
+              borderColor: '#34a853',
             },
             '&.Mui-focused fieldset': {
-              borderColor: '#ffffff',
+              borderColor: '#4285f4',
             },
           },
         },
@@ -120,23 +127,23 @@ export default function Signup() {
   };
 
   return (
-    <ThemeProvider theme={theme} style={{width:'100vw',height:'100vh'}}>
+    <ThemeProvider theme={theme}>
       <Box
         sx={{
-          backgroundColor: '#0b1d41',
+          backgroundColor: '#f5f5f5',
           minHeight: '100vh',
           minWidth: '100vw',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          padding: '2rem 0',
+          padding: '2rem',
         }}
       >
         <Container component="main" maxWidth="sm">
           <CssBaseline />
           <Box
             sx={{
-              backgroundColor: '#1c336b',
+              backgroundColor: '#ffffff',
               padding: '2.5rem 3rem',
               borderRadius: '15px',
               boxShadow: '0px 6px 30px rgba(0, 0, 0, 0.6)',
@@ -147,8 +154,8 @@ export default function Signup() {
               variant="h4"
               align="center"
               sx={{ 
-                color: '#ffffff', 
-                marginBottom: '2rem', 
+                color: '#202124',
+                marginBottom: '2rem',
                 fontWeight: 'bold',
                 letterSpacing: '0.7px',
               }}
@@ -168,10 +175,10 @@ export default function Signup() {
                     error={!!validationErrors.firstName}
                     helperText={validationErrors.firstName}
                     InputLabelProps={{
-                      style: { color: '#b0bec5' },
+                      style: { color: '#4285f4' },
                     }}
                     InputProps={{
-                      style: { color: '#ffffff' },
+                      style: { color: '#202124' },
                     }}
                   />
                 </Grid>
@@ -185,10 +192,10 @@ export default function Signup() {
                     error={!!validationErrors.lastName}
                     helperText={validationErrors.lastName}
                     InputLabelProps={{
-                      style: { color: '#b0bec5' },
+                      style: { color: '#4285f4' },
                     }}
                     InputProps={{
-                      style: { color: '#ffffff' },
+                      style: { color: '#202124' },
                     }}
                   />
                 </Grid>
@@ -203,10 +210,10 @@ export default function Signup() {
                     error={!!validationErrors.email}
                     helperText={validationErrors.email}
                     InputLabelProps={{
-                      style: { color: '#b0bec5' },
+                      style: { color: '#4285f4' },
                     }}
                     InputProps={{
-                      style: { color: '#ffffff' },
+                      style: { color: '#202124' },
                     }}
                   />
                 </Grid>
@@ -220,10 +227,10 @@ export default function Signup() {
                     error={!!validationErrors.phoneNumber}
                     helperText={validationErrors.phoneNumber}
                     InputLabelProps={{
-                      style: { color: '#b0bec5' },
+                      style: { color: '#4285f4' },
                     }}
                     InputProps={{
-                      style: { color: '#ffffff' },
+                      style: { color: '#202124' },
                     }}
                   />
                 </Grid>
@@ -236,11 +243,11 @@ export default function Signup() {
                     type="date"
                     id="dob"
                     InputLabelProps={{
-                      style: { color: '#b0bec5' },
+                      style: { color: '#4285f4' },
                       shrink: true,
                     }}
                     InputProps={{
-                      style: { color: '#ffffff' },
+                      style: { color: '#202124' },
                     }}
                   />
                 </Grid>
@@ -256,10 +263,10 @@ export default function Signup() {
                     error={!!validationErrors.password}
                     helperText={validationErrors.password}
                     InputLabelProps={{
-                      style: { color: '#b0bec5' },
+                      style: { color: '#4285f4' },
                     }}
                     InputProps={{
-                      style: { color: '#ffffff' },
+                      style: { color: '#202124' },
                     }}
                   />
                 </Grid>
@@ -267,7 +274,7 @@ export default function Signup() {
                   <FormControlLabel
                     control={<Checkbox value="allowExtraEmails" color="primary" />}
                     label="I want to receive inspiration, marketing promotions, and updates via email."
-                    sx={{ color: '#b0bec5' }}
+                    sx={{ color: '#5f6368' }}
                   />
                 </Grid>
               </Grid>
@@ -276,28 +283,36 @@ export default function Signup() {
                   Please fix the errors before submitting.
                 </Typography>
               )}
-              <Button
+              <Lk
+              to='/signin'
+              style={{
+                textDecoration: 'none',
+                color: '#fff', // White text
+              }}
+              >
+                <Button
                 type="submit"
                 fullWidth
                 variant="contained"
                 sx={{
                   mt: 3,
                   mb: 2,
-                  backgroundColor: '#ffffff',
-                  color: '#0b1d41',
+                  backgroundColor: '#4285f4',
+                  color: '#ffffff',
                   fontWeight: 700,
                   '&:hover': {
-                    backgroundColor: '#ffffff',
-                    color: '#1c336b',
+                    backgroundColor: '#357ae8',
                     transform: 'translateY(-2px)',
                   },
                 }}
               >
                 Sign Up
               </Button>
+              </Lk>
+              
               <Grid container justifyContent="flex-end">
                 <Grid item>
-                  <Lk to="/signin" style={{ textDecoration: 'none', color: '#b0bec5', fontWeight: 500 }}>
+                  <Lk to="/signin" style={{ textDecoration: 'none', color: '#4285f4', fontWeight: 500 }}>
                     Already have an account? Sign in
                   </Lk>
                 </Grid>

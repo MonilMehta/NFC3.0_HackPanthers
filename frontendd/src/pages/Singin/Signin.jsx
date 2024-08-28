@@ -9,12 +9,35 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { Link as Lk } from 'react-router-dom';
+import { Link as Lk, useNavigate } from 'react-router-dom';
 
-const defaultTheme = createTheme();
+const googleTheme = createTheme({
+  palette: {
+    primary: {
+      main: '#4285f4', // Google Blue
+    },
+    secondary: {
+      main: '#34a853', // Google Green
+    },
+    text: {
+      primary: '#202124', // Google Dark Gray
+      secondary: '#5f6368', // Google Light Gray
+    },
+    background: {
+      default: '#f5f5f5', // Google Light Gray Background
+    },
+  },
+  shape: {
+    borderRadius: 4, // Slightly rounded corners
+  },
+  typography: {
+    fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
+  },
+});
 
 export default function Signin() {
   const [validationErrors, setValidationErrors] = useState({});
+  const navigate = useNavigate(); // Hook to programmatically navigate
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -28,7 +51,7 @@ export default function Signin() {
     const errors = {};
 
     if (!emailRegex.test(email)) {
-      errors.email = 'Invalid email address. It must contain an @ sign.';
+      errors.email = 'Invalid email address.';
     }
 
     if (!password) {
@@ -38,25 +61,22 @@ export default function Signin() {
     setValidationErrors(errors);
 
     if (Object.keys(errors).length === 0) {
-      console.log({
-        email,
-        password,
-      });
+      // Redirect to the main page if there are no validation errors
+      navigate('/main');
     }
   };
 
   return (
-    <ThemeProvider theme={defaultTheme} style={{width:'100vw',height:'100vh'}}>
-      <Box 
-        sx={{ 
-          backgroundColor: '#0b1d41', 
+    <ThemeProvider theme={googleTheme}>
+      <Box
+        sx={{
+          backgroundColor: '#f5f5f5', // Light gray background
           minWidth: '100vw',
-          minHeight: '100vh', 
-          display: 'flex', 
-          justifyContent: 'center', 
-          alignItems: 'center', 
+          minHeight: '100vh',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
           padding: '2rem',
-          color: '#fff',
         }}
       >
         <Container component="main" maxWidth="xs">
@@ -66,29 +86,28 @@ export default function Signin() {
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
-              border: '1px solid #1c336b',
-              borderRadius: '12px',
+              border: '1px solid #ddd', // Light gray border
+              borderRadius: '8px',
               padding: '3rem 2rem',
-              boxShadow: '0 0 40px rgba(255, 255, 255, 0.1)',
-              backgroundColor: '#1c336b',
+              boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
+              backgroundColor: '#fff', // White background for the form
             }}
           >
-            <Typography 
-              component="h1" 
-              variant="h4" 
-              sx={{ 
-                color: '#ffffff', 
-                marginBottom: '1.5rem', 
-                fontWeight: 600,
-                letterSpacing: '0.5px',
+            <Typography
+              component="h1"
+              variant="h5"
+              sx={{
+                color: '#202124', // Dark gray text
+                marginBottom: '1.5rem',
+                fontWeight: 500,
               }}
             >
               Sign In
             </Typography>
-            <Box 
-              component="form" 
-              onSubmit={handleSubmit} 
-              noValidate 
+            <Box
+              component="form"
+              onSubmit={handleSubmit}
+              noValidate
               sx={{ width: '100%' }}
             >
               <TextField
@@ -103,14 +122,14 @@ export default function Signin() {
                 error={!!validationErrors.email}
                 helperText={validationErrors.email}
                 InputLabelProps={{
-                  style: { color: '#b0bec5' },
+                  style: { color: '#5f6368' }, // Light gray label
                 }}
                 InputProps={{
-                  style: { 
-                    color: '#fff', 
-                    backgroundColor: '#2b3a67', 
-                    borderRadius: '6px', 
-                    padding: '10px 15px', 
+                  style: {
+                    color: '#202124', // Dark gray text
+                    backgroundColor: '#fff', // White background
+                    borderRadius: '4px',
+                    padding: '10px 15px',
                   },
                 }}
               />
@@ -126,13 +145,13 @@ export default function Signin() {
                 error={!!validationErrors.password}
                 helperText={validationErrors.password}
                 InputLabelProps={{
-                  style: { color: '#b0bec5' },
+                  style: { color: '#5f6368' }, // Light gray label
                 }}
                 InputProps={{
-                  style: { 
-                    color: '#fff', 
-                    backgroundColor: '#2b3a67', 
-                    borderRadius: '6px', 
+                  style: {
+                    color: '#202124', // Dark gray text
+                    backgroundColor: '#fff', // White background
+                    borderRadius: '4px',
                     padding: '10px 15px',
                   },
                 }}
@@ -140,25 +159,24 @@ export default function Signin() {
               <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
                 label="Remember me"
-                sx={{ color: '#b0bec5', marginTop: '1rem' }}
+                sx={{ color: '#5f6368', marginTop: '1rem' }}
               />
               <Button
                 type="submit"
                 fullWidth
                 variant="contained"
-                sx={{ 
-                  mt: 3, 
-                  mb: 2, 
-                  backgroundColor: '#ffffff', 
-                  color: '#0b1d41', 
-                  fontWeight: 700,
-                  borderRadius: '6px',
+                sx={{
+                  mt: 3,
+                  mb: 2,
+                  backgroundColor: '#4285f4', // Google Blue
+                  color: '#fff', // White text
+                  fontWeight: 500,
+                  borderRadius: '4px',
                   transition: 'all 0.3s ease',
                   '&:hover': {
-                    backgroundColor: '#ffffff',
-                    color: '#1c336b',
+                    backgroundColor: '#357ae8', // Darker blue for hover
                     transform: 'translateY(-2px)',
-                    boxShadow: '0 4px 10px rgba(0, 0, 0, 0.2)',
+                    boxShadow: '0 6px 12px rgba(0, 0, 0, 0.2)',
                   },
                 }}
               >
@@ -166,12 +184,12 @@ export default function Signin() {
               </Button>
               <Grid container justifyContent="center" sx={{ mt: 2 }}>
                 <Grid item>
-                  <Lk 
-                    to="/signup" 
-                    style={{ 
-                      textDecoration: 'none', 
-                      color: '#ffffff', 
-                      fontWeight: 500, 
+                  <Lk
+                    to="/signup"
+                    style={{
+                      textDecoration: 'none',
+                      color: '#4285f4', // Google Blue
+                      fontWeight: 500,
                     }}
                   >
                     Don't have an account? Sign Up
