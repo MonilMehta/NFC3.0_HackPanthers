@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Book, Users, Globe, Menu, X, ChevronRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -13,10 +14,17 @@ const Navbar = () => {
             </div>
             <div className="hidden md:block">
               <div className="ml-10 flex items-baseline space-x-4">
-                <a href="#" className="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium">Home</a>
-                <a href="#" className="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium">About</a>
-                <a href="#" className="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium">Resources</a>
-                <a href="#" className="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium">Get Involved</a>
+                <ul style={{listStyle: 'none', display: 'flex', flexDirection: 'row', gap: '1rem'}}>
+                <li>
+                  <Link to="/signin">Signin</Link>
+                </li>
+                <li>
+                  <Link to="/signup">Signup</Link>
+                </li>
+                <li>
+                  <Link to="/about">About</Link>
+                </li>
+                </ul>
               </div>
             </div>
             <div className="md:hidden flex items-center">

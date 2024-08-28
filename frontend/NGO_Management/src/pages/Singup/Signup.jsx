@@ -125,6 +125,7 @@ export default function Signup() {
         sx={{
           backgroundColor: '#0b1d41',
           minHeight: '100vh',
+          minWidth: '100vw',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',

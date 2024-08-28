@@ -50,6 +50,7 @@ export default function Signin() {
       <Box 
         sx={{ 
           backgroundColor: '#0b1d41', 
+          minWidth: '100vw',
           minHeight: '100vh', 
           display: 'flex', 
           justifyContent: 'center', 
