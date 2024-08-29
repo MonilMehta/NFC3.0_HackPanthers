@@ -1,13 +1,8 @@
 import React from 'react';
-import { Calendar, Heart, DollarSign } from 'lucide-react';
 import Proj1 from '../../assets/Proj1.png';
-import Proj2 from '../../assets/Proj2.jpg';
 import Proj3 from '../../assets/Proj3.jpg';
-import Proj4 from '../../assets/Proj4.png';
-import Proj5 from '../../assets/Proj5.jpg';
-import Proj6 from '../../assets/Proj6.jpg';
 import CustomCard from './CustomCard';
-
+import Rotationlogo from './rotation/Rotationlogo';
 const Navbar = () => (
   <nav className="bg-[#003E1F] p-4">
     <div className="container mx-auto flex justify-between items-center">
@@ -47,6 +42,7 @@ const HomePage = () => {
       {/* Hero Section */}
       <div className="bg-[#003E1F] text-[#FFFFFF] py-20">
         <div className="container mx-auto px-4 text-center">
+          <Rotationlogo />
           <h1 className="text-5xl font-bold mb-6">Empowering Children, Transforming Lives</h1>
           <p className="text-xl mb-8 max-w-2xl mx-auto">Join our mission to provide education, healthcare, and support to children in need. Together, we can create a brighter future for all.</p>
           <button className="bg-[#4CAF50] text-[#FFFFFF] font-bold py-3 px-8 rounded-full hover:bg-[#6BCB80] transition duration-300">
