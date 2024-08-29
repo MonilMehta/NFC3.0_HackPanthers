@@ -114,7 +114,7 @@ const Navbar = () => {
               </MenuItem>
               <MenuItem onClick={handleCloseNavMenu}>
                 <Link to="/badges-certificates" style={{ textDecoration: 'none', color: '#2c3e50' }}>
-                  <Typography sx={{ textAlign: 'center' }}>Badges & Certificates</Typography>
+                  <Typography sx={{ textAlign: 'center' }}>Forum</Typography>
                 </Link>
               </MenuItem>
               <MenuItem onClick={handleCloseNavMenu}>
@@ -147,7 +147,7 @@ const Navbar = () => {
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'center' }}>
             <StyledButton component={Link} to="/donation">Donate</StyledButton>
             <StyledButton component={Link} to="/events">Events</StyledButton>
-            <StyledButton component={Link} to="/badges-certificates">Badges & Certificates</StyledButton>
+            <StyledButton component={Link} to="/forum">Forum</StyledButton>
             <StyledButton component={Link} to="/event-analytics">Event Analytics</StyledButton>
           </Box>
 

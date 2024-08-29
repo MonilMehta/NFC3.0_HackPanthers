@@ -8,6 +8,9 @@ import Account from './pages/Account/Account';
 import Donation from './pages/donation/Donation';
 import EventUser from './pages/EventManagement/EventUser';
 // import RazorpayForm from './pages/donation/RazorpayForm';
+import EventInfoDetailsPage from './pages/EventManagement/EventInfoDetailPage';
+import Forum from './pages/Forum/Forum';
+
 const App = () => {
   return (
     <Router>
@@ -20,6 +23,8 @@ const App = () => {
         <Route path="/donation" element={<Donation />} />
         <Route path="/events" element={<EventUser />} />
         {/* <Route path="/razorpay" element={<RazorpayForm />} /> */}
+        <Route path="/event-details/:eventId" element={<EventInfoDetailsPage />} />
+        <Route path="/forum" element={<Forum />} />
 
       </Routes>
     </Router>
