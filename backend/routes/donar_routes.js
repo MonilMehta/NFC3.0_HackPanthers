@@ -1,6 +1,6 @@
 import express from "express"
 import donar from '../controllers/donors/donar.js'
-import donarDetails from "../controllers/donors/donar.js";
+import donarDetails from "../controllers/donors/getDonarDetails.js";
 
 const router = express.Router();
 

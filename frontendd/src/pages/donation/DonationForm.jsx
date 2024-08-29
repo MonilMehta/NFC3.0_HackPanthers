@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { TextField, Button, Box, Typography, Container, Grid } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { Link as Lk } from 'react-router-dom';
 import jsPDF from 'jspdf';
 
 const theme = createTheme({
@@ -38,6 +37,8 @@ const DonationForm = () => {
   });
 
   const [validationErrors, setValidationErrors] = useState({});
+  const [submissionError, setSubmissionError] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -47,7 +48,7 @@ const DonationForm = () => {
     });
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -79,7 +80,38 @@ const DonationForm = () => {
     setValidationErrors(errors);
 
     if (Object.keys(errors).length === 0) {
-      generatePDF(); // Call the function to generate the PDF
+      try {
+        setIsSubmitting(true);
+        const response = await fetch('http://localhost:8000/donates/donate', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formData),
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to submit donation');
+        }
+
+        await response.json();
+        generatePDF(); // Call the function to generate the PDF
+
+        // Reset form data after successful submission
+        setFormData({
+          firstName: '',
+          lastName: '',
+          donarEmail: '',
+          donarPhoneNo: '',
+          amount: '',
+          message: '',
+        });
+        setSubmissionError('');
+      } catch (error) {
+        setSubmissionError('There was an error submitting the form. Please try again.');
+      } finally {
+        setIsSubmitting(false);
+      }
     }
   };
 
@@ -214,9 +246,16 @@ const DonationForm = () => {
                     transform: 'translateY(-2px)',
                   },
                 }}
+                disabled={isSubmitting}
               >
-                Payment
+                {isSubmitting ? 'Submitting...' : 'Submit'}
               </Button>
+
+              {submissionError && (
+                <Typography color="error" align="center" sx={{ mt: 2 }}>
+                  {submissionError}
+                </Typography>
+              )}
           </Box>
         </Box>
       </Container>
