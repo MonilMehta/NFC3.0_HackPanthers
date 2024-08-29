@@ -122,6 +122,11 @@ const Navbar = () => {
                   <Typography sx={{ textAlign: 'center' }}>Event Analytics</Typography>
                 </Link>
               </MenuItem>
+              <MenuItem onClick={handleCloseNavMenu}>
+                <Link to="/projects" style={{ textDecoration: 'none', color: '#2c3e50' }}>
+                  <Typography sx={{ textAlign: 'center' }}>Projects</Typography>
+                </Link>
+              </MenuItem>
             </Menu>
           </Box>
           <VolunteerActivismIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1, color: '#ecf0f1' }} />
@@ -149,6 +154,7 @@ const Navbar = () => {
             <StyledButton component={Link} to="/events">Events</StyledButton>
             <StyledButton component={Link} to="/forum">Forum</StyledButton>
             <StyledButton component={Link} to="/event-analytics">Event Analytics</StyledButton>
+            <StyledButton component={Link} to="/projects">Projects</StyledButton>
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
@@ -179,7 +185,7 @@ const Navbar = () => {
                 </Link>
               </MenuItem>
               <MenuItem onClick={handleCloseUserMenu}>
-                <Link to="/logout" style={{ textDecoration: 'none', color: '#2c3e50' }}>
+                <Link to="/" style={{ textDecoration: 'none', color: '#2c3e50' }}>
                   <Typography sx={{ textAlign: 'center' }}>Logout</Typography>
                 </Link>
               </MenuItem>

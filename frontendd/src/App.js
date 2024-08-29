@@ -10,6 +10,7 @@ import EventUser from './pages/EventManagement/EventUser';
 // import RazorpayForm from './pages/donation/RazorpayForm';
 import EventInfoDetailsPage from './pages/EventManagement/EventInfoDetailPage';
 import Forum from './pages/Forum/Forum';
+import Projects from './pages/projectsuser/Projects';
 
 const App = () => {
   return (
@@ -25,6 +26,7 @@ const App = () => {
         {/* <Route path="/razorpay" element={<RazorpayForm />} /> */}
         <Route path="/event-details/:eventId" element={<EventInfoDetailsPage />} />
         <Route path="/forum" element={<Forum />} />
+        <Route path="/projects" element={<Projects />} />
 
       </Routes>
     </Router>
