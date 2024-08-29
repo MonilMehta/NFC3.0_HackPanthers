@@ -49,7 +49,7 @@ const signUp = async (req, resp) => {
     // console.log(result);
 
     // Send SMS
-    // await sendSMS(userdata.firstName, userdata.lastName, userdata.phone_no);
+    await sendSMS(userdata.firstName, userdata.lastName, userdata.phone_no);
 
     const createdUser = await User.findById(userdata?._id).select(
       "-password -refreshToken"

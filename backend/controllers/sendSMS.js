@@ -4,7 +4,7 @@ import { parsePhoneNumberFromString } from 'libphonenumber-js';
 
 // Twilio credentials (use environment variables for security)
 const accountSid ='AC3c76b48f5c70753ecf744b43d7f59841';
-const authToken ='a0a6b7d343f2cb399a3788873bd7f6f9';
+const authToken ='012819d2ad2be608351f579d3479c3ff';
 const client = new twilio(accountSid, authToken);
 
 // Function to send SMS

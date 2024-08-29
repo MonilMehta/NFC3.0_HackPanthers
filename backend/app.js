@@ -24,10 +24,12 @@ app.use(cookieParser());
 import user_router from "./routes/user_routes.js";
 import event_router from "./routes/event_routes.js";
 import project_router from "./routes/project_routes.js";
-
+import donar_router from "./routes/donar_routes.js"
 // declare routes
+
 app.use("/users", user_router);
 app.use("/projects", project_router);
 app.use("/events", event_router);
+app.use("/donates",donar_router);
 
 export { app };

@@ -30,7 +30,7 @@ const ProjectSchema = new mongoose.Schema({
     },
   ],
   budget: {
-    allocated: {
+    allocated: { 
       type: Number,
       default: 0,
     },
