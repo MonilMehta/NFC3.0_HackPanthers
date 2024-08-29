@@ -6,6 +6,7 @@ import Landing from './pages/landing/Landing';
 import Mainpage from './pages/main/Mainpage';
 import AdminMain from './pages/Admin/AdminMain';
 import Account from './pages/Account/Account';
+import Donation from './pages/donation/Donation';
 const App = () => {
   return (
     <Router>
@@ -16,6 +17,7 @@ const App = () => {
         <Route path="/main" element={<Mainpage />} />
         <Route path="/admin/*" element={<AdminMain />} />
         <Route path="/account" element={<Account />} />
+        <Route path="/donation" element={<Donation />} />
       </Routes>
     </Router>
   );

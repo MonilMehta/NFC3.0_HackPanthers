@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -14,24 +15,21 @@ import MenuItem from '@mui/material/MenuItem';
 import VolunteerActivismIcon from '@mui/icons-material/VolunteerActivism';
 import { styled } from '@mui/material/styles';
 
-const pages = ['Donate', 'Events', 'Badges & Certificates', 'Event Analytics'];
-const settings = ['Account', 'Logout'];
-
 const StyledAppBar = styled(AppBar)({
-  backgroundColor: '#1e1e2d', // Darker primary color consistent with the admin navbar
-  boxShadow: 'none', // Keep a flat design with no shadow
-  borderBottom: '1px solid #34495e', // Slightly darker border for a subtle separation
+  backgroundColor: '#1e1e2d',
+  boxShadow: 'none',
+  borderBottom: '1px solid #34495e',
 });
 
 const StyledButton = styled(Button)({
-  color: '#ecf0f1', // Light text color consistent with the admin theme
+  color: '#ecf0f1',
   fontWeight: '500',
   fontSize: '14px',
   '&:hover': {
     backgroundColor: '#ecf0f1',
-    color:'#1e1e2d' // Darker shade on hover consistent with admin navbar
+    color: '#1e1e2d',
   },
-  margin: '0 10px', // Adjusting margin for consistent spacing
+  margin: '0 10px',
 });
 
 const Navbar = () => {
@@ -62,12 +60,12 @@ const Navbar = () => {
           <Typography
             variant="h6"
             noWrap
-            component="a"
-            href="#"
+            component={Link}
+            to="/"
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
-              fontFamily: 'Roboto, sans-serif', // Professional font
+              fontFamily: 'Roboto, sans-serif',
               fontWeight: 700,
               letterSpacing: '.1rem',
               color: 'inherit',
@@ -104,19 +102,34 @@ const Navbar = () => {
               onClose={handleCloseNavMenu}
               sx={{ display: { xs: 'block', md: 'none' } }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography sx={{ textAlign: 'center', color: '#2c3e50' }}>{page}</Typography>
-                </MenuItem>
-              ))}
+              <MenuItem onClick={handleCloseNavMenu}>
+                <Link to="/donate" style={{ textDecoration: 'none', color: '#2c3e50' }}>
+                  <Typography sx={{ textAlign: 'center' }}>Donate</Typography>
+                </Link>
+              </MenuItem>
+              <MenuItem onClick={handleCloseNavMenu}>
+                <Link to="/events" style={{ textDecoration: 'none', color: '#2c3e50' }}>
+                  <Typography sx={{ textAlign: 'center' }}>Events</Typography>
+                </Link>
+              </MenuItem>
+              <MenuItem onClick={handleCloseNavMenu}>
+                <Link to="/badges-certificates" style={{ textDecoration: 'none', color: '#2c3e50' }}>
+                  <Typography sx={{ textAlign: 'center' }}>Badges & Certificates</Typography>
+                </Link>
+              </MenuItem>
+              <MenuItem onClick={handleCloseNavMenu}>
+                <Link to="/event-analytics" style={{ textDecoration: 'none', color: '#2c3e50' }}>
+                  <Typography sx={{ textAlign: 'center' }}>Event Analytics</Typography>
+                </Link>
+              </MenuItem>
             </Menu>
           </Box>
           <VolunteerActivismIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1, color: '#ecf0f1' }} />
           <Typography
             variant="h5"
             noWrap
-            component="a"
-            href="#"
+            component={Link}
+            to="/"
             sx={{
               mr: 2,
               display: { xs: 'flex', md: 'none' },
@@ -132,14 +145,10 @@ const Navbar = () => {
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'center' }}>
-            {pages.map((page) => (
-              <StyledButton
-                key={page}
-                onClick={handleCloseNavMenu}
-              >
-                {page}
-              </StyledButton>
-            ))}
+            <StyledButton component={Link} to="/donation">Donate</StyledButton>
+            <StyledButton component={Link} to="/events">Events</StyledButton>
+            <StyledButton component={Link} to="/badges-certificates">Badges & Certificates</StyledButton>
+            <StyledButton component={Link} to="/event-analytics">Event Analytics</StyledButton>
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
@@ -164,11 +173,16 @@ const Navbar = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography sx={{ textAlign: 'center', color: '#2c3e50' }}>{setting}</Typography>
-                </MenuItem>
-              ))}
+              <MenuItem onClick={handleCloseUserMenu}>
+                <Link to="/account" style={{ textDecoration: 'none', color: '#2c3e50' }}>
+                  <Typography sx={{ textAlign: 'center' }}>Account</Typography>
+                </Link>
+              </MenuItem>
+              <MenuItem onClick={handleCloseUserMenu}>
+                <Link to="/logout" style={{ textDecoration: 'none', color: '#2c3e50' }}>
+                  <Typography sx={{ textAlign: 'center' }}>Logout</Typography>
+                </Link>
+              </MenuItem>
             </Menu>
           </Box>
         </Toolbar>
