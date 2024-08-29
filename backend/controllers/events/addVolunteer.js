@@ -12,7 +12,7 @@ const addVolunteer = async (req, res) => {
       { new: true } // Returns the updated event document
     ).populate('volunteers');
 
-    // If the event is not found
+    // If the event is not found1
     if (!event) {
       return res.status(404).json({ message: "Event not found" });
     }

@@ -19,7 +19,7 @@ const RotationVol = () => {
   const [hovered, setHovered] = useState(false);
 
   return (
-    <div style={{ width: '300px', height: '300px', background: '#003E1F', margin: 'auto', }}>
+    <div style={{ width: '300px', height: '300px', background: '#f1f8e9', margin: 'auto', }}>
       <Canvas style={{ width: '100%', height: '100%' }}>
         <React.Suspense fallback={null}>
           {/* Ambient Light */}

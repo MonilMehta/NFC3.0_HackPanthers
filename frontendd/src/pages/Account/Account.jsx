@@ -135,14 +135,11 @@ export default function Account() {
         <Card sx={{ bgcolor: '#f1f8e9', color: '#2c3e50' }}>
           <Box sx={{ mb: 1 }}>
             <Typography level="title-md" sx={{ color: '#2e7d32' }}>
-              <BadgeIcon sx={{ mr: 1 }} /> Badges
+              <BadgeIcon sx={{ mr: 1 }} /> Badges Earned
             </Typography>
           </Box>
           <Divider sx={{ bgcolor: '#2e7d32' }} />
-          <Typography sx={{ my: 2 }}>You have earned 5 badges for outstanding performance!</Typography>
           <Stack direction="row" spacing={2}>
-            <img src="https://example.com/badge1.png" alt="Badge 1" style={{ width: '50px', height: '50px' }} />
-            <img src="https://example.com/badge2.png" alt="Badge 2" style={{ width: '50px', height: '50px' }} />
             {/* Add more badge images as needed */}
             <RotationVol/>
             <Rotationdoner/>
@@ -153,11 +150,10 @@ export default function Account() {
         <Card sx={{ bgcolor: '#f1f8e9', color: '#2c3e50' }}>
           <Box sx={{ mb: 1 }}>
             <Typography level="title-md" sx={{ color: '#2e7d32' }}>
-              <EventIcon sx={{ mr: 1 }} /> Events
+              <EventIcon sx={{ mr: 1 }} /> Events Volunteered
             </Typography>
           </Box>
           <Divider sx={{ bgcolor: '#2e7d32' }} />
-          <Typography sx={{ my: 2 }}>You have participated in 3 events this year:</Typography>
           <ul>
             <li>Hackathon 2024</li>
             <li>CodeFest 2024</li>
