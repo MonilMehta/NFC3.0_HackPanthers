@@ -1,6 +1,6 @@
-const Project = require("../../models/Project_Schema");
+import Project from "../../models/Project_Schema.js";
 
-module.exports = async (req, res) => {
+const createProject = async (req, res) => {
   try {
     // Create a new project with the provided details
     const projectData = new Project({
@@ -32,3 +32,5 @@ module.exports = async (req, res) => {
     });
   }
 };
+
+export default createProject

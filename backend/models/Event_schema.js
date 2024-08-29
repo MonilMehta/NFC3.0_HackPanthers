@@ -1,6 +1,5 @@
 // models/Event.js
-const mongoose = require('mongoose');
-mongoose.connect("mongodb://127.0.0.1:27017/NGO");
+import mongoose  from "mongoose";
 
 const EventSchema = new mongoose.Schema({
   eventName: {
@@ -78,4 +77,4 @@ const EventSchema = new mongoose.Schema({
 
 const Event = mongoose.model('Event',EventSchema)
 
-module.exports = Event
+export default Event

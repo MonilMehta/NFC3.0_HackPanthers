@@ -1,8 +1,8 @@
 // controllers/deleteProjectMember.js
-const ProjectMember = require("../../models/Project_member_Schema");
-const Project = require("../../models/Project_Schema");
+import ProjectMember from "../../models/Project_member_Schema.js";
+import Project from "../../models/Project_Schema.js";
 
-module.exports = async (req, res) => {
+const deleteMember = async (req, res) => {
   try {
     const { memberId, projectId } = req.body;
 
@@ -34,3 +34,5 @@ module.exports = async (req, res) => {
     return res.status(500).json({ message: "Error in deleting project member" });
   }
 };
+
+export default deleteMember

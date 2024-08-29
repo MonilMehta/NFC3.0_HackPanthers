@@ -1,6 +1,6 @@
-const Event = require("../../models/Event_schema");
+import Event from "../../models/Event_schema.js";
 
-module.exports = async (req, res) => {
+const addVolunteer = async (req, res) => {
   try {
     const { eventId, userId } = req.body; 
 
@@ -25,3 +25,5 @@ module.exports = async (req, res) => {
     });
   }
 };
+
+export default addVolunteer

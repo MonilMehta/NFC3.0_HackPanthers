@@ -1,6 +1,6 @@
-const Event = require("../../models/Event_schema"); // Import the Event model
+import Event from "../../models/Event_schema.js"; // Import the Event model
 
-module.exports = async (req, res) => {
+const addParticipant = async (req, res) => {
   try {
     const { eventId, userId } = req.body; 
 
@@ -25,3 +25,5 @@ module.exports = async (req, res) => {
     });
   }
 };
+
+export default addParticipant;

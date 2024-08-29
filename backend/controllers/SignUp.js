@@ -1,11 +1,11 @@
-const User = require("../models/User_schema");
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const sendSMS = require("./sendSMS");
+import User from "../models/User_schema.js";
+import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken"
+import sendSMS from "./sendSMS.js";
 
 const secretKey = "123#secret";
 
-module.exports = async (req, resp) => {
+const signUp = async (req, resp) => {
   try {
     // Check if a user with the same first name and last name exists
     const existingUser = await User.findOne({
@@ -52,3 +52,5 @@ module.exports = async (req, resp) => {
     return resp.status(401).json({ message: "Error in creating User" });
   }
 };
+
+export default signUp;
