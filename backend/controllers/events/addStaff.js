@@ -1,7 +1,7 @@
-const Staff = require("../../models/Staff_schema");
-const Event = require("../../models/Event_schema");
+import Staff from "../../models/Staff_schema.js";
+import Event from "../../models/Event_schema.js";
 
-module.exports = async (req, res) => {
+const addStaff = async (req, res) => {
   try {
     // Create a new staff member
     const staffdata = new Staff({
@@ -37,3 +37,5 @@ module.exports = async (req, res) => {
     return res.status(500).json({ message: "Error in creating Staff member" });
   }
 };
+
+export default addStaff

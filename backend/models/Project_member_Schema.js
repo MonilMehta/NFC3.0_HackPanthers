@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+import mongoose  from "mongoose";
 
 const projectMemberSchema = new mongoose.Schema({
     firstName: {
@@ -31,4 +31,4 @@ const projectMemberSchema = new mongoose.Schema({
 
 const ProjectMember = mongoose.model('ProjectMember', projectMemberSchema);
 
-module.exports = ProjectMember;
+export default ProjectMember;

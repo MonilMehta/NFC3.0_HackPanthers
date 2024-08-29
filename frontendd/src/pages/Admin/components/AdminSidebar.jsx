@@ -1,62 +1,226 @@
-import React from 'react';
-import { List, ListItem, ListItemIcon, ListItemText, Divider, Box } from '@mui/material';
-import { Link } from 'react-router-dom';
-import DashboardIcon from '@mui/icons-material/Dashboard';
-import AssignmentIcon from '@mui/icons-material/Assignment';
-import PeopleIcon from '@mui/icons-material/People';
-import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
-import ReportIcon from '@mui/icons-material/Report';
-import EventIcon from '@mui/icons-material/Event';
+import React from "react";
+import {
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  Divider,
+  Box,
+} from "@mui/material";
+import { Link } from "react-router-dom";
+import DashboardIcon from "@mui/icons-material/Dashboard";
+import AssignmentIcon from "@mui/icons-material/Assignment";
+import PeopleIcon from "@mui/icons-material/People";
+import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
+import ReportIcon from "@mui/icons-material/Report";
+import EventIcon from "@mui/icons-material/Event";
 
 const AdminSidebar = () => {
   return (
-    <Box sx={{ width: 250, bgcolor: 'background.paper', height: '100vh' }}>
+    <Box
+      sx={{
+        width: 250,
+        bgcolor: "#1e1e2d",
+        height: "100vh",
+        color: "#ecf0f1",
+      }}
+    >
       <List>
-        <ListItem button component={Link} to="/admin/">
-          <ListItemIcon>
+        <ListItem 
+          button 
+          component={Link} 
+          to="/admin/"
+          sx={{
+            '&:hover': {
+              bgcolor: '#ecf0f1',
+              color: '#1e1e2d',
+            },
+          }}
+        >
+          <ListItemIcon 
+            sx={{
+              color: 'inherit',
+              '&:hover': {
+                color: '#1e1e2d',
+              },
+            }}
+          >
             <DashboardIcon />
           </ListItemIcon>
-          <ListItemText primary="Dashboard" />
+          <ListItemText
+            primary="Dashboard"
+            sx={{
+              color: 'inherit',
+              '&:hover': {
+                color: '#1e1e2d',
+              },
+            }}
+          />
         </ListItem>
 
-        <ListItem button component={Link} to="/admin/projects">
-          <ListItemIcon>
+        <ListItem 
+          button 
+          component={Link} 
+          to="/admin/projects"
+          sx={{
+            '&:hover': {
+              bgcolor: '#ecf0f1',
+              color: '#1e1e2d',
+            },
+          }}
+        >
+          <ListItemIcon 
+            sx={{
+              color: 'inherit',
+              '&:hover': {
+                color: '#1e1e2d',
+              },
+            }}
+          >
             <AssignmentIcon />
           </ListItemIcon>
-          <ListItemText primary="Projects" />
+          <ListItemText
+            primary="Projects"
+            sx={{
+              color: 'inherit',
+              '&:hover': {
+                color: '#1e1e2d',
+              },
+            }}
+          />
         </ListItem>
 
-        <ListItem button component={Link} to="/admin/volunteers">
-          <ListItemIcon>
+        <ListItem 
+          button 
+          component={Link} 
+          to="/admin/volunteers"
+          sx={{
+            '&:hover': {
+              bgcolor: '#ecf0f1',
+              color: '#1e1e2d',
+            },
+          }}
+        >
+          <ListItemIcon 
+            sx={{
+              color: 'inherit',
+              '&:hover': {
+                color: '#1e1e2d',
+              },
+            }}
+          >
             <PeopleIcon />
           </ListItemIcon>
-          <ListItemText primary="Volunteers" />
+          <ListItemText
+            primary="Volunteers"
+            sx={{
+              color: 'inherit',
+              '&:hover': {
+                color: '#1e1e2d',
+              },
+            }}
+          />
         </ListItem>
 
-        <ListItem button component={Link} to="/admin/donations">
-          <ListItemIcon>
+        <ListItem 
+          button 
+          component={Link} 
+          to="/admin/donations"
+          sx={{
+            '&:hover': {
+              bgcolor: '#ecf0f1',
+              color: '#1e1e2d',
+            },
+          }}
+        >
+          <ListItemIcon 
+            sx={{
+              color: 'inherit',
+              '&:hover': {
+                color: '#1e1e2d',
+              },
+            }}
+          >
             <MonetizationOnIcon />
           </ListItemIcon>
-          <ListItemText primary="Donations" />
+          <ListItemText
+            primary="Donations"
+            sx={{
+              color: 'inherit',
+              '&:hover': {
+                color: '#1e1e2d',
+              },
+            }}
+          />
         </ListItem>
 
-        <ListItem button component={Link} to="/admin/reports">
-          <ListItemIcon>
+        <ListItem 
+          button 
+          component={Link} 
+          to="/admin/reports"
+          sx={{
+            '&:hover': {
+              bgcolor: '#ecf0f1',
+              color: '#1e1e2d',
+            },
+          }}
+        >
+          <ListItemIcon 
+            sx={{
+              color: 'inherit',
+              '&:hover': {
+                color: '#1e1e2d',
+              },
+            }}
+          >
             <ReportIcon />
           </ListItemIcon>
-          <ListItemText primary="Reports" />
+          <ListItemText
+            primary="Reports"
+            sx={{
+              color: 'inherit',
+              '&:hover': {
+                color: '#1e1e2d',
+              },
+            }}
+          />
         </ListItem>
 
-        <ListItem button component={Link} to="/admin/events">
-          <ListItemIcon>
+        <ListItem 
+          button 
+          component={Link} 
+          to="/admin/events"
+          sx={{
+            '&:hover': {
+              bgcolor: '#ecf0f1',
+              color: '#1e1e2d',
+            },
+          }}
+        >
+          <ListItemIcon 
+            sx={{
+              color: 'inherit',
+              '&:hover': {
+                color: '#1e1e2d',
+              },
+            }}
+          >
             <EventIcon />
           </ListItemIcon>
-          <ListItemText primary="Events" />
+          <ListItemText
+            primary="Events"
+            sx={{
+              color: 'inherit',
+              '&:hover': {
+                color: '#1e1e2d',
+              },
+            }}
+          />
         </ListItem>
       </List>
       <Divider />
     </Box>
   );
-}
+};
 
 export default AdminSidebar;

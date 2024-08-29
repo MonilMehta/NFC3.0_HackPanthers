@@ -1,6 +1,6 @@
-const Event = require("../../models/Event_schema"); // Import the Event model
+import Event from "../../models/Event_schema.js"; // Import the Event model
 
-module.exports = async (req, res) => {
+const createEvent = async (req, res) => {
   try {
     // Create a new event using the request body
     let data = new Event({
@@ -30,3 +30,5 @@ module.exports = async (req, res) => {
     });
   }
 };
+
+export default createEvent

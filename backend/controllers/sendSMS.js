@@ -1,6 +1,6 @@
 // sendSMS.js
-const twilio = require('twilio');
-const { parsePhoneNumberFromString } = require('libphonenumber-js');
+import twilio from "twilio";
+import { parsePhoneNumberFromString } from 'libphonenumber-js';
 
 // Twilio credentials (use environment variables for security)
 const accountSid ='AC3c76b48f5c70753ecf744b43d7f59841';
@@ -31,5 +31,4 @@ async function sendSMS(firstName,lastName, phoneNumber) {
     throw error; // Rethrow the error to handle it in the calling function
   }
 }
-
-module.exports = sendSMS;
+export default sendSMS;

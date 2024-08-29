@@ -1,5 +1,4 @@
-const mongoose = require('mongoose');
-mongoose.connect("mongodb://127.0.0.1:27017/NGO")
+import mongoose  from "mongoose";
 
 // Define the schema for User
 const staffSchema = new mongoose.Schema({
@@ -33,4 +32,4 @@ const staffSchema = new mongoose.Schema({
 // Create the model from the schema
 const Staff = mongoose.model('Staff', staffSchema);
 
-module.exports = Staff;
+export default Staff;

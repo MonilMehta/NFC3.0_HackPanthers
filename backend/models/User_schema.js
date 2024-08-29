@@ -1,5 +1,4 @@
-const mongoose = require('mongoose');
-mongoose.connect("mongodb://127.0.0.1:27017/NGO")
+import mongoose  from "mongoose";
 
 // Define the schema for User
 const userSchema = new mongoose.Schema({
@@ -42,4 +41,4 @@ const userSchema = new mongoose.Schema({
 // Create the model from the schema
 const User = mongoose.model('User', userSchema);
 
-module.exports = User;
+export default User;

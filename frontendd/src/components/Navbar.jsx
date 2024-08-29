@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -12,11 +12,29 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import VolunteerActivismIcon from '@mui/icons-material/VolunteerActivism';
+import { styled } from '@mui/material/styles';
 
 const pages = ['Donate', 'Events', 'Badges & Certificates', 'Event Analytics'];
 const settings = ['Account', 'Logout'];
 
-function Navbar() {
+const StyledAppBar = styled(AppBar)({
+  backgroundColor: '#1e1e2d', // Darker primary color consistent with the admin navbar
+  boxShadow: 'none', // Keep a flat design with no shadow
+  borderBottom: '1px solid #34495e', // Slightly darker border for a subtle separation
+});
+
+const StyledButton = styled(Button)({
+  color: '#ecf0f1', // Light text color consistent with the admin theme
+  fontWeight: '500',
+  fontSize: '14px',
+  '&:hover': {
+    backgroundColor: '#ecf0f1',
+    color:'#1e1e2d' // Darker shade on hover consistent with admin navbar
+  },
+  margin: '0 10px', // Adjusting margin for consistent spacing
+});
+
+const Navbar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -37,10 +55,10 @@ function Navbar() {
   };
 
   return (
-    <AppBar position="static">
+    <StyledAppBar position="sticky">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <VolunteerActivismIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+          <VolunteerActivismIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1, color: '#f39c12' }} />
           <Typography
             variant="h6"
             noWrap
@@ -49,9 +67,9 @@ function Navbar() {
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
+              fontFamily: 'Roboto, sans-serif', // Professional font
               fontWeight: 700,
-              letterSpacing: '.3rem',
+              letterSpacing: '.1rem',
               color: 'inherit',
               textDecoration: 'none',
             }}
@@ -88,12 +106,12 @@ function Navbar() {
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography sx={{ textAlign: 'center' }}>{page}</Typography>
+                  <Typography sx={{ textAlign: 'center', color: '#2c3e50' }}>{page}</Typography>
                 </MenuItem>
               ))}
             </Menu>
           </Box>
-          <VolunteerActivismIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+          <VolunteerActivismIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1, color: '#ecf0f1' }} />
           <Typography
             variant="h5"
             noWrap
@@ -103,9 +121,9 @@ function Navbar() {
               mr: 2,
               display: { xs: 'flex', md: 'none' },
               flexGrow: 1,
-              fontFamily: 'monospace',
+              fontFamily: 'Roboto, sans-serif',
               fontWeight: 700,
-              letterSpacing: '.3rem',
+              letterSpacing: '.1rem',
               color: 'inherit',
               textDecoration: 'none',
             }}
@@ -113,15 +131,14 @@ function Navbar() {
             NGOFlow
           </Typography>
 
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'center' }}>
             {pages.map((page) => (
-              <Button
+              <StyledButton
                 key={page}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
               >
                 {page}
-              </Button>
+              </StyledButton>
             ))}
           </Box>
 
@@ -149,14 +166,14 @@ function Navbar() {
             >
               {settings.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography sx={{ textAlign: 'center' }}>{setting}</Typography>
+                  <Typography sx={{ textAlign: 'center', color: '#2c3e50' }}>{setting}</Typography>
                 </MenuItem>
               ))}
             </Menu>
           </Box>
         </Toolbar>
       </Container>
-    </AppBar>
+    </StyledAppBar>
   );
 }
 

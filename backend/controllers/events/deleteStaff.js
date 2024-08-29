@@ -1,7 +1,7 @@
-const Staff = require("../../models/Staff_schema");
-const Event = require("../../models/Event_schema");
+import Staff from "../../models/Staff_schema.js";
+import Event from "../../models/Event_schema.js";
 
-module.exports = async (req, res) => {
+const deleteStaff = async (req, res) => {
   try {
     const { staffId, eventId } = req.body;
 
@@ -33,3 +33,5 @@ module.exports = async (req, res) => {
     return res.status(500).json({ message: "Error in deleting Staff member" });
   }
 };
+
+export default deleteStaff

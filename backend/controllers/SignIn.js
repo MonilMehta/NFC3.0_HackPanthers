@@ -1,7 +1,7 @@
-const User = require("../models/User_schema")
-const bcrypt = require('bcryptjs')
+import User from "../models/User_schema.js";
+import bcrypt from "bcryptjs";
 
-module.exports = async(req,resp)=>{
+const signIn = async(req,resp)=>{
     try
     {
         let existingUserEmail = await User.findOne({email:req.body.email});
@@ -27,3 +27,4 @@ module.exports = async(req,resp)=>{
         resp.status(401).json({ message:"Internal server Error" });
     }
 } 
+export default signIn;

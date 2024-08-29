@@ -1,7 +1,7 @@
-const ProjectMember = require("../../models/Project_member_Schema");
-const Project = require("../../models/Project_Schema");
+import ProjectMember from "../../models/Project_member_Schema.js";
+import Project from "../../models/Project_Schema.js";
 
-module.exports = async (req, res) => {
+const addMember = async (req, res) => {
   try {
     // Create a new project member
     const memberData = new ProjectMember({
@@ -38,3 +38,5 @@ module.exports = async (req, res) => {
     res.status(500).json({ message: "Error creating project member", error: err.message });
   }
 };
+
+export default addMember
