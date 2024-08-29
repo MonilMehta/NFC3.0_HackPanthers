@@ -34,7 +34,7 @@ const Staff = () => {
   };
 
   return (
-    <>
+    <div style={{height: "88vh"}}>
       <h1>Staff Page</h1>
       <Button 
         variant="contained" 
@@ -67,7 +67,7 @@ const Staff = () => {
           </TableBody>
         </Table>
       </TableContainer>
-    </>
+    </div>
   );
 };
 
