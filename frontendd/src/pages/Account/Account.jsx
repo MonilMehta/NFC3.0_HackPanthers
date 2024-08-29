@@ -19,7 +19,8 @@ import CalendarTodayRoundedIcon from '@mui/icons-material/CalendarTodayRounded';
 import BadgeIcon from '@mui/icons-material/Badge'; // Badge icon
 import EventIcon from '@mui/icons-material/Event'; // Event icon
 import VolunteerActivismIcon from '@mui/icons-material/VolunteerActivism'; // Donation icon
-
+import Rotationdoner from './Roationdoner';
+import RotationVol from './RotationVol';
 export default function Account() {
   return (
     <Box sx={{ flex: 1, width: '100%', bgcolor: '#ffffff', color: '#2c3e50', height: '100vh' }}>
@@ -143,6 +144,8 @@ export default function Account() {
             <img src="https://example.com/badge1.png" alt="Badge 1" style={{ width: '50px', height: '50px' }} />
             <img src="https://example.com/badge2.png" alt="Badge 2" style={{ width: '50px', height: '50px' }} />
             {/* Add more badge images as needed */}
+            <RotationVol/>
+            <Rotationdoner/>
           </Stack>
         </Card>
 
