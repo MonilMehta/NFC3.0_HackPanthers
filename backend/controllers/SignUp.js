@@ -3,7 +3,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const sendSMS = require("./sendSMS");
 
-// const secretKey = "123#secret";
+const secretKey = "123#secret";
 
 module.exports = async (req, resp) => {
   try {

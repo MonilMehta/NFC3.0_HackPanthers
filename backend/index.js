@@ -6,6 +6,9 @@ const addParticipants = require('./controllers/events/addParticipates')
 const addVolunteer = require('./controllers/events/addVolunteer')
 const addStaff = require('./controllers/events/addStaff')
 const deleteStaff = require("./controllers/events/deleteStaff")
+const addMember =require("./controllers/projects/addMember")
+const createProject =require("./controllers/projects/createProject")
+const deleteMember = require("./controllers/projects/deleteMember")
 
 const cors = require("cors");
 const jwt = require('jsonwebtoken');
@@ -39,6 +42,9 @@ app.post("/addParticipates",addParticipants);
 app.post("/addVolunteer",addVolunteer);
 app.post("/addStaff",addStaff);
 app.delete("/deleteStaff",deleteStaff);
+app.post("/createProject",createProject);
+app.post("/addMember",addMember);
+app.delete("/deleteMember",deleteMember);
 
 app.use((err, req, res, next) => {
     console.error(err.stack);

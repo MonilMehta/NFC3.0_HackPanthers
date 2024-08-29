@@ -3,8 +3,8 @@ const twilio = require('twilio');
 const { parsePhoneNumberFromString } = require('libphonenumber-js');
 
 // Twilio credentials (use environment variables for security)
-// const accountSid ='AC3c76b48f5c70753ecf744b43d7f59841';
-// const authToken ='a0a6b7d343f2cb399a3788873bd7f6f9';
+const accountSid ='AC3c76b48f5c70753ecf744b43d7f59841';
+const authToken ='a0a6b7d343f2cb399a3788873bd7f6f9';
 const client = new twilio(accountSid, authToken);
 
 // Function to send SMS
