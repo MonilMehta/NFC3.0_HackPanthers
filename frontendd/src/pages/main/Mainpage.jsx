@@ -3,6 +3,7 @@ import Proj1 from '../../assets/Proj1.png';
 import Proj3 from '../../assets/Proj3.jpg';
 import CustomCard from './CustomCard';
 import Rotationlogo from './rotation/Rotationlogo';
+
 const Navbar = () => (
   <nav className="bg-[#003E1F] p-4">
     <div className="container mx-auto flex justify-between items-center">
@@ -16,8 +17,6 @@ const Navbar = () => (
     </div>
   </nav>
 );
-
-
 
 const HomePage = () => {
   const upcomingEvents = [
@@ -41,13 +40,20 @@ const HomePage = () => {
 
       {/* Hero Section */}
       <div className="bg-[#003E1F] text-[#FFFFFF] py-20">
-        <div className="container mx-auto px-4 text-center">
-          <Rotationlogo />
-          <h1 className="text-5xl font-bold mb-6">Empowering Children, Transforming Lives</h1>
-          <p className="text-xl mb-8 max-w-2xl mx-auto">Join our mission to provide education, healthcare, and support to children in need. Together, we can create a brighter future for all.</p>
-          <button className="bg-[#4CAF50] text-[#FFFFFF] font-bold py-3 px-8 rounded-full hover:bg-[#6BCB80] transition duration-300">
-            Get Involved
-          </button>
+        <div className="container mx-auto px-4 flex flex-col md:flex-row items-center">
+          {/* Logo on the Left */}
+          <div className="md:w-1/2 flex justify-center md:justify-start mb-8 md:mb-0">
+            <Rotationlogo />
+          </div>
+
+          {/* Text on the Right */}
+          <div className="md:w-1/2 text-center md:text-left">
+            <h1 className="text-5xl font-bold mb-6">Empowering Children, Transforming Lives</h1>
+            <p className="text-xl mb-8 max-w-2xl">Join our mission to provide education, healthcare, and support to children in need. Together, we can create a brighter future for all.</p>
+            <button className="bg-[#4CAF50] text-[#FFFFFF] font-bold py-3 px-8 rounded-full hover:bg-[#6BCB80] transition duration-300">
+              Get Involved
+            </button>
+          </div>
         </div>
       </div>
 
