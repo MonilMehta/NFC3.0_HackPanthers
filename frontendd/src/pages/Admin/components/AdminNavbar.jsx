@@ -12,9 +12,13 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
+import { Link } from 'react-router-dom';
 
 const pages = [''];
-const settings = ['Account', 'Logout'];
+const settings = [
+  { label: 'Account', path: '/account' },
+  { label: 'Logout', path: '/' },
+];
 
 function AdminNavbar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -148,8 +152,15 @@ function AdminNavbar() {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography sx={{ textAlign: 'center' }}>{setting}</Typography>
+                <MenuItem key={setting.label} onClick={handleCloseUserMenu}>
+                  <Link
+                    to={setting.path}
+                    style={{ textDecoration: 'none', color: 'inherit' }}
+                  >
+                    <Typography sx={{ textAlign: 'center' }}>
+                      {setting.label}
+                    </Typography>
+                  </Link>
                 </MenuItem>
               ))}
             </Menu>

@@ -19,20 +19,14 @@ const secretKey = process.env.JWT_SECRET || "123#secret"; // Use an environment 
 
 const verifyToken = (req, res, next) => {
     // Get the token from the request headers
-    const token = req.headers['authorization']?.split(' ')[1]; // Bearer token format
-
-    // If no token is provided, return an error
+    const token = req.headers['authorization']?.split(' ')[1];
     if (!token) {
         return res.status(403).json({ message: "No token provided!" });
     }
-
-    // Verify the token
     jwt.verify(token, secretKey, (err, decoded) => {
         if (err) {
             return res.status(401).json({ message: "Unauthorized! Invalid token." });
         }
-        
-        // Attach the decoded user id to the request object for use in other routes
         req.userId = decoded.id;
         next();
     });

@@ -5,7 +5,7 @@ import Signup from './pages/Singup/Signup';
 import Landing from './pages/landing/Landing';
 import Mainpage from './pages/main/Mainpage';
 import AdminMain from './pages/Admin/AdminMain';
-
+import Account from './pages/Account/Account';
 const App = () => {
   return (
     <Router>
@@ -15,6 +15,7 @@ const App = () => {
         <Route path="/signup" element={<Signup />} />
         <Route path="/main" element={<Mainpage />} />
         <Route path="/admin/*" element={<AdminMain />} />
+        <Route path="/account" element={<Account />} />
       </Routes>
     </Router>
   );
