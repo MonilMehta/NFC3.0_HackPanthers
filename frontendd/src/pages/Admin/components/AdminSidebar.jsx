@@ -12,7 +12,7 @@ const AdminSidebar = () => {
   return (
     <Box sx={{ width: 250, bgcolor: 'background.paper', height: '100vh' }}>
       <List>
-        <ListItem button component={Link} to="/admin/dashboard">
+        <ListItem button component={Link} to="/admin/">
           <ListItemIcon>
             <DashboardIcon />
           </ListItemIcon>
