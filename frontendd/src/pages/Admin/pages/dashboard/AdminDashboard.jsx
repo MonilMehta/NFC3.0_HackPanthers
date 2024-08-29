@@ -1,82 +1,85 @@
 import React from 'react';
-import { Line, Pie } from 'react-chartjs-2';
-import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, ArcElement, Tooltip, Legend } from 'chart.js';
+import ApexCharts from 'react-apexcharts';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 
-ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, ArcElement, Tooltip, Legend);
-
 const AdminDashboard = () => {
-  // Dummy data for the charts
+  // Dummy data for the charts (single event)
   const eventData = {
-    labels: ['Event 1', 'Event 2', 'Event 3'],
-    datasets: [
-      {
-        label: 'Staff Count',
-        data: [10, 20, 15],
-        backgroundColor: 'rgba(75, 192, 192, 0.2)',
-        borderColor: 'rgba(75, 192, 192, 1)',
-        borderWidth: 1,
+    series: [{
+      name: 'Staff Count',
+      data: [10]  
+    }, {
+      name: 'Volunteer Count',
+      data: [30]  
+    }],
+    options: {
+      chart: { type: 'bar' },
+      xaxis: { categories: ['Event 1'] },
+      colors: ['#00E396', '#0099FF'],
+      plotOptions: {
+        bar: { horizontal: false, columnWidth: '50%' }
       },
-      {
-        label: 'Volunteer Count',
-        data: [30, 40, 35],
-        backgroundColor: 'rgba(153, 102, 255, 0.2)',
-        borderColor: 'rgba(153, 102, 255, 1)',
-        borderWidth: 1,
-      }
-    ]
+      legend: { position: 'top' },
+      title: { text: 'Event 1' }
+    }
   };
 
   const fundraisingData = {
-    labels: ['Event 1', 'Event 2', 'Event 3'],
-    datasets: [
-      {
-        label: 'Funds Raised',
-        data: [5000, 7000, 6000],
-        fill: false,
-        borderColor: '#742774',
-        tension: 0.1
-      }
-    ]
+    series: [{
+      name: 'Funds Raised',
+      data: [5000, 6000, 7000, 8000, 5500, 7200, 6800, 7500, 7800, 8100, 7000, 7300]  // Data for one month
+    }],
+    options: {
+      chart: { type: 'line', zoom: { enabled: false } },
+      xaxis: { categories: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6', 'Week 7', 'Week 8', 'Week 9', 'Week 10', 'Week 11', 'Week 12'] },
+      colors: ['#FF4560'],
+      stroke: { curve: 'smooth', width: 3 },
+      markers: { size: 5 },
+      grid: { borderColor: '#e0e0e0' },
+      tooltip: { y: { formatter: val => `$${val}` } },
+      title: { text: 'Funds Raised Over the Last Month' }
+    }
   };
 
   const pieChartData = {
-    labels: ['Staff', 'Volunteers'],
-    datasets: [
-      {
-        data: [70, 30],
-        backgroundColor: ['#FF6384', '#36A2EB'],
-        hoverBackgroundColor: ['#FF6384', '#36A2EB']
-      }
-    ]
+    series: [70, 30],
+    options: {
+      chart: { type: 'pie' },
+      labels: ['Staff', 'Volunteers'],
+      colors: ['#FF4560', '#00E396'],
+      legend: { position: 'bottom' },
+      title: { text: 'Staff and Volunteer Distribution' }
+    }
   };
 
   return (
-    <Box sx={{ p: 3 }}>
+    <Box sx={{ p: 2 }}>
       <Typography variant="h4" component="h1" sx={{ mb: 2 }}>
         Admin Dashboard
       </Typography>
-      
-      <Box sx={{ mb: 4 }}>
-        <Typography variant="h6" component="h2" sx={{ mb: 2 }}>
-          Staff and Volunteer Distribution (Pie Chart)
-        </Typography>
-        <Pie data={pieChartData} />
+
+      <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 2, mb: 2 }}>
+        <Box sx={{ width: '50%', height: '300px' }}>
+          <Typography variant="h6" component="h2" sx={{ mb: 1 }}>
+            Staff and Volunteer Distribution (Pie Chart)
+          </Typography>
+          <ApexCharts options={pieChartData.options} series={pieChartData.series} type="pie" height={300} />
+        </Box>
+
+        <Box sx={{ width: '50%', height: '300px' }}>
+          <Typography variant="h6" component="h2" sx={{ mb: 1 }}>
+            Staff and Volunteer Counts (Bar Chart)
+          </Typography>
+          <ApexCharts options={eventData.options} series={eventData.series} type="bar" height={300} />
+        </Box>
       </Box>
 
-      <Box sx={{ mb: 4 }}>
-        <Typography variant="h6" component="h2" sx={{ mb: 2 }}>
-          Staff and Volunteer Counts (Bar Chart)
+      <Box sx={{ width: '100%', height: '400px', paddingTop: '50px' }}>
+        <Typography variant="h6" component="h2" sx={{ mb: 1 }}>
+          Fundraising Over the Last Month (Line Chart)
         </Typography>
-        <Line data={eventData} options={{ scales: { x: { stacked: true }, y: { stacked: true } } }} />
-      </Box>
-
-      <Box>
-        <Typography variant="h6" component="h2" sx={{ mb: 2 }}>
-          Fundraising Over Time (Line Chart)
-        </Typography>
-        <Line data={fundraisingData} />
+        <ApexCharts options={fundraisingData.options} series={fundraisingData.series} type="line" height={400} />
       </Box>
     </Box>
   );
