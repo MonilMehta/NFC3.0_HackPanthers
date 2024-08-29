@@ -9,7 +9,8 @@ const createEvent = async (req, res) => {
       date: req.body.date,
       location: req.body.location, // Add location if it's part of the schema
       organizer: req.body.organizer, // Add organizer if it's part of the schema
-      status: req.body.status || "Scheduled" // Default to "Scheduled" if not provided
+      status: req.body.status || "Scheduled", // Default to "Scheduled" if not provided
+      staff: req.body.staff
     });
 
     // Save the new event to the database

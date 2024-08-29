@@ -1,12 +1,9 @@
-import React, { useState } from 'react';
-import { Button, TextField, Typography, Box, Container, Grid, List, ListItem, ListItemText, ListItemSecondaryAction, IconButton } from '@mui/material';
+import React, { useState, useEffect } from 'react';
+import { Button, TextField, Typography, Box, Container, Grid, MenuItem, Select, InputLabel, Checkbox, ListItemText } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/Delete';
 import StaffForm from './StaffForm';
 
 const EventForm = () => {
-  const [showStaffForm, setShowStaffForm] = useState(false);
   const [formData, setFormData] = useState({
     eventName: '',
     description: '',
@@ -21,7 +18,26 @@ const EventForm = () => {
     organizer: ''
   });
   const [staffList, setStaffList] = useState([]);
-  const [editingIndex, setEditingIndex] = useState(null);
+  const [selectedStaff, setSelectedStaff] = useState([]);
+
+  useEffect(() => {
+    // Fetch staff list from API
+    const fetchStaffList = async () => {
+      try {
+        const response = await fetch('http://localhost:8000/events/getStaff');
+        if (response.ok) {
+          const staffData = await response.json();
+          setStaffList(staffData);
+        } else {
+          console.error('Error fetching staff list:', response.statusText);
+        }
+      } catch (error) {
+        console.error('Error fetching staff list:', error);
+      }
+    };
+
+    fetchStaffList();
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -42,42 +58,37 @@ const EventForm = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleStaffChange = (event) => {
+    setSelectedStaff(event.target.value);
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Event Data:', formData);
-    console.log('Staff List:', staffList);
-  };
-
-  const handleShowStaffForm = (index = null) => {
-    if (index !== null) {
-      setEditingIndex(index);
-    } else {
-      setEditingIndex(null);
-    }
-    setShowStaffForm(true);
-  };
-
-  const handleCloseStaffForm = (newStaff) => {
-    setShowStaffForm(false);
-    if (newStaff) {
-      if (editingIndex !== null) {
-        const updatedStaffList = [...staffList];
-        updatedStaffList[editingIndex] = newStaff;
-        setStaffList(updatedStaffList);
+    const dataToSend = {
+      ...formData,
+      date: new Date(formData.date).toISOString(), // Convert date to ISO string if needed
+      staff: selectedStaff // Array of staff IDs
+    };
+    try {
+      const response = await fetch('http://localhost:8000/events/createEvent', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(dataToSend),
+      });
+  
+      if (response.ok) {
+        const result = await response.json();
+        console.log('Event created successfully:', result);
       } else {
-        setStaffList((prevList) => [...prevList, newStaff]);
+        console.error('Error creating event');
       }
+    } catch (error) {
+      console.error('Error creating event:', error);
     }
-    setEditingIndex(null);
   };
-
-  const handleEditStaff = (index) => {
-    handleShowStaffForm(index);
-  };
-
-  const handleDeleteStaff = (index) => {
-    setStaffList((prevList) => prevList.filter((_, i) => i !== index));
-  };
+  
 
   return (
     <Container component="main" maxWidth="sm" sx={{ padding: '20px' }}>
@@ -188,48 +199,27 @@ const EventForm = () => {
           <Typography variant="h6" component="h2" gutterBottom>
             Staff
           </Typography>
-          <List>
-            {staffList.map((staff, index) => (
-              <ListItem key={index}>
-                <ListItemText
-                  primary={`${staff.firstName} ${staff.lastName}`}
-                  secondary={`Role: ${staff.role}`}
-                />
-                <ListItemSecondaryAction>
-                  <IconButton
-                    edge="end"
-                    color="primary"
-                    onClick={() => handleEditStaff(index)}
-                  >
-                    <EditIcon />
-                  </IconButton>
-                  <IconButton
-                    edge="end"
-                    color="error"
-                    onClick={() => handleDeleteStaff(index)}
-                  >
-                    <DeleteIcon />
-                  </IconButton>
-                </ListItemSecondaryAction>
-              </ListItem>
-            ))}
-          </List>
-          <IconButton
-            color="primary"
-            aria-label="add staff"
-            onClick={() => handleShowStaffForm()}
-            sx={{ marginTop: '10px' }}
+          <InputLabel id="staff-select-label">Select Staff</InputLabel>
+          <Select
+            labelId="staff-select-label"
+            multiple
+            value={selectedStaff}
+            onChange={handleStaffChange}
+            renderValue={(selected) => selected.map(id => {
+              const staff = staffList.find(staff => staff._id === id);
+              return staff ? `${staff.firstName} ${staff.lastName}` : '';
+            }).join(', ')}
+            fullWidth
+            inputProps={{ 'aria-label': 'Select Staff' }}
           >
-            <AddIcon />
-          </IconButton>
+            {staffList.map((staff) => (
+              <MenuItem key={staff._id} value={staff._id}>
+                <Checkbox checked={selectedStaff.includes(staff._id)} />
+                <ListItemText primary={`${staff.firstName} ${staff.lastName}`} />
+              </MenuItem>
+            ))}
+          </Select>
         </Box>
-        
-        {showStaffForm && (
-          <StaffForm
-            staff={editingIndex !== null ? staffList[editingIndex] : null}
-            onClose={handleCloseStaffForm}
-          />
-        )}
         <Box sx={{ display: 'flex', justifyContent: 'space-between', marginTop: '20px' }}>
           <Button type="submit" variant="contained" color="primary">
             Submit

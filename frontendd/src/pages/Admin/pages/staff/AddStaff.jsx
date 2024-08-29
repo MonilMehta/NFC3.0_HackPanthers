@@ -22,7 +22,14 @@ const AddStaff = ({ staff, onClose }) => {
 
   useEffect(() => {
     if (staff) {
-      setStaffData(staff);
+      // Convert date to YYYY-MM-DD format if it's in a different format
+      const formattedDateOfBirth = staff.date_of_birth
+        ? new Date(staff.date_of_birth).toISOString().split('T')[0]
+        : "";
+      setStaffData({
+        ...staff,
+        date_of_birth: formattedDateOfBirth,
+      });
     } else {
       setStaffData({
         firstName: "",
@@ -41,7 +48,6 @@ const AddStaff = ({ staff, onClose }) => {
       email: value,
     }));
 
-    // Avoid making a request with an empty or incomplete email
     if (!value || value.trim() === "") {
       return;
     }
@@ -51,13 +57,17 @@ const AddStaff = ({ staff, onClose }) => {
       const response = await fetch(`http://localhost:8000/users/getUser/${value.trim()}`);
       if (response.ok) {
         const userData = await response.json();
+        // Convert date to YYYY-MM-DD format
+        const formattedDateOfBirth = userData.date_of_birth
+          ? new Date(userData.date_of_birth).toISOString().split('T')[0]
+          : "";
         setStaffData({
           ...userData,
-          email: value, // Ensure email field is up-to-date
+          date_of_birth: formattedDateOfBirth,
+          email: value,
         });
         setIsExistingUser(true);
       } else {
-        // Clear other fields if no user is found
         setStaffData((prevData) => ({
           ...prevData,
           firstName: "",
@@ -101,7 +111,6 @@ const AddStaff = ({ staff, onClose }) => {
       });
 
       if (response.ok) {
-        console.log(response)
         const result = await response.json();
         if (typeof onClose === "function") {
           onClose(result);
@@ -175,6 +184,11 @@ const AddStaff = ({ staff, onClose }) => {
           onChange={handleChange}
           fullWidth
           variant="outlined"
+          type="date" // Set type to date for calendar input
+          InputLabelProps={{
+            shrink: true, // Ensure label shrinks when date is entered
+          }}
+          sx={{ marginBottom: "16px" }}
         />
       </DialogContent>
       <DialogActions>
