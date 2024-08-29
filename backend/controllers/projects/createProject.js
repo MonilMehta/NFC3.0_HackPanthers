@@ -9,10 +9,8 @@ const createProject = async (req, res) => {
       objectives: req.body.objectives,
       startDate: req.body.startDate,
       endDate: req.body.endDate,
-      budget: {
-        allocated: req.body.budget.allocated || 0,
-        spent: req.body.budget.spent || 0,
-      },
+      allocated: req.body.allocated || 0,
+      teamMembers: req.body.teamMembers,
       status: req.body.status || 'Planning', // Default status to 'Planning' if not provided
     });
 

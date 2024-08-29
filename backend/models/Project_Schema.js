@@ -22,7 +22,7 @@ const ProjectSchema = new mongoose.Schema({
   teamMembers: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'ProjectMember',
+      ref: 'User',
     },
   ],
   allocated: { 
