@@ -1,5 +1,11 @@
 import React from 'react';
 import { ChevronRight } from 'lucide-react';
+import Proj1 from '../../assets/Proj1.png';
+import Proj2 from '../../assets/Proj2.jpg';
+import Proj3 from '../../assets/Proj3.jpg';
+import Proj4 from '../../assets/Proj4.png';
+import Proj5 from '../../assets/Proj5.jpg';
+import Proj6 from '../../assets/Proj6.jpg';
 
 const ProjectsSection = () => (
   <div className="bg-gray-50">
@@ -14,12 +20,12 @@ const ProjectsSection = () => (
       </div>
       <div className="mt-16 grid gap-10 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
         {[
-          { title: 'Child Education Support', description: 'Ensuring access to quality education for underprivileged children.', image: '' },
-          { title: 'Healthcare for Kids', description: 'Providing essential healthcare services to children in need.', image: '' },
-          { title: 'Nutritional Programs', description: 'Addressing malnutrition and promoting healthy development for children.', image: '' },
-          { title: 'Child Protection Services', description: 'Working to safeguard children from abuse and exploitation.', image: '' },
-          { title: 'Recreational Programs', description: 'Encouraging physical and mental development through play and activities.', image: '' },
-          { title: 'Foster Care Support', description: 'Supporting foster care systems to provide safe and nurturing homes for children.', image: '' }
+          { title: 'Child Education Support', description: 'Ensuring access to quality education for underprivileged children.', image: Proj1 },
+          { title: 'Healthcare for Kids', description: 'Providing essential healthcare services to children in need.', image: Proj2 },
+          { title: 'Nutritional Programs', description: 'Addressing malnutrition and promoting healthy development for children.', image:  Proj3 },
+          { title: 'Child Protection Services', description: 'Working to safeguard children from abuse and exploitation.', image: Proj4 },
+          { title: 'Recreational Programs', description: 'Encouraging physical and mental development through play and activities.', image: Proj5 },
+          { title: 'Foster Care Support', description: 'Supporting foster care systems to provide safe and nurturing homes for children.', image: Proj6 },
         ].map((project, index) => (
           <div key={index} className="relative bg-white rounded-xl shadow-lg overflow-hidden">
             <div className="h-64 bg-gray-200">
