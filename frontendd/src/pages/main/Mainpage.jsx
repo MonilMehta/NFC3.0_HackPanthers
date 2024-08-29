@@ -4,6 +4,7 @@ import Proj3 from '../../assets/Proj3.jpg';
 import CustomCard from './CustomCard';
 import Rotationlogo from './rotation/Rotationlogo';
 import Navbar from '../../components/Navbar';
+import Flow from './Flow';
 import {Link} from 'react-router-dom';
 // const Navbar = () => (
 //   <nav className="bg-[#003E1F] p-4">
@@ -19,7 +20,7 @@ import {Link} from 'react-router-dom';
 //   </nav>
 // );
 
-const HomePage = () => {
+const Mainpage = () => {
   const upcomingEvents = [
     { image: Proj1, title: "Charity Run", date: "2023-09-15", description: "Annual 5K run to raise funds for children's education" },
     { image: Proj1, title: "Art Workshop", date: "2023-09-22", description: "Creative workshop for underprivileged children" },
@@ -55,6 +56,14 @@ const HomePage = () => {
               Get Involved
             </button>
           </div>
+        </div>
+      </div>
+
+      {/* Flow Component */}
+      <div className="py-16 bg-gray-200">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold mb-8 text-center text-[#003E1F]">Donation Process Flow</h2>
+          <Flow />
         </div>
       </div>
 
@@ -122,4 +131,4 @@ const HomePage = () => {
   );
 }
 
-export default HomePage;
+export default Mainpage;
