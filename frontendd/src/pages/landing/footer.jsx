@@ -5,9 +5,9 @@ const Footer = () => (
       <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
         <div className="xl:grid xl:grid-cols-3 xl:gap-8">
           <div className="space-y-8 xl:col-span-1">
-            <span className="text-white font-bold text-2xl">GenocideEdu</span>
+            <span className="text-white font-bold text-2xl">NGO</span>
             <p className="text-gray-300 text-base">
-              Educating for a future free from genocide and mass atrocities.
+              NGO is a non-profit organization dedicated to making a positive impact in communities around the world.
             </p>
             <div className="flex space-x-6">
               {/* Add social media icons here */}

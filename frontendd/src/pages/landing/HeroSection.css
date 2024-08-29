@@ -1,0 +1,5 @@
+/* HeroSection.css */
+.carousel .slide img {
+    object-fit: cover;
+    height: 100vh;
+  }

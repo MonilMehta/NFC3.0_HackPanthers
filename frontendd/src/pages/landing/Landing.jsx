@@ -1,27 +1,27 @@
 import React from 'react';
-import { useState } from 'react';
+import { Nav, Carousel, Container, Row, Col, Card, Button } from 'react-bootstrap';
 import { Book, Users, Globe, Menu, X, ChevronRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import Navbar from './Navbr';
-import Footer from './footer';
 import HeroSection from './HeroSection';
 import MissionSection from './MissionAction';
-import ResourcesSection from './ResourcesSection';
+import ProjectsSection from './ProjectSection';
+import Footer from './footer';
 import CallToAction from './CalltoAction';
 
 
-const Landing = () => {
+
+const LandingPage = () => {
   return (
-    <div className="min-h-screen flex flex-col w-full" style={{width:'100vw'}}>
-    <Navbar />
-    <main className="flex-grow">
+    <div>
+      <Navbar />
       <HeroSection />
       <MissionSection />
-      <ResourcesSection />
+      <ProjectsSection />
       <CallToAction />
-    </main>
-    <Footer />
+      <Footer />
     </div>
-  )
-}
+  );
+};
 
-export default Landing;
+export default LandingPage;
