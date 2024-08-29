@@ -11,10 +11,10 @@ const ProjectsSection = () => (
   <div className="bg-gray-50">
     <div className="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:py-24 lg:px-8">
       <div className="text-center">
-        <h2 className="text-4xl font-extrabold text-gray-900 sm:text-5xl">
+        <h2 className="text-4xl font-extrabold text-[#003E1F] sm:text-5xl">
           Child Welfare Projects
         </h2>
-        <p className="mt-6 max-w-3xl mx-auto text-xl text-gray-600">
+        <p className="mt-6 max-w-3xl mx-auto text-xl text-[#003E1F]">
           Our mission is to uplift the lives of children by addressing their needs in education, health, and well-being.
         </p>
       </div>

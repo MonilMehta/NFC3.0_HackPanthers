@@ -23,18 +23,18 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="navbar bg-green-300" style={{position:'sticky', top:'0', zIndex:'1000'}}>
+      <nav className="navbar bg-[#003E1F]" style={{position:'sticky', top:'0', zIndex:'1000'}}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16">
             <div className="flex-shrink-0 flex items-center">
-              <span className="font-bold text-xl text-black-600" style={{ fontSize: '30px', marginLeft: '-5vw' }}>NGO Name</span>
+              <span className="font-bold text-xl text-white" style={{ fontSize: '30px', marginLeft: '-5vw' }}>NGO Name</span>
             </div>
             <div className="hidden md:block">
               <div className="ml-10 flex items-baseline space-x-4">
-                <Link to="/" className="text-black-400 px-3 py-2 rounded-md text-sm" style={{ fontSize: '25px', marginTop: '10px' }}>Home</Link>
-                <Link to="/about" className="text-black-400 px-3 py-2 rounded-md text-sm" style={{ fontSize: '25px', marginTop: '10px' }}>About</Link>
-                <Link to="/signup" className="text-black-400 px-3 py-2 rounded-md text-sm" style={{ fontSize: '25px', marginTop: '10px' }}>Register</Link>
-                <Link to="/signin" className="text-black-400 px-3 py-2 rounded-md text-sm" style={{ fontSize: '25px', marginTop: '10px' }}>Login</Link>
+                <Link to="/" className="text-white px-3 py-2 rounded-md text-sm" style={{ fontSize: '25px', marginTop: '10px' }}>Home</Link>
+                <Link to="/about" className="text-white px-3 py-2 rounded-md text-sm" style={{ fontSize: '25px', marginTop: '10px' }}>About</Link>
+                <Link to="/signup" className="text-white px-3 py-2 rounded-md text-sm" style={{ fontSize: '25px', marginTop: '10px' }}>Register</Link>
+                <Link to="/signin" className="text-white px-3 py-2 rounded-md text-sm" style={{ fontSize: '25px', marginTop: '10px' }}>Login</Link>
               </div>
             </div>
             <div className="-mr-2 flex md:hidden">

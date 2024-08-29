@@ -56,10 +56,10 @@ const MissionAction = () => {
   return (
     <div className="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:py-24 lg:px-8 bg-white-100">
       <div className="text-center">
-        <h2 className="text-3xl font-extrabold text-green-600 sm:text-4xl">
+        <h2 className="text-3xl font-extrabold text-[#003E1F] sm:text-4xl">
           Our Mission
         </h2>
-        <p className="mt-4 max-w-2xl mx-auto text-xl text-green-500">
+        <p className="mt-4 max-w-2xl mx-auto text-xl text-[#003E1F]">
           We strive to create lasting change through education, community development, and sustainable initiatives.
         </p>
       </div>
@@ -73,7 +73,7 @@ const MissionAction = () => {
                 alt={item.title}
               />
               <div className="p-6">
-                <div className="flex items-center justify-center h-12 w-12 rounded-md bg-green-500 mb-4">
+                <div className="flex items-center justify-center h-12 w-12 rounded-md bg-[#003E1F] mb-4">
                   <item.icon className="h-6 w-6 text-white" aria-hidden="true" />
                 </div>
                 <h3 className="text-lg leading-6 font-medium text-gray-900">{item.title}</h3>
