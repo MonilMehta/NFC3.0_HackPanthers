@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import EventForm from './EventForm'; // Adjust the path as needed
-
+import EventCard from './EventCard';
 const AdminEvents = () => {
   const [showForm, setShowForm] = useState(false);
 
@@ -24,6 +24,7 @@ const AdminEvents = () => {
 
   return (
     <>
+    <EventCard/>
       <h1>Admin Events</h1>
       <button
         onClick={handleShowForm}
