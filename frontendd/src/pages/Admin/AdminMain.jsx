@@ -1,5 +1,5 @@
-import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import AdminNavbar from './components/AdminNavbar';
 import AdminSidebar from './components/AdminSidebar';
 import AdminDashboard from './pages/dashboard/AdminDashboard';
@@ -9,6 +9,14 @@ import AdminReports from './pages/reports/AdminReports';
 import AdminProjects from './pages/projects/AdminProjects';
 import AdminVolunteers from './pages/volunteers/AdminVolunteers';
 const AdminMain = () => {
+  const navigate = useNavigate();
+  useEffect(() => {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; role=`);
+    if(parts.pop().split(';').shift() != 'admin'){
+      navigate("/main");
+    }
+  })
   return (
     <>
       <AdminNavbar />

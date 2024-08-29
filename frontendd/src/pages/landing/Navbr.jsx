@@ -33,8 +33,7 @@ const Navbar = () => {
               <div className="ml-10 flex items-baseline space-x-4">
                 <Link to="/" className="text-white px-3 py-2 rounded-md text-sm" style={{ fontSize: '25px', marginTop: '10px' }}>Home</Link>
                 <Link to="/about" className="text-white px-3 py-2 rounded-md text-sm" style={{ fontSize: '25px', marginTop: '10px' }}>About</Link>
-                <Link to="/signup" className="text-white px-3 py-2 rounded-md text-sm" style={{ fontSize: '25px', marginTop: '10px' }}>Register</Link>
-                <Link to="/signin" className="text-white px-3 py-2 rounded-md text-sm" style={{ fontSize: '25px', marginTop: '10px' }}>Login</Link>
+                <Link to="/auth" className="text-white px-3 py-2 rounded-md text-sm" style={{ fontSize: '25px', marginTop: '10px' }}>Signup / Signin</Link>
               </div>
             </div>
             <div className="-mr-2 flex md:hidden">
