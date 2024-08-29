@@ -1,22 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Button,
   TextField,
   Typography,
   Box,
   Container,
-  Grid,
   List,
   ListItem,
   ListItemText,
   ListItemSecondaryAction,
   IconButton,
   MenuItem,
+  Checkbox,
+  Select,
+  InputLabel
 } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-import MemberForm from './MemberForm'; // Assuming MemberForm is a component you use to add/edit members
 
 const ProjectForm = () => {
   const [showMemberForm, setShowMemberForm] = useState(false);
@@ -30,8 +31,31 @@ const ProjectForm = () => {
   });
   const [memberList, setMemberList] = useState([]);
   const [editingIndex, setEditingIndex] = useState(null);
+  const [staffList, setStaffList] = useState([]);
+  const [selectedStaff, setSelectedStaff] = useState([]);
 
-  // Handle changes to form fields
+  useEffect(() => {
+    const fetchStaffList = async () => {
+      try {
+        const response = await fetch('http://localhost:8000/events/getStaff');
+        if (response.ok) {
+          const staffData = await response.json();
+          setStaffList(staffData);
+        } else {
+          console.error('Error fetching staff list:', response.statusText);
+        }
+      } catch (error) {
+        console.error('Error fetching staff list:', error);
+      }
+    };
+
+    fetchStaffList();
+  }, []);
+
+  const handleStaffChange = (event) => {
+    setSelectedStaff(event.target.value);
+  };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -40,14 +64,34 @@ const ProjectForm = () => {
     }));
   };
 
-  // Handle form submission
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Project Data:', formData);
-    console.log('Team Members:', memberList);
+    try {
+      const response = await fetch('http://localhost:8000/projects/createProject', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ...formData,
+          teamMembers: selectedStaff,
+          allocated: formData.allocatedBudget,
+        }),
+      });
+
+      if (response.ok) {
+        const result = await response.json();
+        console.log('Project created successfully:', result);
+        // Handle success (e.g., show a success message, redirect to another page)
+      } else {
+        console.error('Error creating project:', response.statusText);
+        // Handle error (e.g., show an error message)
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+    }
   };
 
-  // Show or edit member form
   const handleShowMemberForm = (index = null) => {
     if (index !== null) {
       setEditingIndex(index);
@@ -57,7 +101,6 @@ const ProjectForm = () => {
     setShowMemberForm(true);
   };
 
-  // Close member form and update member list
   const handleCloseMemberForm = (newMember) => {
     setShowMemberForm(false);
     if (newMember) {
@@ -72,12 +115,10 @@ const ProjectForm = () => {
     setEditingIndex(null);
   };
 
-  // Edit member
   const handleEditMember = (index) => {
     handleShowMemberForm(index);
   };
 
-  // Delete member
   const handleDeleteMember = (index) => {
     setMemberList((prevList) => prevList.filter((_, i) => i !== index));
   };
@@ -175,9 +216,6 @@ const ProjectForm = () => {
         </Box>
 
         {/* Team Members Section */}
-        <Typography variant="h6" component="h2" gutterBottom>
-          Team Members
-        </Typography>
         <List>
           {memberList.map((member, index) => (
             <ListItem key={index}>
@@ -204,22 +242,31 @@ const ProjectForm = () => {
             </ListItem>
           ))}
         </List>
-        <IconButton
-          color="primary"
-          aria-label="add member"
-          onClick={() => handleShowMemberForm()}
-          sx={{ marginTop: '10px' }}
-        >
-          <AddIcon />
-        </IconButton>
-
-        {/* Member Form */}
-        {showMemberForm && (
-          <MemberForm
-            member={editingIndex !== null ? memberList[editingIndex] : null}
-            onClose={handleCloseMemberForm}
-          />
-        )}
+        <Box sx={{ marginBottom: '20px' }}>
+          <Typography variant="h6" component="h2" gutterBottom>
+            Member
+          </Typography>
+          <InputLabel id="staff-select-label">Select Member</InputLabel>
+          <Select
+            labelId="staff-select-label"
+            multiple
+            value={selectedStaff}
+            onChange={handleStaffChange}
+            renderValue={(selected) => selected.map(id => {
+              const staff = staffList.find(staff => staff._id === id);
+              return staff ? `${staff.firstName} ${staff.lastName}` : '';
+            }).join(', ')}
+            fullWidth
+            inputProps={{ 'aria-label': 'Select Staff' }}
+          >
+            {staffList.map((staff) => (
+              <MenuItem key={staff._id} value={staff._id}>
+                <Checkbox checked={selectedStaff.includes(staff._id)} />
+                <ListItemText primary={`${staff.firstName} ${staff.lastName}`} />
+              </MenuItem>
+            ))}
+          </Select>
+        </Box>
 
         {/* Submit Button */}
         <Box sx={{ display: 'flex', justifyContent: 'space-between', marginTop: '20px' }}>

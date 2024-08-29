@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Button, TextField, Typography, Dialog, DialogActions, DialogContent, DialogTitle, Divider } from '@mui/material';
 
-const StaffForm = ({ member, onClose }) => {
+const MemberForm = ({ member, onClose }) => {
   const [memberData, setmemberData] = useState({
     firstName: '',
     lastName: '',
@@ -106,4 +106,4 @@ const StaffForm = ({ member, onClose }) => {
   );
 };
 
-export default StaffForm;
+export default MemberForm;
