@@ -1,4 +1,5 @@
 import mongoose  from "mongoose";
+import jwt from "jsonwebtoken";
 
 // Define the schema for User
 const userSchema = new mongoose.Schema({
@@ -35,8 +36,37 @@ const userSchema = new mongoose.Schema({
     amountDonated: {
         type: Number,
         default: 0
+    },
+    refreshToken:{
+        type: String,
     }
-});
+}, {timestamps: true});
+
+userSchema.methods.generateAccessToken = function(){
+    return jwt.sign(
+        {
+            _id: this._id,
+            email: this.email,
+            firstName: this.firstName
+        },
+        process.env.ACCESS_TOKEN_SECRET || "A1B2C3D4E5F6G7H8I9J10",
+        {
+            expiresIn: process.env.ACCESS_TOKEN_EXPIRY || "2h"
+        }
+    )
+}
+
+userSchema.methods.generateRefreshToken = function(){
+    return jwt.sign(
+        {
+            _id: this._id
+        },
+        process.env.REFRESH_TOKEN_SECRET || "J1I2H3G4F5E6D7C8B9A10",
+        {
+            expiresIn: process.env.REFRESH_TOKEN_EXPIRY || "3d"
+        }
+    )
+}
 
 // Create the model from the schema
 const User = mongoose.model('User', userSchema);
