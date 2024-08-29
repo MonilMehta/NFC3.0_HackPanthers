@@ -1,53 +1,53 @@
 import React, { useState } from 'react';
-import { Button, TextField, Typography, Box, Container, Grid, List, ListItem, ListItemText, ListItemSecondaryAction, IconButton } from '@mui/material';
+import {
+  Button,
+  TextField,
+  Typography,
+  Box,
+  Container,
+  Grid,
+  List,
+  ListItem,
+  ListItemText,
+  ListItemSecondaryAction,
+  IconButton,
+  MenuItem,
+} from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-import MemberForm from './MemberForm';
+import MemberForm from './MemberForm'; // Assuming MemberForm is a component you use to add/edit members
 
 const ProjectForm = () => {
   const [showMemberForm, setShowMemberForm] = useState(false);
   const [formData, setFormData] = useState({
-    ProjectName: '',
+    projectName: '',
     description: '',
-    date: '',
-    location: {
-      address: '',
-      city: '',
-      state: '',
-      zipCode: '',
-      country: ''
-    },
-    organizer: ''
+    startDate: '',
+    endDate: '',
+    allocatedBudget: 0,
+    status: 'Planning',
   });
-  const [memberList, setmemberList] = useState([]);
+  const [memberList, setMemberList] = useState([]);
   const [editingIndex, setEditingIndex] = useState(null);
 
+  // Handle changes to form fields
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
-      [name]: value
+      [name]: value,
     }));
   };
 
-  const handleLocationChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      location: {
-        ...prevData.location,
-        [name]: value
-      }
-    }));
-  };
-
+  // Handle form submission
   const handleSubmit = (e) => {
-    e.prProjectDefault();
+    e.preventDefault();
     console.log('Project Data:', formData);
-    console.log('Staff List:', memberList);
+    console.log('Team Members:', memberList);
   };
 
+  // Show or edit member form
   const handleShowMemberForm = (index = null) => {
     if (index !== null) {
       setEditingIndex(index);
@@ -57,26 +57,29 @@ const ProjectForm = () => {
     setShowMemberForm(true);
   };
 
-  const handleCloseMemberForm = (newStaff) => {
+  // Close member form and update member list
+  const handleCloseMemberForm = (newMember) => {
     setShowMemberForm(false);
-    if (newStaff) {
+    if (newMember) {
       if (editingIndex !== null) {
-        const updatedStaffList = [...memberList];
-        updatedStaffList[editingIndex] = newStaff;
-        setmemberList(updatedStaffList);
+        const updatedMemberList = [...memberList];
+        updatedMemberList[editingIndex] = newMember;
+        setMemberList(updatedMemberList);
       } else {
-        setmemberList((prevList) => [...prevList, newStaff]);
+        setMemberList((prevList) => [...prevList, newMember]);
       }
     }
     setEditingIndex(null);
   };
 
+  // Edit member
   const handleEditMember = (index) => {
     handleShowMemberForm(index);
   };
 
+  // Delete member
   const handleDeleteMember = (index) => {
-    setmemberList((prevList) => prevList.filter((_, i) => i !== index));
+    setMemberList((prevList) => prevList.filter((_, i) => i !== index));
   };
 
   return (
@@ -85,16 +88,19 @@ const ProjectForm = () => {
         Add New Project
       </Typography>
       <form onSubmit={handleSubmit}>
+        {/* Project Name */}
         <Box sx={{ marginBottom: '20px' }}>
           <TextField
             fullWidth
             label="Project Name"
-            name="ProjectName"
-            value={formData.ProjectName}
+            name="projectName"
+            value={formData.projectName}
             onChange={handleChange}
             required
           />
         </Box>
+
+        {/* Description */}
         <Box sx={{ marginBottom: '20px' }}>
           <TextField
             fullWidth
@@ -107,129 +113,115 @@ const ProjectForm = () => {
             required
           />
         </Box>
+
+        {/* Start Date */}
         <Box sx={{ marginBottom: '20px' }}>
           <TextField
             fullWidth
-            label="Date"
+            label="Start Date"
             type="date"
-            name="date"
+            name="startDate"
             InputLabelProps={{ shrink: true }}
-            value={formData.date}
+            value={formData.startDate}
             onChange={handleChange}
             required
           />
         </Box>
-        <Typography variant="h6" component="h2" gutterBottom>
-          Location
-        </Typography>
-        <Grid container spacing={2}>
-          <Grid item xs={12}>
-            <TextField
-              fullWidth
-              label="Address"
-              name="address"
-              value={formData.location.address}
-              onChange={handleLocationChange}
-              required
-            />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              fullWidth
-              label="City"
-              name="city"
-              value={formData.location.city}
-              onChange={handleLocationChange}
-              required
-            />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              fullWidth
-              label="State"
-              name="state"
-              value={formData.location.state}
-              onChange={handleLocationChange}
-              required
-            />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              fullWidth
-              label="Zip Code"
-              name="zipCode"
-              value={formData.location.zipCode}
-              onChange={handleLocationChange}
-              required
-            />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              fullWidth
-              label="Country"
-              name="country"
-              value={formData.location.country}
-              onChange={handleLocationChange}
-              required
-            />
-          </Grid>
-        </Grid>
-        <Box sx={{ marginBottom: '20px', marginTop: '20px' }}>
+
+        {/* End Date */}
+        <Box sx={{ marginBottom: '20px' }}>
           <TextField
             fullWidth
-            label="Organizer"
-            name="organizer"
-            value={formData.organizer}
+            label="End Date"
+            type="date"
+            name="endDate"
+            InputLabelProps={{ shrink: true }}
+            value={formData.endDate}
             onChange={handleChange}
             required
           />
         </Box>
+
+        {/* Allocated Budget */}
         <Box sx={{ marginBottom: '20px' }}>
-          <Typography variant="h6" component="h2" gutterBottom>
-            Members
-          </Typography>
-          <List>
-            {memberList.map((staff, index) => (
-              <ListItem key={index}>
-                <ListItemText
-                  primary={`${staff.firstName} ${staff.lastName}`}
-                  secondary={`Role: ${staff.role}`}
-                />
-                <ListItemSecondaryAction>
-                  <IconButton
-                    edge="end"
-                    color="primary"
-                    onClick={() => handleEditMember(index)}
-                  >
-                    <EditIcon />
-                  </IconButton>
-                  <IconButton
-                    edge="end"
-                    color="error"
-                    onClick={() => handleDeleteMember(index)}
-                  >
-                    <DeleteIcon />
-                  </IconButton>
-                </ListItemSecondaryAction>
-              </ListItem>
-            ))}
-          </List>
-          <IconButton
-            color="primary"
-            aria-label="add staff"
-            onClick={() => handleShowMemberForm()}
-            sx={{ marginTop: '10px' }}
-          >
-            <AddIcon />
-          </IconButton>
+          <TextField
+            fullWidth
+            label="Allocated Budget"
+            type="number"
+            name="allocatedBudget"
+            value={formData.allocatedBudget}
+            onChange={handleChange}
+            required
+          />
         </Box>
-        
+
+        {/* Project Status */}
+        <Box sx={{ marginBottom: '20px' }}>
+          <TextField
+            fullWidth
+            select
+            label="Status"
+            name="status"
+            value={formData.status}
+            onChange={handleChange}
+            required
+          >
+            {['Planning', 'In Progress', 'Completed', 'On Hold', 'Cancelled'].map((status) => (
+              <MenuItem key={status} value={status}>
+                {status}
+              </MenuItem>
+            ))}
+          </TextField>
+        </Box>
+
+        {/* Team Members Section */}
+        <Typography variant="h6" component="h2" gutterBottom>
+          Team Members
+        </Typography>
+        <List>
+          {memberList.map((member, index) => (
+            <ListItem key={index}>
+              <ListItemText
+                primary={`${member.firstName} ${member.lastName}`}
+                secondary={`Role: ${member.role}`}
+              />
+              <ListItemSecondaryAction>
+                <IconButton
+                  edge="end"
+                  color="primary"
+                  onClick={() => handleEditMember(index)}
+                >
+                  <EditIcon />
+                </IconButton>
+                <IconButton
+                  edge="end"
+                  color="error"
+                  onClick={() => handleDeleteMember(index)}
+                >
+                  <DeleteIcon />
+                </IconButton>
+              </ListItemSecondaryAction>
+            </ListItem>
+          ))}
+        </List>
+        <IconButton
+          color="primary"
+          aria-label="add member"
+          onClick={() => handleShowMemberForm()}
+          sx={{ marginTop: '10px' }}
+        >
+          <AddIcon />
+        </IconButton>
+
+        {/* Member Form */}
         {showMemberForm && (
           <MemberForm
-            staff={editingIndex !== null ? memberList[editingIndex] : null}
+            member={editingIndex !== null ? memberList[editingIndex] : null}
             onClose={handleCloseMemberForm}
           />
         )}
+
+        {/* Submit Button */}
         <Box sx={{ display: 'flex', justifyContent: 'space-between', marginTop: '20px' }}>
           <Button type="submit" variant="contained" color="primary">
             Submit

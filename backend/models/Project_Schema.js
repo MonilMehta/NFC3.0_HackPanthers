@@ -11,10 +11,6 @@ const ProjectSchema = new mongoose.Schema({
     required: true,
     trim: true,
   },
-  objectives: {
-    type: String,
-    required: true,
-  },
   startDate: {
     type: Date,
     required: true,
@@ -29,15 +25,9 @@ const ProjectSchema = new mongoose.Schema({
       ref: 'ProjectMember',
     },
   ],
-  budget: {
-    allocated: { 
+  allocated: { 
       type: Number,
       default: 0,
-    },
-    spent: {
-      type: Number,
-      default: 0,
-    },
   },
   status: {
     type: String,
