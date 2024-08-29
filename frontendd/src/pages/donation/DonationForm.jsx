@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { TextField, Button, Box, Typography, Container, Grid } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Link as Lk } from 'react-router-dom';
+import jsPDF from 'jspdf';
 
 const theme = createTheme({
   palette: {
@@ -78,9 +79,25 @@ const DonationForm = () => {
     setValidationErrors(errors);
 
     if (Object.keys(errors).length === 0) {
-      console.log('Form Data Submitted:', formData);
-      // Handle form submission (e.g., send data to server)
+      generatePDF(); // Call the function to generate the PDF
     }
+  };
+
+  const generatePDF = () => {
+    const doc = new jsPDF();
+    const { firstName, lastName, amount } = formData;
+
+    doc.setFontSize(16);
+    doc.text('Donation Confirmation', 20, 20);
+    doc.setFontSize(12);
+    doc.text(`Dear ${firstName} ${lastName},`, 20, 30);
+    doc.text(`Thank you for your generous donation of $${amount} to our NGO organization.`, 20, 40);
+    doc.text('Your support helps us continue our work and make a positive impact in the lives of children in need.', 20, 50);
+    doc.text('We are deeply grateful for your contribution and commitment.', 20, 60);
+    doc.text('Sincerely,', 20, 70);
+    doc.text('The Children Welfare Oriented Team', 20, 80);
+
+    doc.save('donation-card.pdf');
   };
 
   return (
@@ -88,7 +105,6 @@ const DonationForm = () => {
       <Container component="main" maxWidth="md">
         <Box
           sx={{
-
             padding: '2rem 3rem',
             backgroundColor: '#e9ecef',
             marginTop: '2rem',
@@ -183,35 +199,24 @@ const DonationForm = () => {
                 />
               </Grid>
             </Grid>
-            <Lk
-            style={{
-                textDecoration: 'none',
-                color: '#4285f4', // Google Blue
-                fontWeight: 500,
-                marginTop: '1rem',
-  
-            }}
-            to='/razorpay' 
-            >
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{
-                mt: 3,
-                backgroundColor: '#4CAF50',
-                color: '#ffffff',
-                fontWeight: 600,
-                '&:hover': {
-                  backgroundColor: '#388E3C',
-                  transform: 'translateY(-2px)',
-                },
-              }}
-            >
-              Payment
-            </Button>
-            </Lk>
             
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{
+                  mt: 3,
+                  backgroundColor: '#4CAF50',
+                  color: '#ffffff',
+                  fontWeight: 600,
+                  '&:hover': {
+                    backgroundColor: '#388E3C',
+                    transform: 'translateY(-2px)',
+                  },
+                }}
+              >
+                Payment
+              </Button>
           </Box>
         </Box>
       </Container>

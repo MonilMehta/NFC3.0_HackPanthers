@@ -1,56 +1,59 @@
 import React from 'react';
-import { motion } from 'framer-motion'; // For transitions
 
 const DonationText = () => {
+  const styles = {
+    container: {
+      backgroundColor: '#e9ecef',
+      padding: '2rem',
+      borderRadius: '8px',
+      textAlign: 'center',
+      maxWidth: '600px',
+      margin: '0 auto',
+      color: '#202124',
+    },
+    heading: {
+      marginBottom: '1rem',
+      fontSize: '24px',
+      fontWeight: 'bold',
+    },
+    paragraph: {
+      marginBottom: '1.5rem',
+      fontSize: '16px',
+      lineHeight: '1.6',
+    },
+  };
+
   return (
-    <motion.div
-      initial={{ opacity: 0, translateY: 20 }}
-      animate={{ opacity: 1, translateY: 0 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
-      style={{
-        backgroundColor: '#e9ecef',
-        padding: '2rem',
-        borderRadius: '8px',
-        textAlign: 'center',
-        maxWidth: '600px',
-        margin: '0 auto',
-        color: '#202124',
-        flex: 1,
-      }}
-    >
-      <h2 style={{ marginBottom: '1rem' }}>Make a Difference Today</h2>
-      <p style={{ marginBottom: '1.5rem' }}>
-        Your donation is a powerful way to make a positive impact in the community. 
-        Every contribution, regardless of its size, supports our mission to deliver vital 
-        programs and services to those in need. With your help, we can tackle pressing 
-        issues and drive meaningful change. Whether it’s providing education, healthcare, 
-        or emergency assistance, your support makes a real difference in people's lives.
+    <div style={styles.container}>
+      <h2 style={styles.heading}>Support Children's Futures Today</h2>
+      <p style={styles.paragraph}>
+        Your donation is instrumental in improving the lives of children in need. 
+        Each contribution helps us provide essential services such as education, healthcare, 
+        and emotional support to vulnerable children. With your support, we can address urgent needs 
+        and create a brighter future for every child. No matter the size, your donation has a profound impact.
       </p>
-      <p style={{ marginBottom: '1.5rem' }}>
-        We believe in the power of collective effort and the strength of our community. 
-        Each donation enables us to fund projects that address crucial needs and create 
-        lasting impact. By contributing today, you are joining a movement of compassionate 
-        individuals dedicated to fostering a better world. Your generosity fuels our work 
-        and helps us to continue making strides toward a more equitable and just society.
+      <p style={styles.paragraph}>
+        We believe in the power of community and collective action. Every donation enables us to fund 
+        programs that nurture and protect children, helping them reach their full potential. By supporting us, 
+        you join a network of compassionate individuals committed to making a difference in the lives of children.
       </p>
-      <p style={{ marginBottom: '1.5rem' }}>
-        Our organization is committed to transparency and accountability. We ensure that 
-        every donation is utilized effectively to maximize its impact. You can be confident 
-        that your support goes directly to initiatives that create positive outcomes. Together, 
-        we can overcome challenges and build a brighter future for all. 
+      <p style={styles.paragraph}>
+        Our organization is dedicated to transparency and effective use of resources. We ensure that 
+        every donation is directed towards initiatives that deliver real, positive outcomes for children. 
+        You can be assured that your support is making a meaningful difference in building a better world for all.
       </p>
-      <p style={{ marginBottom: '1.5rem' }}>
-        Thank you for your invaluable contribution and for standing with us in our mission. 
-        Your support empowers us to keep pushing forward and brings hope to countless individuals. 
-        We are deeply grateful for your commitment and generosity.
+      <p style={styles.paragraph}>
+        Thank you for your invaluable contribution and for standing with us in our mission. Your support 
+        drives our efforts and brings hope to countless children. We are deeply grateful for your commitment 
+        and generosity, which empower us to continue our work.
       </p>
-      <p>
-        If you have any questions or need further information about our projects or how 
-        your donation is used, please feel free to reach out. We are here to provide any 
-        additional details you might need and to ensure you have a fulfilling giving experience. 
-        Together, let's continue making a difference and shaping a better tomorrow.
+      <p style={styles.paragraph}>
+        If you have any questions or need more information about our programs or how your donation is utilized, 
+        please feel free to reach out. We are here to provide any additional details you need and to ensure 
+        a fulfilling giving experience. Together, let’s continue to make a difference and create a brighter future 
+        for every child.
       </p>
-    </motion.div>
+    </div>
   );
 }
 
