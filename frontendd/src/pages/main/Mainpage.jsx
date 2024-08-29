@@ -3,20 +3,20 @@ import Proj1 from '../../assets/Proj1.png';
 import Proj3 from '../../assets/Proj3.jpg';
 import CustomCard from './CustomCard';
 import Rotationlogo from './rotation/Rotationlogo';
-
-const Navbar = () => (
-  <nav className="bg-[#003E1F] p-4">
-    <div className="container mx-auto flex justify-between items-center">
-      <div className="text-[#FFFFFF] font-bold text-xl">ChildCare NGO</div>
-      <div className="space-x-4">
-        <a href="#" className="text-[#FFFFFF] hover:text-[#6BCB80]">Home</a>
-        <a href="#" className="text-[#FFFFFF] hover:text-[#6BCB80]">About</a>
-        <a href="#" className="text-[#FFFFFF] hover:text-[#6BCB80]">Events</a>
-        <a href="#" className="text-[#FFFFFF] hover:text-[#6BCB80]">Donate</a>
-      </div>
-    </div>
-  </nav>
-);
+import Navbar from '../../components/Navbar';
+// const Navbar = () => (
+//   <nav className="bg-[#003E1F] p-4">
+//     <div className="container mx-auto flex justify-between items-center">
+//       <div className="text-[#FFFFFF] font-bold text-xl">ChildCare NGO</div>
+//       <div className="space-x-4">
+//         <a href="#" className="text-[#FFFFFF] hover:text-[#6BCB80]">Home</a>
+//         <a href="#" className="text-[#FFFFFF] hover:text-[#6BCB80]">About</a>
+//         <a href="#" className="text-[#FFFFFF] hover:text-[#6BCB80]">Events</a>
+//         <a href="#" className="text-[#FFFFFF] hover:text-[#6BCB80]">Donate</a>
+//       </div>
+//     </div>
+//   </nav>
+// );
 
 const HomePage = () => {
   const upcomingEvents = [
