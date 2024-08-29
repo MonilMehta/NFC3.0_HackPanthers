@@ -1,6 +1,4 @@
 import React from 'react';
-import { Nav, Carousel, Container, Row, Col, Card, Button } from 'react-bootstrap';
-import { Book, Users, Globe, Menu, X, ChevronRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import Navbar from './Navbr';
 import HeroSection from './HeroSection';

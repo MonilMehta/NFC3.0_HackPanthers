@@ -4,15 +4,16 @@ import Proj3 from '../../assets/Proj3.jpg';
 import CustomCard from './CustomCard';
 import Rotationlogo from './rotation/Rotationlogo';
 import Navbar from '../../components/Navbar';
+import {Link} from 'react-router-dom';
 // const Navbar = () => (
 //   <nav className="bg-[#003E1F] p-4">
 //     <div className="container mx-auto flex justify-between items-center">
 //       <div className="text-[#FFFFFF] font-bold text-xl">ChildCare NGO</div>
 //       <div className="space-x-4">
-//         <a href="#" className="text-[#FFFFFF] hover:text-[#6BCB80]">Home</a>
-//         <a href="#" className="text-[#FFFFFF] hover:text-[#6BCB80]">About</a>
-//         <a href="#" className="text-[#FFFFFF] hover:text-[#6BCB80]">Events</a>
-//         <a href="#" className="text-[#FFFFFF] hover:text-[#6BCB80]">Donate</a>
+//         <Link to="/donation" className="text-[#FFFFFF] hover:text-[#6BCB80]">Donations</Link>
+//         <Link to="/events" className="text-[#FFFFFF] hover:text-[#6BCB80]">Events</Link>
+//         <Link to="/badges-certifications" className="text-[#FFFFFF] hover:text-[#6BCB80]">Badges & Certificates</Link>
+//         <Link to="/event-analytics" className="text-[#FFFFFF] hover:text-[#6BCB80]">Event Analytics</Link>
 //       </div>
 //     </div>
 //   </nav>
@@ -35,11 +36,11 @@ const HomePage = () => {
   ];
 
   return (
-    <div className="bg-[#FFFFFF] min-h-screen">
+    <div className="bg-[#FFFFFF] min-h-screen ">
       <Navbar />
 
       {/* Hero Section */}
-      <div className="bg-[#003E1F] text-[#FFFFFF] py-20">
+      <div className="bg-[#003E1F] text-[#FFFFFF] py-20 h-[100vh]">
         <div className="container mx-auto px-4 flex flex-col md:flex-row items-center">
           {/* Logo on the Left */}
           <div className="md:w-1/2 flex justify-center md:justify-start mb-8 md:mb-0">
@@ -106,9 +107,9 @@ const HomePage = () => {
             <div>
               <h3 className="text-xl font-bold mb-4">Follow Us</h3>
               <div className="flex space-x-4">
-                <a href="#" className="text-[#FFFFFF] hover:text-[#6BCB80]">Facebook</a>
-                <a href="#" className="text-[#FFFFFF] hover:text-[#6BCB80]">Twitter</a>
-                <a href="#" className="text-[#FFFFFF] hover:text-[#6BCB80]">Instagram</a>
+                <a href="/" className="text-[#FFFFFF] hover:text-[#6BCB80]">Facebook</a>
+                <a href="/" className="text-[#FFFFFF] hover:text-[#6BCB80]">Twitter</a>
+                <a href="/" className="text-[#FFFFFF] hover:text-[#6BCB80]">Instagram</a>
               </div>
             </div>
           </div>
