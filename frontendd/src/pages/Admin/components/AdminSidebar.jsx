@@ -14,6 +14,7 @@ import PeopleIcon from "@mui/icons-material/People";
 import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 import ReportIcon from "@mui/icons-material/Report";
 import EventIcon from "@mui/icons-material/Event";
+import GroupIcon from "@mui/icons-material/Group"; // Added GroupIcon for Staff
 
 const AdminSidebar = () => {
   return (
@@ -209,6 +210,38 @@ const AdminSidebar = () => {
           </ListItemIcon>
           <ListItemText
             primary="Events"
+            sx={{
+              color: 'inherit',
+              '&:hover': {
+                color: '#1e1e2d',
+              },
+            }}
+          />
+        </ListItem>
+
+        <ListItem 
+          button 
+          component={Link} 
+          to="/admin/staff"
+          sx={{
+            '&:hover': {
+              bgcolor: '#ecf0f1',
+              color: '#1e1e2d',
+            },
+          }}
+        >
+          <ListItemIcon 
+            sx={{
+              color: 'inherit',
+              '&:hover': {
+                color: '#1e1e2d',
+              },
+            }}
+          >
+            <GroupIcon /> {/* Added icon for Staff */}
+          </ListItemIcon>
+          <ListItemText
+            primary="Staff"
             sx={{
               color: 'inherit',
               '&:hover': {
