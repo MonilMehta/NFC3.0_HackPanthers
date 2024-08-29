@@ -7,6 +7,7 @@ import Mainpage from './pages/main/Mainpage';
 import AdminMain from './pages/Admin/AdminMain';
 import Account from './pages/Account/Account';
 import Donation from './pages/donation/Donation';
+import RazorpayForm from './pages/donation/RazorpayForm';
 const App = () => {
   return (
     <Router>
@@ -18,6 +19,8 @@ const App = () => {
         <Route path="/admin/*" element={<AdminMain />} />
         <Route path="/account" element={<Account />} />
         <Route path="/donation" element={<Donation />} />
+        <Route path="/razorpay" element={<RazorpayForm />} />
+
       </Routes>
     </Router>
   );

@@ -1,0 +1,222 @@
+import React, { useState } from 'react';
+import { TextField, Button, Box, Typography, Container, Grid } from '@mui/material';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { Link as Lk } from 'react-router-dom';
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#4CAF50', // Soft green
+    },
+    secondary: {
+      main: '#FFC107', // Amber
+    },
+    background: {
+      default: '#FAFAFA', // Light gray background
+    },
+    text: {
+      primary: '#333333', // Darker text for readability
+    },
+  },
+  typography: {
+    fontFamily: 'Roboto, sans-serif',
+    h5: {
+      fontWeight: 700,
+    },
+  },
+});
+
+const DonationForm = () => {
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    donarEmail: '',
+    donarPhoneNo: '',
+    amount: '',
+    message: '',
+  });
+
+  const [validationErrors, setValidationErrors] = useState({});
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const phoneRegex = /^\d+$/;
+    const amountRegex = /^[0-9]+(\.[0-9]{1,2})?$/;
+
+    const errors = {};
+
+    if (!formData.firstName) {
+      errors.firstName = 'First name is required.';
+    }
+
+    if (!formData.lastName) {
+      errors.lastName = 'Last name is required.';
+    }
+
+    if (!emailRegex.test(formData.donarEmail)) {
+      errors.donarEmail = 'Invalid email address.';
+    }
+
+    if (!phoneRegex.test(formData.donarPhoneNo)) {
+      errors.donarPhoneNo = 'Invalid phone number. Only numbers are allowed.';
+    }
+
+    if (!amountRegex.test(formData.amount) || parseFloat(formData.amount) <= 0) {
+      errors.amount = 'Amount must be a positive number.';
+    }
+
+    setValidationErrors(errors);
+
+    if (Object.keys(errors).length === 0) {
+      console.log('Form Data Submitted:', formData);
+      // Handle form submission (e.g., send data to server)
+    }
+  };
+
+  return (
+    <ThemeProvider theme={theme}>
+      <Container component="main" maxWidth="md">
+        <Box
+          sx={{
+
+            padding: '2rem 3rem',
+            backgroundColor: '#e9ecef',
+            marginTop: '2rem',
+            marginBottom: '2rem',
+          }}
+        >
+          <Typography
+            component="h1"
+            variant="h5"
+            align="center"
+            sx={{
+              color: '#333333',
+              marginBottom: '1.5rem',
+              fontWeight: 'bold',
+            }}
+          >
+            Donation Form
+          </Typography>
+          <Box component="form" noValidate onSubmit={handleSubmit}>
+            <Grid container spacing={2}>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  name="firstName"
+                  required
+                  fullWidth
+                  label="First Name"
+                  value={formData.firstName}
+                  onChange={handleChange}
+                  error={!!validationErrors.firstName}
+                  helperText={validationErrors.firstName}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  name="lastName"
+                  required
+                  fullWidth
+                  label="Last Name"
+                  value={formData.lastName}
+                  onChange={handleChange}
+                  error={!!validationErrors.lastName}
+                  helperText={validationErrors.lastName}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  name="donarEmail"
+                  required
+                  fullWidth
+                  label="Email Address"
+                  value={formData.donarEmail}
+                  onChange={handleChange}
+                  error={!!validationErrors.donarEmail}
+                  helperText={validationErrors.donarEmail}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  name="donarPhoneNo"
+                  required
+                  fullWidth
+                  label="Phone Number"
+                  type="tel"
+                  value={formData.donarPhoneNo}
+                  onChange={handleChange}
+                  error={!!validationErrors.donarPhoneNo}
+                  helperText={validationErrors.donarPhoneNo}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  name="amount"
+                  required
+                  fullWidth
+                  label="Donation Amount"
+                  type="number"
+                  value={formData.amount}
+                  onChange={handleChange}
+                  error={!!validationErrors.amount}
+                  helperText={validationErrors.amount}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  name="message"
+                  fullWidth
+                  label="Message (optional)"
+                  multiline
+                  rows={4}
+                  value={formData.message}
+                  onChange={handleChange}
+                />
+              </Grid>
+            </Grid>
+            <Lk
+            style={{
+                textDecoration: 'none',
+                color: '#4285f4', // Google Blue
+                fontWeight: 500,
+                marginTop: '1rem',
+  
+            }}
+            to='/razorpay' 
+            >
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{
+                mt: 3,
+                backgroundColor: '#4CAF50',
+                color: '#ffffff',
+                fontWeight: 600,
+                '&:hover': {
+                  backgroundColor: '#388E3C',
+                  transform: 'translateY(-2px)',
+                },
+              }}
+            >
+              Payment
+            </Button>
+            </Lk>
+            
+          </Box>
+        </Box>
+      </Container>
+    </ThemeProvider>
+  );
+};
+
+export default DonationForm;
