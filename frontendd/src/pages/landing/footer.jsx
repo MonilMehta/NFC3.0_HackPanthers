@@ -1,5 +1,5 @@
 import React from 'react';
-import { Book, Users, Globe, Menu, X, ChevronRight, Italic, FanIcon } from 'lucide-react';
+import { FanIcon } from 'lucide-react';
 
 const Footer = () => (
   <footer className="bg-green-300">

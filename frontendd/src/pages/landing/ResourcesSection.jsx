@@ -1,5 +1,5 @@
 import React from 'react';
-import { Book, Users, Globe, Menu, X, ChevronRight } from 'lucide-react';
+
 
 const ResourcesSection = () => (
     <div className="bg-gray-50">
