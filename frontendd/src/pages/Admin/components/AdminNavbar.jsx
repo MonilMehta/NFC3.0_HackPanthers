@@ -41,10 +41,10 @@ function AdminNavbar() {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar position="sticky" sx={{ backgroundColor: '#1e1e2d' }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AdminPanelSettingsIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+          <AdminPanelSettingsIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1, color: '#f39c12' }} />
           <Typography
             variant="h6"
             noWrap
@@ -56,7 +56,7 @@ function AdminNavbar() {
               fontFamily: 'monospace',
               fontWeight: 700,
               letterSpacing: '.3rem',
-              color: 'inherit',
+              color: '#ecf0f1',
               textDecoration: 'none',
             }}
           >
@@ -92,12 +92,12 @@ function AdminNavbar() {
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography sx={{ textAlign: 'center' }}>{page}</Typography>
+                  <Typography sx={{ textAlign: 'center', color: '#ecf0f1' }}>{page}</Typography>
                 </MenuItem>
               ))}
             </Menu>
           </Box>
-          <AdminPanelSettingsIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+          <AdminPanelSettingsIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1, color: '#f39c12' }} />
           <Typography
             variant="h5"
             noWrap
@@ -110,7 +110,7 @@ function AdminNavbar() {
               fontFamily: 'monospace',
               fontWeight: 700,
               letterSpacing: '.3rem',
-              color: 'inherit',
+              color: '#ecf0f1',
               textDecoration: 'none',
             }}
           >
@@ -122,7 +122,7 @@ function AdminNavbar() {
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
+                sx={{ my: 2, color: '#ecf0f1', display: 'block' }}
               >
                 {page}
               </Button>
@@ -155,7 +155,7 @@ function AdminNavbar() {
                 <MenuItem key={setting.label} onClick={handleCloseUserMenu}>
                   <Link
                     to={setting.path}
-                    style={{ textDecoration: 'none', color: 'inherit' }}
+                    style={{ textDecoration: 'none', color: '#2c3e50' }}
                   >
                     <Typography sx={{ textAlign: 'center' }}>
                       {setting.label}

@@ -10,7 +10,7 @@ import Stack from '@mui/joy/Stack';
 import Typography from '@mui/joy/Typography';
 import Tabs from '@mui/joy/Tabs';
 import TabList from '@mui/joy/TabList';
-import  { tabClasses } from '@mui/joy/Tab';
+import { tabClasses } from '@mui/joy/Tab';
 import Card from '@mui/joy/Card';
 import EmailRoundedIcon from '@mui/icons-material/EmailRounded';
 import EditRoundedIcon from '@mui/icons-material/EditRounded';
@@ -19,18 +19,18 @@ import CalendarTodayRoundedIcon from '@mui/icons-material/CalendarTodayRounded';
 
 export default function Account() {
   return (
-    <Box sx={{ flex: 1, width: '100%' }}>
+    <Box sx={{ flex: 1, width: '100%', bgcolor: '#2c3e50', color: '#ecf0f1',height:'100vh' }}>
       <Box
         sx={{
           position: 'sticky',
           top: { sm: -100, md: -110 },
-          bgcolor: 'background.body',
+          bgcolor: '#34495e',
           zIndex: 9995,
         }}
       >
         <Box sx={{ px: { xs: 2, md: 6 } }}>
-          <Typography level="h2" component="h1" sx={{ mt: 1, mb: 2 }}>
-            My profile
+          <Typography level="h2" component="h1" sx={{ mt: 1, mb: 2, color: '#f39c12' }}>
+            My Profile
           </Typography>
         </Box>
         <Tabs defaultValue={0} sx={{ bgcolor: 'transparent' }}>
@@ -43,13 +43,13 @@ export default function Account() {
               [`&& .${tabClasses.root}`]: {
                 fontWeight: '600',
                 flex: 'initial',
-                color: 'text.tertiary',
+                color: '#ecf0f1',
                 [`&.${tabClasses.selected}`]: {
                   bgcolor: 'transparent',
-                  color: 'text.primary',
+                  color: '#f39c12',
                   '&::after': {
                     height: '2px',
-                    bgcolor: 'primary.500',
+                    bgcolor: '#f39c12',
                   },
                 },
               },
@@ -68,11 +68,11 @@ export default function Account() {
           py: { xs: 2, md: 3 },
         }}
       >
-        <Card>
+        <Card sx={{ bgcolor: '#34495e', color: '#ecf0f1' }}>
           <Box sx={{ mb: 1 }}>
-            <Typography level="title-md">Personal info</Typography>
+            <Typography level="title-md" sx={{ color: '#f39c12' }}>Personal Info</Typography>
           </Box>
-          <Divider />
+          <Divider sx={{ bgcolor: '#f39c12' }} />
           <Stack
             direction="row"
             spacing={3}
@@ -80,44 +80,45 @@ export default function Account() {
           >
             <Stack spacing={2} sx={{ flexGrow: 1 }}>
               <Stack spacing={1}>
-                <FormLabel>Name</FormLabel>
+                <FormLabel sx={{ color: '#ecf0f1' }}>Name</FormLabel>
                 <FormControl
                   sx={{ display: { sm: 'flex-column', md: 'flex-row' }, gap: 2 }}
                 >
-                  <Input size="sm" placeholder="First name" />
-                  <Input size="sm" placeholder="Last name" sx={{ flexGrow: 1 }} />
+                  <Input size="sm" placeholder="First name" sx={{ bgcolor: '#2c3e50', color: '#ecf0f1' }} />
+                  <Input size="sm" placeholder="Last name" sx={{ flexGrow: 1, bgcolor: '#2c3e50', color: '#ecf0f1' }} />
                 </FormControl>
               </Stack>
               <Stack direction="row" spacing={2}>
                 <FormControl>
-                  <FormLabel>Date of Birth</FormLabel>
+                  <FormLabel sx={{ color: '#ecf0f1' }}>Date of Birth</FormLabel>
                   <Input
                     size="sm"
                     type="date"
                     startDecorator={<CalendarTodayRoundedIcon />}
+                    sx={{ bgcolor: '#2c3e50', color: '#ecf0f1' }}
                   />
                 </FormControl>
                 <FormControl sx={{ flexGrow: 1 }}>
-                  <FormLabel>Email</FormLabel>
+                  <FormLabel sx={{ color: '#ecf0f1' }}>Email</FormLabel>
                   <Input
                     size="sm"
                     type="email"
                     startDecorator={<EmailRoundedIcon />}
                     placeholder="email"
                     defaultValue="siriwatk@test.com"
-                    sx={{ flexGrow: 1 }}
+                    sx={{ flexGrow: 1, bgcolor: '#2c3e50', color: '#ecf0f1' }}
                   />
                 </FormControl>
               </Stack>
               <Stack direction="row" spacing={2}>
                 <FormControl sx={{ flexGrow: 1 }}>
-                  <FormLabel>Phone Number</FormLabel>
+                  <FormLabel sx={{ color: '#ecf0f1' }}>Phone Number</FormLabel>
                   <Input
                     size="sm"
                     type="tel"
                     startDecorator={<PhoneRoundedIcon />}
                     placeholder="(123) 456-7890"
-                    sx={{ flexGrow: 1 }}
+                    sx={{ flexGrow: 1, bgcolor: '#2c3e50', color: '#ecf0f1' }}
                   />
                 </FormControl>
               </Stack>
@@ -148,7 +149,7 @@ export default function Account() {
                   variant="outlined"
                   color="neutral"
                   sx={{
-                    bgcolor: 'background.body',
+                    bgcolor: '#2c3e50',
                     position: 'absolute',
                     zIndex: 2,
                     borderRadius: '50%',
@@ -162,46 +163,47 @@ export default function Account() {
               </Stack>
               <Stack spacing={2} sx={{ flexGrow: 1 }}>
                 <Stack spacing={1}>
-                  <FormLabel>Name</FormLabel>
+                  <FormLabel sx={{ color: '#ecf0f1' }}>Name</FormLabel>
                   <FormControl
                     sx={{ display: { sm: 'flex-column', md: 'flex-row' }, gap: 2 }}
                   >
-                    <Input size="sm" placeholder="First name" />
-                    <Input size="sm" placeholder="Last name" sx={{ flexGrow: 1 }} />
+                    <Input size="sm" placeholder="First name" sx={{ bgcolor: '#2c3e50', color: '#ecf0f1' }} />
+                    <Input size="sm" placeholder="Last name" sx={{ flexGrow: 1, bgcolor: '#2c3e50', color: '#ecf0f1' }} />
                   </FormControl>
                 </Stack>
               </Stack>
             </Stack>
             <Stack direction="row" spacing={2}>
               <FormControl>
-                <FormLabel>Date of Birth</FormLabel>
+                <FormLabel sx={{ color: '#ecf0f1' }}>Date of Birth</FormLabel>
                 <Input
                   size="sm"
                   type="date"
                   startDecorator={<CalendarTodayRoundedIcon />}
+                  sx={{ bgcolor: '#2c3e50', color: '#ecf0f1' }}
                 />
               </FormControl>
               <FormControl sx={{ flexGrow: 1 }}>
-                <FormLabel>Email</FormLabel>
+                <FormLabel sx={{ color: '#ecf0f1' }}>Email</FormLabel>
                 <Input
                   size="sm"
                   type="email"
                   startDecorator={<EmailRoundedIcon />}
                   placeholder="email"
                   defaultValue="siriwatk@test.com"
-                  sx={{ flexGrow: 1 }}
+                  sx={{ flexGrow: 1, bgcolor: '#2c3e50', color: '#ecf0f1' }}
                 />
               </FormControl>
             </Stack>
             <Stack direction="row" spacing={2}>
               <FormControl sx={{ flexGrow: 1 }}>
-                <FormLabel>Phone Number</FormLabel>
+                <FormLabel sx={{ color: '#ecf0f1' }}>Phone Number</FormLabel>
                 <Input
                   size="sm"
                   type="tel"
                   startDecorator={<PhoneRoundedIcon />}
                   placeholder="(123) 456-7890"
-                  sx={{ flexGrow: 1 }}
+                  sx={{ flexGrow: 1, bgcolor: '#2c3e50', color: '#ecf0f1' }}
                 />
               </FormControl>
             </Stack>
