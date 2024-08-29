@@ -1,21 +1,26 @@
 import React from 'react';
-import { Book, Users, Globe, Menu, X, ChevronRight } from 'lucide-react';
+import { ChevronRight } from 'lucide-react';
 
 const CallToAction = () => (
-    <div className="bg-indigo-700">
-      <div className="max-w-2xl mx-auto text-center py-16 px-4 sm:py-20 sm:px-6 lg:px-8">
-        <h2 className="text-3xl font-extrabold text-white sm:text-4xl">
-          <span className="block">Take Action Today</span>
-          <span className="block">Join Our Educational Programs</span>
-        </h2>
-        <p className="mt-4 text-lg leading-6 text-indigo-200">
-          Empower yourself with knowledge and become an advocate for change. Our educational programs offer comprehensive insights into genocide prevention and peacebuilding.
-        </p>
-        <a href="#" className="mt-8 w-full inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-indigo-600 bg-white hover:bg-indigo-50 sm:w-auto">
-          Volunteer Now
+  <div className="bg-white-700" style={{ position: 'relative' }}>
+    <div className="text-green-400 max-w-2xl mx-auto text-center py-16 px-4 sm:py-20 sm:px-6 lg:px-8">
+      <h2 className="text-green-400 text-4xl font-extrabold sm:text-5xl">
+        <span className="block" style={{ fontSize: '60px', fontStyle: 'italic' }}>Join Us</span>
+        <span className="block">Take Action Now</span>
+      </h2>
+      <p className="mt-6 text-lg leading-7 text-green-400">
+        Make a difference in the lives of children and communities around the world. Volunteer with us today and help create a brighter future for all.
+      </p>
+      <div className="mt-8">
+        <a
+          href="#"
+          className="w-full inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-lg shadow-sm text-black bg-green-300 hover:bg-green-400 sm:w-auto"
+        >
+          Volunteer Now <ChevronRight className="ml-3 h-5 w-5" />
         </a>
       </div>
     </div>
-  );
+  </div>
+);
 
-  export default CallToAction;
+export default CallToAction;
