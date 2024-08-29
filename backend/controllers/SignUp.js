@@ -10,9 +10,9 @@ const signUp = async (req, resp) => {
         req.body?.lastName,
         req.body?.email,
         req.body?.phone_no,
-        req.body?.date_of_birth,
         req.body?.password,
-      ].some((field) => typeof field !== 'string' || field.trim() === "")
+      ].some((field) => typeof field !== "string" || field.trim() === "") ||
+      !req.body?.date_of_birth
     ) {
       return resp.status(400).json({ message: "All fields are required" });
     }

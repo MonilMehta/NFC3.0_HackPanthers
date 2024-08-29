@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import SignupSignin from './pages/Auth/SigninSignup';
 import Signin from './pages/Singin/Signin';
 import Signup from './pages/Singup/Signup';
 import Landing from './pages/landing/Landing';
@@ -13,6 +14,7 @@ const App = () => {
     <Router>
       <Routes>
         <Route path="/" element={<Landing />} />
+        <Route path="/auth" element={<SignupSignin />} />
         <Route path="/signin" element={<Signin />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/main" element={<Mainpage />} />
