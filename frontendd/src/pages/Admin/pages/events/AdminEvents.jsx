@@ -1,41 +1,51 @@
-import React, { useState } from 'react';
-import EventForm from './EventForm'; // Adjust the path as needed
-import EventCard from './EventCard';
+import React, { useEffect, useState } from 'react';
+import EventCard from './EventCard'; // Component to display basic event details
+import { Grid, Button } from '@mui/material';
+import { useNavigate } from 'react-router-dom'; // Assuming you're using React Router for navigation
+
 const AdminEvents = () => {
-  const [showForm, setShowForm] = useState(false);
+  const [events, setEvents] = useState([]);
+  const navigate = useNavigate();
 
-  const handleShowForm = () => setShowForm(true);
-  const handleCloseForm = () => setShowForm(false);
+  useEffect(() => {
+    // Fetch all events from the API
+    const fetchEvents = async () => {
+      try {
+        const response = await fetch('http://localhost:8000/events/getEventsDetails'); // Adjust the API endpoint as needed
+        const data = await response.json();
+        setEvents(data.events);
+      } catch (error) {
+        console.error('Error fetching events:', error);
+      }
+    };
 
-  const buttonStyle = {
-    backgroundColor: '#007BFF',
-    color: 'white',
-    border: 'none',
-    borderRadius: '4px',
-    padding: '10px 20px',
-    fontSize: '16px',
-    cursor: 'pointer',
-    transition: 'background-color 0.3s ease',
-  };
+    fetchEvents();
+  }, []);
 
-  const buttonHoverStyle = {
-    backgroundColor: '#0056b3',
+  const handleEventClick = (eventId) => {
+    // Navigate to a new page with more details about the event
+    navigate(`/event-details/${eventId}`);
   };
 
   return (
-    <>
-    <EventCard/>
+    <div>
       <h1>Admin Events</h1>
-      <button
-        onClick={handleShowForm}
-        style={buttonStyle}
-        onMouseOver={(e) => e.currentTarget.style.backgroundColor = buttonHoverStyle.backgroundColor}
-        onMouseOut={(e) => e.currentTarget.style.backgroundColor = buttonStyle.backgroundColor}
+      <Grid container spacing={2}>
+        {events.map((event) => (
+          <Grid item xs={12} sm={6} key={event._id}>
+            <EventCard event={event} onClick={() => handleEventClick(event._id)} />
+          </Grid>
+        ))}
+      </Grid>
+      <Button 
+        variant="contained" 
+        color="primary" 
+        onClick={() => navigate('/events/new')}
+        style={{ marginTop: '20px' }}
       >
         Add Event
-      </button>
-      {showForm && <EventForm onClose={handleCloseForm} />}
-    </>
+      </Button>
+    </div>
   );
 };
 

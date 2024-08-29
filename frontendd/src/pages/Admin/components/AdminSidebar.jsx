@@ -22,7 +22,7 @@ const AdminSidebar = () => {
       sx={{
         width: 250,
         bgcolor: "#1e1e2d",
-        height: "100vh",
+        height: "full",
         color: "#ecf0f1",
       }}
     >
