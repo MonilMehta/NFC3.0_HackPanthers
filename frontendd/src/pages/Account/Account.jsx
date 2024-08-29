@@ -16,20 +16,23 @@ import EmailRoundedIcon from '@mui/icons-material/EmailRounded';
 import EditRoundedIcon from '@mui/icons-material/EditRounded';
 import PhoneRoundedIcon from '@mui/icons-material/PhoneRounded';
 import CalendarTodayRoundedIcon from '@mui/icons-material/CalendarTodayRounded';
+import BadgeIcon from '@mui/icons-material/Badge'; // Badge icon
+import EventIcon from '@mui/icons-material/Event'; // Event icon
+import VolunteerActivismIcon from '@mui/icons-material/VolunteerActivism'; // Donation icon
 
 export default function Account() {
   return (
-    <Box sx={{ flex: 1, width: '100%', bgcolor: '#2c3e50', color: '#ecf0f1',height:'100vh' }}>
+    <Box sx={{ flex: 1, width: '100%', bgcolor: '#ffffff', color: '#2c3e50', height: '100vh' }}>
       <Box
         sx={{
           position: 'sticky',
           top: { sm: -100, md: -110 },
-          bgcolor: '#34495e',
+          bgcolor: '#e8f5e9',
           zIndex: 9995,
         }}
       >
         <Box sx={{ px: { xs: 2, md: 6 } }}>
-          <Typography level="h2" component="h1" sx={{ mt: 1, mb: 2, color: '#f39c12' }}>
+          <Typography level="h2" component="h1" sx={{ mt: 1, mb: 2, color: '#2e7d32' }}>
             My Profile
           </Typography>
         </Box>
@@ -43,13 +46,13 @@ export default function Account() {
               [`&& .${tabClasses.root}`]: {
                 fontWeight: '600',
                 flex: 'initial',
-                color: '#ecf0f1',
+                color: '#2c3e50',
                 [`&.${tabClasses.selected}`]: {
                   bgcolor: 'transparent',
-                  color: '#f39c12',
+                  color: '#2e7d32',
                   '&::after': {
                     height: '2px',
-                    bgcolor: '#f39c12',
+                    bgcolor: '#2e7d32',
                   },
                 },
               },
@@ -68,11 +71,12 @@ export default function Account() {
           py: { xs: 2, md: 3 },
         }}
       >
-        <Card sx={{ bgcolor: '#34495e', color: '#ecf0f1' }}>
+        {/* Personal Info Section */}
+        <Card sx={{ bgcolor: '#f1f8e9', color: '#2c3e50' }}>
           <Box sx={{ mb: 1 }}>
-            <Typography level="title-md" sx={{ color: '#f39c12' }}>Personal Info</Typography>
+            <Typography level="title-md" sx={{ color: '#2e7d32' }}>Personal Info</Typography>
           </Box>
-          <Divider sx={{ bgcolor: '#f39c12' }} />
+          <Divider sx={{ bgcolor: '#2e7d32' }} />
           <Stack
             direction="row"
             spacing={3}
@@ -80,134 +84,93 @@ export default function Account() {
           >
             <Stack spacing={2} sx={{ flexGrow: 1 }}>
               <Stack spacing={1}>
-                <FormLabel sx={{ color: '#ecf0f1' }}>Name</FormLabel>
+                <FormLabel sx={{ color: '#2c3e50' }}>Name</FormLabel>
                 <FormControl
                   sx={{ display: { sm: 'flex-column', md: 'flex-row' }, gap: 2 }}
                 >
-                  <Input size="sm" placeholder="First name" sx={{ bgcolor: '#2c3e50', color: '#ecf0f1' }} />
-                  <Input size="sm" placeholder="Last name" sx={{ flexGrow: 1, bgcolor: '#2c3e50', color: '#ecf0f1' }} />
+                  <Input size="sm" placeholder="First name" sx={{ bgcolor: '#ffffff', color: '#2c3e50' }} />
+                  <Input size="sm" placeholder="Last name" sx={{ flexGrow: 1, bgcolor: '#ffffff', color: '#2c3e50' }} />
                 </FormControl>
               </Stack>
               <Stack direction="row" spacing={2}>
                 <FormControl>
-                  <FormLabel sx={{ color: '#ecf0f1' }}>Date of Birth</FormLabel>
+                  <FormLabel sx={{ color: '#2c3e50' }}>Date of Birth</FormLabel>
                   <Input
                     size="sm"
                     type="date"
                     startDecorator={<CalendarTodayRoundedIcon />}
-                    sx={{ bgcolor: '#2c3e50', color: '#ecf0f1' }}
+                    sx={{ bgcolor: '#ffffff', color: '#2c3e50' }}
                   />
                 </FormControl>
                 <FormControl sx={{ flexGrow: 1 }}>
-                  <FormLabel sx={{ color: '#ecf0f1' }}>Email</FormLabel>
+                  <FormLabel sx={{ color: '#2c3e50' }}>Email</FormLabel>
                   <Input
                     size="sm"
                     type="email"
                     startDecorator={<EmailRoundedIcon />}
                     placeholder="email"
                     defaultValue="siriwatk@test.com"
-                    sx={{ flexGrow: 1, bgcolor: '#2c3e50', color: '#ecf0f1' }}
+                    sx={{ flexGrow: 1, bgcolor: '#ffffff', color: '#2c3e50' }}
                   />
                 </FormControl>
               </Stack>
               <Stack direction="row" spacing={2}>
                 <FormControl sx={{ flexGrow: 1 }}>
-                  <FormLabel sx={{ color: '#ecf0f1' }}>Phone Number</FormLabel>
+                  <FormLabel sx={{ color: '#2c3e50' }}>Phone Number</FormLabel>
                   <Input
                     size="sm"
                     type="tel"
                     startDecorator={<PhoneRoundedIcon />}
                     placeholder="(123) 456-7890"
-                    sx={{ flexGrow: 1, bgcolor: '#2c3e50', color: '#ecf0f1' }}
+                    sx={{ flexGrow: 1, bgcolor: '#ffffff', color: '#2c3e50' }}
                   />
                 </FormControl>
               </Stack>
             </Stack>
           </Stack>
-          <Stack
-            direction="column"
-            spacing={2}
-            sx={{ display: { xs: 'flex', md: 'none' }, my: 1 }}
-          >
-            <Stack direction="row" spacing={2}>
-              <Stack direction="column" spacing={1}>
-                <AspectRatio
-                  ratio="1"
-                  maxHeight={108}
-                  sx={{ flex: 1, minWidth: 108, borderRadius: '100%' }}
-                >
-                  <img
-                    src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=286"
-                    srcSet="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=286&dpr=2 2x"
-                    loading="lazy"
-                    alt=""
-                  />
-                </AspectRatio>
-                <IconButton
-                  aria-label="upload new picture"
-                  size="sm"
-                  variant="outlined"
-                  color="neutral"
-                  sx={{
-                    bgcolor: '#2c3e50',
-                    position: 'absolute',
-                    zIndex: 2,
-                    borderRadius: '50%',
-                    left: 82,
-                    top: 88,
-                    boxShadow: 'sm',
-                  }}
-                >
-                  <EditRoundedIcon />
-                </IconButton>
-              </Stack>
-              <Stack spacing={2} sx={{ flexGrow: 1 }}>
-                <Stack spacing={1}>
-                  <FormLabel sx={{ color: '#ecf0f1' }}>Name</FormLabel>
-                  <FormControl
-                    sx={{ display: { sm: 'flex-column', md: 'flex-row' }, gap: 2 }}
-                  >
-                    <Input size="sm" placeholder="First name" sx={{ bgcolor: '#2c3e50', color: '#ecf0f1' }} />
-                    <Input size="sm" placeholder="Last name" sx={{ flexGrow: 1, bgcolor: '#2c3e50', color: '#ecf0f1' }} />
-                  </FormControl>
-                </Stack>
-              </Stack>
-            </Stack>
-            <Stack direction="row" spacing={2}>
-              <FormControl>
-                <FormLabel sx={{ color: '#ecf0f1' }}>Date of Birth</FormLabel>
-                <Input
-                  size="sm"
-                  type="date"
-                  startDecorator={<CalendarTodayRoundedIcon />}
-                  sx={{ bgcolor: '#2c3e50', color: '#ecf0f1' }}
-                />
-              </FormControl>
-              <FormControl sx={{ flexGrow: 1 }}>
-                <FormLabel sx={{ color: '#ecf0f1' }}>Email</FormLabel>
-                <Input
-                  size="sm"
-                  type="email"
-                  startDecorator={<EmailRoundedIcon />}
-                  placeholder="email"
-                  defaultValue="siriwatk@test.com"
-                  sx={{ flexGrow: 1, bgcolor: '#2c3e50', color: '#ecf0f1' }}
-                />
-              </FormControl>
-            </Stack>
-            <Stack direction="row" spacing={2}>
-              <FormControl sx={{ flexGrow: 1 }}>
-                <FormLabel sx={{ color: '#ecf0f1' }}>Phone Number</FormLabel>
-                <Input
-                  size="sm"
-                  type="tel"
-                  startDecorator={<PhoneRoundedIcon />}
-                  placeholder="(123) 456-7890"
-                  sx={{ flexGrow: 1, bgcolor: '#2c3e50', color: '#ecf0f1' }}
-                />
-              </FormControl>
-            </Stack>
+        </Card>
+
+        {/* Badges Section */}
+        <Card sx={{ bgcolor: '#f1f8e9', color: '#2c3e50' }}>
+          <Box sx={{ mb: 1 }}>
+            <Typography level="title-md" sx={{ color: '#2e7d32' }}>
+              <BadgeIcon sx={{ mr: 1 }} /> Badges
+            </Typography>
+          </Box>
+          <Divider sx={{ bgcolor: '#2e7d32' }} />
+          <Typography sx={{ my: 2 }}>You have earned 5 badges for outstanding performance!</Typography>
+          <Stack direction="row" spacing={2}>
+            <img src="https://example.com/badge1.png" alt="Badge 1" style={{ width: '50px', height: '50px' }} />
+            <img src="https://example.com/badge2.png" alt="Badge 2" style={{ width: '50px', height: '50px' }} />
+            {/* Add more badge images as needed */}
           </Stack>
+        </Card>
+
+        {/* Events Section */}
+        <Card sx={{ bgcolor: '#f1f8e9', color: '#2c3e50' }}>
+          <Box sx={{ mb: 1 }}>
+            <Typography level="title-md" sx={{ color: '#2e7d32' }}>
+              <EventIcon sx={{ mr: 1 }} /> Events
+            </Typography>
+          </Box>
+          <Divider sx={{ bgcolor: '#2e7d32' }} />
+          <Typography sx={{ my: 2 }}>You have participated in 3 events this year:</Typography>
+          <ul>
+            <li>Hackathon 2024</li>
+            <li>CodeFest 2024</li>
+            <li>Open Source Summit</li>
+          </ul>
+        </Card>
+
+        {/* Donations Section */}
+        <Card sx={{ bgcolor: '#f1f8e9', color: '#2c3e50' }}>
+          <Box sx={{ mb: 1 }}>
+            <Typography level="title-md" sx={{ color: '#2e7d32' }}>
+              <VolunteerActivismIcon sx={{ mr: 1 }} /> Donations
+            </Typography>
+          </Box>
+          <Divider sx={{ bgcolor: '#2e7d32' }} />
+          <Typography sx={{ my: 2 }}>You have donated a total of $500 to various causes this year.</Typography>
         </Card>
       </Stack>
     </Box>

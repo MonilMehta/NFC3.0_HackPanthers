@@ -37,9 +37,25 @@ const userSchema = new mongoose.Schema({
         type: Number,
         default: 0
     },
+    level:{
+        type: Number,
+        default: 1
+    },
     refreshToken:{
         type: String,
-    }
+    },
+    volunteeredEvents: [
+        {
+          eventName: {
+            type: String,
+            required: true,
+          },
+          eventDate: {
+            type: Date,
+            required: true,
+          },
+        },
+      ],
 }, {timestamps: true});
 
 userSchema.methods.generateAccessToken = function(){

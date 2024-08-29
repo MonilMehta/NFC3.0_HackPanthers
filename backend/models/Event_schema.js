@@ -42,12 +42,6 @@ const EventSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  participants: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'User', // List of users participating in the event
-    },
-  ],
   volunteers: [
     {
         type: mongoose.Schema.Types.ObjectId,

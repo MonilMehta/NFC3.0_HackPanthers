@@ -53,9 +53,9 @@ function AdminNavbar() {
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
+              fontFamily: 'Arial', // Set to a normal font
+              fontWeight: 'normal', // Set to normal weight
+              letterSpacing: '.1rem', // Adjusted for subtlety
               color: 'black',
               textDecoration: 'none',
             }}
@@ -107,9 +107,9 @@ function AdminNavbar() {
               mr: 2,
               display: { xs: 'flex', md: 'none' },
               flexGrow: 1,
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
+              fontFamily: 'Arial', // Set to a normal font
+              fontWeight: 'normal', // Set to normal weight
+              letterSpacing: '.1rem', // Adjusted for subtlety
               color: '#ecf0f1',
               textDecoration: 'none',
             }}
