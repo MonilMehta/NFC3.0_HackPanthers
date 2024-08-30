@@ -37,7 +37,7 @@ const Navbar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [openNotification, setOpenNotification] = React.useState(false);
-  const [notificationMessage, setNotificationMessage] = React.useState('');
+  const [notificationMessages, setNotificationMessages] = React.useState([]);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -55,9 +55,27 @@ const Navbar = () => {
     setAnchorElUser(null);
   };
 
-  const handleNotificationClick = () => {
-    setNotificationMessage('This is a persistent notification message!');
+  const handleNotificationClick = async () => {
     setOpenNotification(!openNotification);
+
+    if (!openNotification) {
+      try {
+        const response = await fetch('http://localhost:8000/message/getMessage');
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        console.log('Fetched Messages:', data.message); // Log the fetched messages to console
+
+        // Set the array of messages to notificationMessages state
+        setNotificationMessages(data.message);
+
+      } catch (error) {
+        console.error('Error fetching messages:', error);
+        setNotificationMessages([{ message: 'Failed to load messages' }]);
+      }
+    }
   };
 
   const handleCloseNotification = () => {
@@ -74,10 +92,11 @@ const Navbar = () => {
     borderRadius: '8px', // Increased border radius
     boxShadow: '0 4px 15px rgba(0, 0, 0, 0.3)', // Increased shadow
     width: '300px',
-    height:'350px', // Increased width
+    height: '350px', // Increased width
     fontSize: '16px', // Increased font size
     display: openNotification ? 'block' : 'none',
     zIndex: 1300, // Ensure it appears above other content
+    overflowY: 'auto', // Allow scrolling if content overflows
   };
 
   return (
@@ -178,7 +197,15 @@ const Navbar = () => {
               <NotificationsIcon />
             </IconButton>
             <Box sx={notificationStyle}>
-              {notificationMessage}
+              {notificationMessages.length > 0 ? (
+                notificationMessages.map((msg, index) => (
+                  <Typography key={msg._id || index} sx={{ marginBottom: '10px' }}>
+                    {msg.message}
+                  </Typography>
+                ))
+              ) : (
+                <Typography>No new notifications</Typography>
+              )}
               <IconButton
                 size="small"
                 onClick={handleCloseNotification}
@@ -224,6 +251,6 @@ const Navbar = () => {
       </Container>
     </StyledAppBar>
   );
-}
+};
 
 export default Navbar;
