@@ -13,7 +13,7 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import VolunteerActivismIcon from '@mui/icons-material/VolunteerActivism';
-import NotificationsIcon from '@mui/icons-material/Notifications'; // Import Notifications Icon
+import NotificationsIcon from '@mui/icons-material/Notifications';
 import { styled } from '@mui/material/styles';
 
 const StyledAppBar = styled(AppBar)({
@@ -36,6 +36,8 @@ const StyledButton = styled(Button)({
 const Navbar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [openNotification, setOpenNotification] = React.useState(false);
+  const [notificationMessage, setNotificationMessage] = React.useState('');
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -51,6 +53,31 @@ const Navbar = () => {
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
+  };
+
+  const handleNotificationClick = () => {
+    setNotificationMessage('This is a persistent notification message!');
+    setOpenNotification(!openNotification);
+  };
+
+  const handleCloseNotification = () => {
+    setOpenNotification(false);
+  };
+
+  const notificationStyle = {
+    position: 'absolute',
+    top: '60px', // Adjust as needed
+    right: '0',
+    backgroundColor: '#333',
+    color: '#fff',
+    padding: '20px', // Increased padding
+    borderRadius: '8px', // Increased border radius
+    boxShadow: '0 4px 15px rgba(0, 0, 0, 0.3)', // Increased shadow
+    width: '300px',
+    height:'350px', // Increased width
+    fontSize: '16px', // Increased font size
+    display: openNotification ? 'block' : 'none',
+    zIndex: 1300, // Ensure it appears above other content
   };
 
   return (
@@ -146,10 +173,20 @@ const Navbar = () => {
             <StyledButton component={Link} to="/projects">Projects</StyledButton>
           </Box>
 
-          <Box sx={{ flexGrow: 0, display: 'flex', alignItems: 'center' }}>
-            <IconButton size="large" color="inherit">
+          <Box sx={{ flexGrow: 0, display: 'flex', alignItems: 'center', position: 'relative' }}>
+            <IconButton size="large" color="inherit" onClick={handleNotificationClick}>
               <NotificationsIcon />
             </IconButton>
+            <Box sx={notificationStyle}>
+              {notificationMessage}
+              <IconButton
+                size="small"
+                onClick={handleCloseNotification}
+                sx={{ position: 'absolute', top: '5px', right: '5px' }}
+              >
+                &times;
+              </IconButton>
+            </Box>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="User Profile" src="/static/images/avatar/2.jpg" />
