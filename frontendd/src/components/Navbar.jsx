@@ -13,6 +13,7 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import VolunteerActivismIcon from '@mui/icons-material/VolunteerActivism';
+import NotificationsIcon from '@mui/icons-material/Notifications'; // Import Notifications Icon
 import { styled } from '@mui/material/styles';
 
 const StyledAppBar = styled(AppBar)({
@@ -111,17 +112,7 @@ const Navbar = () => {
                 <Link to="/events" style={{ textDecoration: 'none', color: '#2c3e50' }}>
                   <Typography sx={{ textAlign: 'center' }}>Events</Typography>
                 </Link>
-              </MenuItem>
-              <MenuItem onClick={handleCloseNavMenu}>
-                <Link to="/badges-certificates" style={{ textDecoration: 'none', color: '#2c3e50' }}>
-                  <Typography sx={{ textAlign: 'center' }}>Forum</Typography>
-                </Link>
-              </MenuItem>
-              <MenuItem onClick={handleCloseNavMenu}>
-                <Link to="/event-analytics" style={{ textDecoration: 'none', color: '#2c3e50' }}>
-                  <Typography sx={{ textAlign: 'center' }}>Event Analytics</Typography>
-                </Link>
-              </MenuItem>
+              </MenuItem>     
               <MenuItem onClick={handleCloseNavMenu}>
                 <Link to="/projects" style={{ textDecoration: 'none', color: '#2c3e50' }}>
                   <Typography sx={{ textAlign: 'center' }}>Projects</Typography>
@@ -150,14 +141,15 @@ const Navbar = () => {
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'center' }}>
-            <StyledButton component={Link} to="/donation">Donate</StyledButton>
+            <StyledButton component={Link} to="/donate">Donate</StyledButton>
             <StyledButton component={Link} to="/events">Events</StyledButton>
-            <StyledButton component={Link} to="/forum">Forum</StyledButton>
-            <StyledButton component={Link} to="/event-analytics">Event Analytics</StyledButton>
             <StyledButton component={Link} to="/projects">Projects</StyledButton>
           </Box>
 
-          <Box sx={{ flexGrow: 0 }}>
+          <Box sx={{ flexGrow: 0, display: 'flex', alignItems: 'center' }}>
+            <IconButton size="large" color="inherit">
+              <NotificationsIcon />
+            </IconButton>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="User Profile" src="/static/images/avatar/2.jpg" />
