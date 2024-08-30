@@ -10,20 +10,21 @@ import {
 import { Link } from "react-router-dom";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import AssignmentIcon from "@mui/icons-material/Assignment";
-import PeopleIcon from "@mui/icons-material/People";
 import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 import ReportIcon from "@mui/icons-material/Report";
 import EventIcon from "@mui/icons-material/Event";
 import GroupIcon from "@mui/icons-material/Group";
-import NotificationsIcon from "@mui/icons-material/Notifications"; // Import Notifications Icon
+import NotificationsIcon from "@mui/icons-material/Notifications";
 
 const AdminSidebar = () => {
   return (
     <Box
       sx={{
         width: 250,
+        minWidth: 250, // Ensures a fixed width
+        maxWidth: 250, // Ensures a fixed width
         bgcolor: "#1e1e2d",
-        height: "full", // Changed to full viewport height
+        minheight: "200vh", // Full viewport height
         color: "#ecf0f1",
       }}
     >
@@ -56,6 +57,7 @@ const AdminSidebar = () => {
               '&:hover': {
                 color: '#1e1e2d',
               },
+              whiteSpace: 'nowrap', // Prevents text wrapping
             }}
           />
         </ListItem>
@@ -88,6 +90,7 @@ const AdminSidebar = () => {
               '&:hover': {
                 color: '#1e1e2d',
               },
+              whiteSpace: 'nowrap', // Prevents text wrapping
             }}
           />
         </ListItem>
@@ -120,6 +123,7 @@ const AdminSidebar = () => {
               '&:hover': {
                 color: '#1e1e2d',
               },
+              whiteSpace: 'nowrap', // Prevents text wrapping
             }}
           />
         </ListItem>
@@ -152,6 +156,7 @@ const AdminSidebar = () => {
               '&:hover': {
                 color: '#1e1e2d',
               },
+              whiteSpace: 'nowrap', // Prevents text wrapping
             }}
           />
         </ListItem>
@@ -184,6 +189,7 @@ const AdminSidebar = () => {
               '&:hover': {
                 color: '#1e1e2d',
               },
+              whiteSpace: 'nowrap', // Prevents text wrapping
             }}
           />
         </ListItem>
@@ -216,6 +222,7 @@ const AdminSidebar = () => {
               '&:hover': {
                 color: '#1e1e2d',
               },
+              whiteSpace: 'nowrap', // Prevents text wrapping
             }}
           />
         </ListItem>
@@ -239,7 +246,7 @@ const AdminSidebar = () => {
               },
             }}
           >
-            <NotificationsIcon /> {/* Added icon for Notification Messages */}
+            <NotificationsIcon />
           </ListItemIcon>
           <ListItemText
             primary="Notification Messages"
@@ -248,6 +255,7 @@ const AdminSidebar = () => {
               '&:hover': {
                 color: '#1e1e2d',
               },
+              whiteSpace: 'nowrap', // Prevents text wrapping
             }}
           />
         </ListItem>
