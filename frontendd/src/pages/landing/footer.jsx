@@ -6,7 +6,7 @@ const Footer = () => (
     <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
       <div className="xl:grid xl:grid-cols-3 xl:gap-8">
         <div className="space-y-8 xl:col-span-1">
-          <span className="text-white font-bold text-6xl"><italic>ChildNGO</italic></span>
+          <span className="text-white font-bold text-6xl"><italic>ChildCare NGO</italic></span>
           <p className="text-white hover:text-[#4CAF50] text-base">
             NGO is a non-profit organization dedicated to making a positive impact in communities around the world.
           </p>
@@ -56,7 +56,7 @@ const Footer = () => (
       </div>
       <div className="mt-12 border-t border-black-700 pt-8">
         <p className="text-base text-black-300 xl:text-center">
-          &copy; 2024 ChildNGO. All rights reserved.
+          &copy; 2024 ChildCare NGO. All rights reserved.
         </p>
       </div>
     </div>

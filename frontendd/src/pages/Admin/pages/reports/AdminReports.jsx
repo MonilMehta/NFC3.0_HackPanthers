@@ -168,257 +168,194 @@ const AdminReports = () => {
   }, []);
 
   return (
-    <div style={styles.container}>
-      <h1 style={styles.heading}>Create Event Report</h1>
+    <div className="p-8 max-w-4xl mx-auto">
+      <div className="text-4xl font-bold mb-6 text-[#204E4A]">
+        Create Event Report
+      </div>
 
-      <div style={styles.card}>
-        <h2 style={styles.subheading}>Event Details</h2>
-        <label style={styles.label}>Event Name</label>
+      <div className="bg-gray-100 p-6 rounded-lg shadow-lg mb-6">
+        <Typography variant="h6" className="text-xl font-semibold mb-4 text-2E933C">
+          Event Details
+        </Typography>
+        <label className="block text-sm font-medium mb-2 text-297045">Event Name</label>
         <input
           type="text"
           value={eventName}
           onChange={(e) => setEventName(e.target.value)}
           placeholder="Event Name"
-          style={styles.input}
+          className="w-full p-2 mb-4 border rounded-md border-gray-300"
         />
-        <label style={styles.label}>Event Date</label>
+        <label className="block text-sm font-medium mb-2 text-297045">Event Date</label>
         <input
           type="date"
           value={eventDate}
           onChange={(e) => setEventDate(e.target.value)}
-          style={styles.input}
+          className="w-full p-2 mb-4 border rounded-md border-gray-300"
         />
-        <label style={styles.label}>Address</label>
+        <label className="block text-sm font-medium mb-2 text-297045">Address</label>
         <input
           type="text"
           value={eventAddress}
           onChange={(e) => setEventAddress(e.target.value)}
           placeholder="Address"
-          style={styles.input}
+          className="w-full p-2 mb-4 border rounded-md border-gray-300"
         />
-        <label style={styles.label}>City</label>
+        <label className="block text-sm font-medium mb-2 text-297045">City</label>
         <input
           type="text"
           value={eventCity}
           onChange={(e) => setEventCity(e.target.value)}
           placeholder="City"
-          style={styles.input}
+          className="w-full p-2 mb-4 border rounded-md border-gray-300"
         />
-        <label style={styles.label}>State</label>
+        <label className="block text-sm font-medium mb-2 text-297045">State</label>
         <input
           type="text"
           value={eventState}
           onChange={(e) => setEventState(e.target.value)}
           placeholder="State"
-          style={styles.input}
+          className="w-full p-2 mb-4 border rounded-md border-gray-300"
         />
-        <label style={styles.label}>Zip Code</label>
+        <label className="block text-sm font-medium mb-2 text-297045">Zip Code</label>
         <input
           type="text"
           value={eventZipCode}
           onChange={(e) => setEventZipCode(e.target.value)}
           placeholder="Zip Code"
-          style={styles.input}
+          className="w-full p-2 mb-4 border rounded-md border-gray-300"
         />
-        <label style={styles.label}>Country</label>
+        <label className="block text-sm font-medium mb-2 text-297045">Country</label>
         <input
           type="text"
           value={eventCountry}
           onChange={(e) => setEventCountry(e.target.value)}
           placeholder="Country"
-          style={styles.input}
+          className="w-full p-2 mb-4 border rounded-md border-gray-300"
         />
-        <label style={styles.label}>Organizer</label>
+        <label className="block text-sm font-medium mb-2 text-297045">Organizer</label>
         <input
           type="text"
           value={eventOrganizer}
           onChange={(e) => setEventOrganizer(e.target.value)}
           placeholder="Organizer"
-          style={styles.input}
+          className="w-full p-2 mb-4 border rounded-md border-gray-300"
         />
-      </div>
-
-      <div style={styles.card}>
-        <h2 style={styles.subheading}>Description</h2>
+        <label className="block text-sm font-medium mb-2 text-297045">Description</label>
         <textarea
           value={description}
           onChange={(e) => setDescription(e.target.value)}
-          placeholder="Event Description"
-          style={styles.textarea}
+          placeholder="Description"
+          className="w-full p-2 mb-4 border rounded-md border-gray-300"
+        />
+        <label className="block text-sm font-medium mb-2 text-297045">Conclusion</label>
+        <textarea
+          value={conclusion}
+          onChange={(e) => setConclusion(e.target.value)}
+          placeholder="Conclusion"
+          className="w-full p-2 mb-4 border rounded-md border-gray-300"
         />
       </div>
 
-      <div style={styles.card}>
-        <h2 style={styles.subheading}>Staff Members</h2>
+      <div className="bg-gray-100 p-6 rounded-lg shadow-lg mb-6">
+        <Typography variant="h6" className="text-xl font-semibold mb-4 text-2E933C">
+          Staff Members
+        </Typography>
         {staff.map((member, index) => (
-          <div key={index} style={styles.tableRow}>
+          <div key={index} className="flex gap-4 mb-4">
             <input
               type="text"
               value={member.name}
               onChange={(e) => handleStaffChange(index, 'name', e.target.value)}
               placeholder="Name"
-              style={styles.tableInput}
+              className="w-full p-2 border rounded-md border-gray-300"
             />
             <input
               type="text"
               value={member.phone}
               onChange={(e) => handleStaffChange(index, 'phone', e.target.value)}
-              placeholder="Phone Number"
-              style={styles.tableInput}
+              placeholder="Phone"
+              className="w-full p-2 border rounded-md border-gray-300"
             />
-            <button onClick={() => removeStaff(index)} style={styles.removeButton}>Remove</button>
+            <button
+              onClick={() => removeStaff(index)}
+              className="p-2 bg-red-500 text-white rounded-md"
+            >
+              Remove
+            </button>
           </div>
         ))}
-        <button onClick={addStaff} style={styles.addButton}>Add Staff</button>
+        <button
+          onClick={addStaff}
+          className="bg-green-500 text-white py-2 px-4 rounded-md"
+        >
+          Add Staff
+        </button>
       </div>
 
-      <div style={styles.card}>
-        <h2 style={styles.subheading}>Volunteers</h2>
+      <div className="bg-gray-100 p-6 rounded-lg shadow-lg mb-6">
+        <Typography variant="h6" className="text-xl font-semibold mb-4 text-2E933C">
+          Volunteers
+        </Typography>
         {volunteers.map((volunteer, index) => (
-          <div key={index} style={styles.tableRow}>
+          <div key={index} className="flex gap-4 mb-4">
             <input
               type="text"
               value={volunteer.name}
               onChange={(e) => handleVolunteerChange(index, 'name', e.target.value)}
               placeholder="Name"
-              style={styles.tableInput}
+              className="w-full p-2 border rounded-md border-gray-300"
             />
             <input
               type="text"
               value={volunteer.phone}
               onChange={(e) => handleVolunteerChange(index, 'phone', e.target.value)}
-              placeholder="Phone Number"
-              style={styles.tableInput}
+              placeholder="Phone"
+              className="w-full p-2 border rounded-md border-gray-300"
             />
-            <button onClick={() => removeVolunteer(index)} style={styles.removeButton}>Remove</button>
+            <button
+              onClick={() => removeVolunteer(index)}
+              className="p-2 bg-red-500 text-white rounded-md"
+            >
+              Remove
+            </button>
           </div>
         ))}
-        <button onClick={addVolunteer} style={styles.addButton}>Add Volunteer</button>
+        <button
+          onClick={addVolunteer}
+          className="bg-green-500 text-white py-2 px-4 rounded-md"
+        >
+          Add Volunteer
+        </button>
       </div>
 
-      <div style={styles.card}>
-        <h2 style={styles.subheading}>Add Images</h2>
+      <div className="bg-gray-100 p-6 rounded-lg shadow-lg mb-6">
+        <Typography variant="h6" className="text-xl font-semibold mb-4 text-2E933C">
+          Images
+        </Typography>
         <input
           type="file"
           multiple
           onChange={handleImageUpload}
-          style={styles.fileInput}
+          className="mb-4"
         />
-        <div style={styles.imagePreview}>
-          {images.map((src, index) => (
-            <img key={index} src={src} alt={`Preview ${index}`} style={styles.image} />
-          ))}
-        </div>
+        {images.map((src, index) => (
+          <img
+            key={index}
+            src={src}
+            alt={`Event ${index}`}
+            className="w-16 h-16 object-cover mb-4 mr-4 border rounded"
+          />
+        ))}
       </div>
 
-      <div style={styles.card}>
-        <h2 style={styles.subheading}>Conclusion</h2>
-        <textarea
-          value={conclusion}
-          onChange={(e) => setConclusion(e.target.value)}
-          placeholder="Conclusion"
-          style={styles.textarea}
-        />
-      </div>
-
-      <button onClick={handleGeneratePDF} style={styles.generateButton}>Create Report</button>
+      <button
+        onClick={handleGeneratePDF}
+        className="bg-blue-500 text-white py-2 px-4 rounded-md"
+      >
+        Generate Report
+      </button>
     </div>
   );
-};
-
-const styles = {
-  container: {
-    padding: '20px',
-    maxWidth: '1000px',
-    margin: '0 auto',
-  },
-  heading: {
-    fontSize: '24px',
-    marginBottom: '20px',
-  },
-  card: {
-    marginBottom: '20px',
-    padding: '20px',
-    borderRadius: '8px',
-    backgroundColor: '#f9f9f9',
-    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
-  },
-  subheading: {
-    fontSize: '20px',
-    marginBottom: '10px',
-  },
-  label: {
-    display: 'block',
-    fontSize: '14px',
-    marginBottom: '5px',
-  },
-  input: {
-    width: '100%',
-    padding: '8px',
-    marginBottom: '10px',
-    borderRadius: '4px',
-    border: '1px solid #ddd',
-  },
-  textarea: {
-    width: '100%',
-    padding: '8px',
-    marginBottom: '10px',
-    borderRadius: '4px',
-    border: '1px solid #ddd',
-    minHeight: '100px',
-  },
-  tableRow: {
-    display: 'flex',
-    alignItems: 'center',
-    marginBottom: '10px',
-  },
-  tableInput: {
-    flex: 1,
-    padding: '8px',
-    marginRight: '10px',
-    borderRadius: '4px',
-    border: '1px solid #ddd',
-  },
-  addButton: {
-    marginTop: '10px',
-    padding: '10px 20px',
-    borderRadius: '4px',
-    backgroundColor: '#007bff',
-    color: '#fff',
-    border: 'none',
-    cursor: 'pointer',
-  },
-  removeButton: {
-    marginLeft: '10px',
-    padding: '10px 20px',
-    borderRadius: '4px',
-    backgroundColor: '#dc3545',
-    color: '#fff',
-    border: 'none',
-    cursor: 'pointer',
-  },
-  fileInput: {
-    marginBottom: '10px',
-  },
-  imagePreview: {
-    display: 'flex',
-    flexWrap: 'wrap',
-  },
-  image: {
-    width: '70px',
-    height: '70px',
-    objectFit: 'cover',
-    marginRight: '10px',
-    marginBottom: '10px',
-  },
-  generateButton: {
-    padding: '10px 20px',
-    borderRadius: '4px',
-    backgroundColor: '#28a745',
-    color: '#fff',
-    border: 'none',
-    cursor: 'pointer',
-  },
 };
 
 export default AdminReports;

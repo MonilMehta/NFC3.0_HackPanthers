@@ -19,7 +19,7 @@ import AddIcon from '@mui/icons-material/Add';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 
-const ProjectForm = () => {
+const ProjectForm = ({ onProjectAdded }) => {
   const [showMemberForm, setShowMemberForm] = useState(false);
   const [formData, setFormData] = useState({
     projectName: '',
@@ -82,7 +82,13 @@ const ProjectForm = () => {
       if (response.ok) {
         const result = await response.json();
         console.log('Project created successfully:', result);
-        // Handle success (e.g., show a success message, redirect to another page)
+
+        // Trigger the callback to refresh the project list
+        if (onProjectAdded) {
+          onProjectAdded();
+        }
+
+        // Optionally, clear the form or perform other actions after submission
       } else {
         console.error('Error creating project:', response.statusText);
         // Handle error (e.g., show an error message)
@@ -262,18 +268,15 @@ const ProjectForm = () => {
             {staffList.map((staff) => (
               <MenuItem key={staff._id} value={staff._id}>
                 <Checkbox checked={selectedStaff.includes(staff._id)} />
-                <ListItemText primary={`${staff.firstName} ${staff.lastName}`} />
+                {`${staff.firstName} ${staff.lastName}`}
               </MenuItem>
             ))}
           </Select>
         </Box>
 
-        {/* Submit Button */}
-        <Box sx={{ display: 'flex', justifyContent: 'space-between', marginTop: '20px' }}>
-          <Button type="submit" variant="contained" color="primary">
-            Submit
-          </Button>
-        </Box>
+        <Button type="submit" fullWidth variant="contained" color="primary">
+          Add Project
+        </Button>
       </form>
     </Container>
   );

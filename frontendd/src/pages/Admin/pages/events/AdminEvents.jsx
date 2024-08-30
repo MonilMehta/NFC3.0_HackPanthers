@@ -34,8 +34,8 @@ const AdminEvents = () => {
   const handleClose = () => setOpen(false); // Close the modal
 
   return (
-    <div>
-      <h1>Admin Events</h1>
+    <div className="p-8">
+      <h1 className="text-5xl font-bold text-[#204E4A] mb-6">Admin Events</h1>
       <Grid container spacing={2}>
         {events.map((event) => (
           <Grid item xs={12} sm={6} key={event._id}>
@@ -47,26 +47,26 @@ const AdminEvents = () => {
         variant="contained" 
         color="primary" 
         onClick={handleOpen}
-        style={{ marginTop: '20px' }}
+        className="mt-6 bg-81C14B hover:bg-2E933C"
       >
         Add Event
       </Button>
 
       {/* Modal for EventForm */}
       <Dialog open={open} onClose={handleClose} maxWidth="md" fullWidth>
-        <DialogTitle>
-          Add New Event
+        <DialogTitle className="flex justify-between items-center bg-204E4A text-white">
+          <span className="text-xl font-semibold">Add New Event</span>
           <IconButton
             edge="end"
             color="inherit"
             onClick={handleClose}
             aria-label="close"
-            style={{ position: 'absolute', right: 8, top: 8 }}
+            className="text-white"
           >
             <CloseIcon />
           </IconButton>
         </DialogTitle>
-        <DialogContent>
+        <DialogContent className="bg-gray-100">
           <EventForm onClose={handleClose} />
         </DialogContent>
       </Dialog>

@@ -41,7 +41,7 @@ function AdminNavbar() {
   };
 
   return (
-    <AppBar position="sticky" sx={{ backgroundColor: 'green' }}>
+    <AppBar position="sticky" sx={{ backgroundColor: '#2E933C' }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <AdminPanelSettingsIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1, color: 'yellow' }} />

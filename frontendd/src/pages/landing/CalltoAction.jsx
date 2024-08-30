@@ -13,7 +13,7 @@ const CallToAction = () => (
       </p>
       <div className="mt-8">
         <a
-          href="#"
+          href="/events"
           className="w-full inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-lg shadow-sm text-white bg-[#003E1F] hover:bg-green-400 sm:w-auto"
         >
           Volunteer Now <ChevronRight className="ml-3 h-5 w-5" />

@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import ProjectForm from './ProjectForm'; 
+import ProjectForm from './ProjectForm';
 
 const AdminProjects = () => {
   const [showForm, setShowForm] = useState(false);
   const [projects, setProjects] = useState([]);
-  const [selectedProject, setSelectedProject] = useState(null);
   const [showMembers, setShowMembers] = useState({});
 
   useEffect(() => {
@@ -32,55 +31,41 @@ const AdminProjects = () => {
     }));
   };
 
-  const buttonStyle = {
-    backgroundColor: '#007BFF',
-    color: 'white',
-    border: 'none',
-    borderRadius: '4px',
-    padding: '10px 20px',
-    fontSize: '16px',
-    cursor: 'pointer',
-    transition: 'background-color 0.3s ease',
-  };
-
-  const buttonHoverStyle = {
-    backgroundColor: '#0056b3',
-  };
-
   return (
-    <>
-      <h1>Admin Projects</h1>
+    <div className="p-4">
+      <h1 className="text-4xl font-bold text-[#204E4A] mb-4">Admin Projects</h1>
       <button
         onClick={handleShowForm}
-        style={buttonStyle}
-        onMouseOver={(e) => e.currentTarget.style.backgroundColor = buttonHoverStyle.backgroundColor}
-        onMouseOut={(e) => e.currentTarget.style.backgroundColor = buttonStyle.backgroundColor}
+        className="bg-[#297045] hover:bg-[#2E933C] text-white font-semibold py-2 px-4 rounded transition duration-300"
       >
         Add Project
       </button>
       {showForm && <ProjectForm onClose={handleCloseForm} />}
 
-      <div style={{ marginTop: '20px' }}>
+      <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
         {projects.map((project) => (
-          <div key={project._id} style={{ border: '1px solid #ccc', padding: '10px', marginBottom: '10px' }}>
-            <h2>{project.projectName}</h2>
-            <p>{project.description}</p>
-            <p><strong>Status:</strong> {project.status}</p>
-            <p><strong>Allocated Budget:</strong> ${project.allocated}</p>
-            <p><strong>Start Date:</strong> {new Date(project.startDate).toLocaleDateString()}</p>
-            <p><strong>End Date:</strong> {new Date(project.endDate).toLocaleDateString()}</p>
+          <div
+            key={project._id}
+            className="border border-gray-300 rounded-lg p-4 shadow-lg transform transition duration-300 hover:scale-105"
+          >
+            <h2 className="text-xl font-semibold text-[#81C14B] mb-2">{project.projectName}</h2>
+            <p className="text-gray-700">{project.description}</p>
+            <p className="font-semibold text-[#297045] mt-2">Status: <span className="text-[#2E933C]">{project.status}</span></p>
+            <p className="font-semibold text-[#297045]">Allocated Budget: <span className="text-[#2E933C]">${project.allocated}</span></p>
+            <p className="font-semibold text-[#297045]">Start Date: <span className="text-[#2E933C]">{new Date(project.startDate).toLocaleDateString()}</span></p>
+            <p className="font-semibold text-[#297045]">End Date: <span className="text-[#2E933C]">{new Date(project.endDate).toLocaleDateString()}</span></p>
 
             <button
               onClick={() => handleToggleMembers(project._id)}
-              style={{ background: 'transparent', border: 'none', cursor: 'pointer', color: '#007BFF' }}
+              className="mt-2 text-[#007BFF] hover:underline focus:outline-none transition duration-300"
             >
               {showMembers[project._id] ? 'Hide Members' : 'Show Members'}
             </button>
 
             {showMembers[project._id] && (
-              <ul>
+              <ul className="mt-2">
                 {project.teamMembers.map((member) => (
-                  <li key={member._id}>
+                  <li key={member._id} className="text-gray-600">
                     {member.firstName} {member.lastName} - {member.email}
                   </li>
                 ))}
@@ -89,7 +74,7 @@ const AdminProjects = () => {
           </div>
         ))}
       </div>
-    </>
+    </div>
   );
 };
 

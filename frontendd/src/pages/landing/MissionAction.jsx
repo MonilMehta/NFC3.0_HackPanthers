@@ -56,10 +56,10 @@ const MissionAction = () => {
   return (
     <div className="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:py-24 lg:px-8 bg-white-100">
       <div className="text-center">
-        <h2 className="text-3xl font-extrabold text-[#003E1F] sm:text-4xl">
+        <h2 className="text-5xl font-extrabold text-[#003E1F] sm:text-5xl">
           Our Mission
         </h2>
-        <p className="mt-4 max-w-2xl mx-auto text-xl text-[#003E1F]">
+        <p className="mt-4 max-w-2xl mx-auto text-xl font-semibold text-[#003E1F]">
           We strive to create lasting change through education, community development, and sustainable initiatives.
         </p>
       </div>

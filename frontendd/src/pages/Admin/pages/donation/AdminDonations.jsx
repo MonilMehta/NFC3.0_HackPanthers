@@ -7,7 +7,7 @@ const generateRandomDate = () => {
   const start = new Date();
   const end = new Date(start.setFullYear(start.getFullYear() - 1));
   const randomTime = Math.random() * (start - end) + end;
-  return new Date(randomTime).toLocaleDateString();
+  return new Date(randomTime);
 };
 
 // ApexCharts Data
@@ -77,15 +77,16 @@ const AdminDonations = () => {
           throw new Error('Failed to fetch donation details');
         }
         const data = await response.json();
+        console.log(data)
         console.log('Fetched Data:', data); // Log the data to check its structure
         
         // Ensure each donation has a valid date
         const updatedDonations = data.donars.map(donation => ({
           ...donation,
-          date: donation.date ? new Date(donation.date).toLocaleDateString() : generateRandomDate()
+          date: donation.donationDate ? new Date(donation.donationDate) : generateRandomDate()
         }));
 
-        setDonations(updatedDonations); // Extract the donations from the 'donars' key
+        setDonations(updatedDonations.reverse()); // Reverse the order of donations
       } catch (error) {
         setError(error.message);
       } finally {
@@ -100,44 +101,48 @@ const AdminDonations = () => {
   const totalAmount = donations.reduce((sum, donation) => sum + donation.amount, 0);
 
   return (
-    <Container component="main" maxWidth="md">
-      <Typography variant="h4" align="center" sx={{ margin: '2rem 0' }}>
+    <Container className="max-w-4xl mx-auto py-8">
+      <Typography
+        variant="h2"
+        align="center"
+        className="mb-8 text-3xl font-extrabold text-[#204E4A] font-sans"
+      >
         Admin Donations Page
       </Typography>
-      {loading && <Typography align="center">Loading...</Typography>}
-      {error && <Typography color="error" align="center">{error}</Typography>}
+      {loading && <Typography align="center" className="text-lg font-medium text-[#297045]">Loading...</Typography>}
+      {error && <Typography color="error" align="center" className="text-lg font-medium">{error}</Typography>}
       {!loading && !error && donations.length > 0 && (
         <>
-          <TableContainer component={Paper}>
+          <TableContainer component={Paper} className="shadow-lg rounded-lg bg-white">
             <Table>
-              <TableHead>
+              <TableHead className="bg-[#81C14B] text-white">
                 <TableRow>
-                  <TableCell>First Name</TableCell>
-                  <TableCell>Last Name</TableCell>
-                  <TableCell>Email</TableCell>
-                  <TableCell>Phone Number</TableCell>
-                  <TableCell>Amount</TableCell>
-                  <TableCell>Message</TableCell>
+                  <TableCell className="font-semibold text-lg">First Name</TableCell>
+                  <TableCell className="font-semibold text-lg">Last Name</TableCell>
+                  <TableCell className="font-semibold text-lg">Email</TableCell>
+                  <TableCell className="font-semibold text-lg">Phone Number</TableCell>
+                  <TableCell className="font-semibold text-lg">Amount</TableCell>
+                  <TableCell className="font-semibold text-lg">Message</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
                 {donations.map((donation) => (
-                  <TableRow key={donation._id}>
-                    <TableCell>{donation.firstName}</TableCell>
-                    <TableCell>{donation.lastName}</TableCell>
-                    <TableCell>{donation.donarEmail}</TableCell>
-                    <TableCell>{donation.donarPhoneNo}</TableCell>
-                    <TableCell>${donation.amount}</TableCell>
-                    <TableCell>{donation.message}</TableCell>
+                  <TableRow key={donation._id} className="hover:bg-[#F0F0F0]">
+                    <TableCell className="text-[#204E4A]">{donation.firstName}</TableCell>
+                    <TableCell className="text-[#204E4A]">{donation.lastName}</TableCell>
+                    <TableCell className="text-[#204E4A]">{donation.donarEmail}</TableCell>
+                    <TableCell className="text-[#204E4A]">{donation.donarPhoneNo}</TableCell>
+                    <TableCell className="text-[#297045]">${donation.amount}</TableCell>
+                    <TableCell className="text-[#204E4A]">{donation.message}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>
             </Table>
           </TableContainer>
-          <Typography variant="h6" align="center" sx={{ marginTop: '2rem' }}>
+          <Typography variant="h6" align="center" className="mt-8 text-xl font-semibold text-[#297045]">
             Total Donation Amount: ${totalAmount}
           </Typography>
-          <Box sx={{ marginTop: '2rem' }}>
+          <Box className="mt-8">
             <ApexCharts
               options={chartData(donations).options}
               series={chartData(donations).series}
@@ -148,7 +153,7 @@ const AdminDonations = () => {
         </>
       )}
       {!loading && !error && donations.length === 0 && (
-        <Typography align="center">No donation records found.</Typography>
+        <Typography align="center" className="text-lg font-medium text-[#204E4A]">No donation records found.</Typography>
       )}
     </Container>
   );

@@ -20,19 +20,19 @@ const HeroSection = () => {
         <div className="relative">
           <img src={Hero1} alt="Charity Work 1" className="object-cover w-full h-full" />
           <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-            <h2 className="text-white text-4xl font-bold">Helping Hands</h2>
+            <h2 className="text-white text-8xl font-bold">Helping Hands</h2>
           </div>
         </div>
         <div className="relative">
           <img src={Hero2} alt="Charity Work 2" className="object-cover w-full h-full" />
           <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-            <h2 className="text-white text-4xl font-bold">Support the Needy</h2>
+            <h2 className="text-white text-8xl font-bold">Support the Needy</h2>
           </div>
         </div>
         <div className="relative">
           <img src={Hero3} alt="Charity Work 3" className="object-cover w-full h-full" />
           <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-            <h2 className="text-white text-4xl font-bold">Join Our Cause</h2>
+            <h2 className="text-white text-8xl font-bold">Join Our Cause</h2>
           </div>
         </div>
       </Carousel>

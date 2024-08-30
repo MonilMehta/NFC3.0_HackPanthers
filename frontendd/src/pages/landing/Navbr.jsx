@@ -23,17 +23,17 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="navbar bg-[#003E1F]" style={{position:'sticky', top:'0', zIndex:'1000'}}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between h-16">
+      <nav className="navbar bg-[#297045] h-20 flex w-full items-center" style={{position:'sticky', top:'0', zIndex:'1000'}}>
+        <div className="w-full mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-around w-full h-16">
             <div className="flex-shrink-0 flex items-center">
-              <span className="font-bold text-xl text-white" style={{ fontSize: '30px', marginLeft: '-5vw' }}>NGO Name</span>
+              <span className="font-bold text-xl text-white" style={{ fontSize: '30px', marginLeft: '-5vw' }}>ChildCare NGO</span>
             </div>
             <div className="hidden md:block">
               <div className="ml-10 flex items-baseline space-x-4">
-                <Link to="/" className="text-white px-3 py-2 rounded-md text-sm" style={{ fontSize: '25px', marginTop: '10px' }}>Home</Link>
-                <Link to="/about" className="text-white px-3 py-2 rounded-md text-sm" style={{ fontSize: '25px', marginTop: '10px' }}>About</Link>
-                <Link to="/auth" className="text-white px-3 py-2 rounded-md text-sm" style={{ fontSize: '25px', marginTop: '10px' }}>Signup / Signin</Link>
+                <Link to="/" className="text-white px-4 py-3 rounded-2xl hover:cursor-pointer hover:bg-[#235d3a] hover:scale-110 text-sm" style={{ fontSize: '25px', marginTop: '10px' }}>Home</Link>
+                <Link to="/donation" className="text-white px-4 py-3 rounded-2xl hover:cursor-pointer hover:bg-[#235d3a] hover:scale-110 text-sm" style={{ fontSize: '25px', marginTop: '10px' }}>Donate</Link>
+                <Link to="/auth" className="text-white px-4 py-3 rounded-2xl hover:cursor-pointer hover:bg-[#235d3a] hover:scale-110 text-sm" style={{ fontSize: '25px', marginTop: '10px' }}>Signup / Signin</Link>
               </div>
             </div>
             <div className="-mr-2 flex md:hidden">
