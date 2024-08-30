@@ -13,7 +13,8 @@ const EventForm = ({ onClose }) => {
       zipCode: '',
       country: ''
     },
-    organizer: ''
+    organizer: '',
+    status: 'Scheduled' // Default status
   });
   const [staffList, setStaffList] = useState([]);
   const [selectedStaff, setSelectedStaff] = useState([]);
@@ -226,6 +227,25 @@ const EventForm = ({ onClose }) => {
                 <ListItemText primary={`${staff.firstName} ${staff.lastName}`} />
               </MenuItem>
             ))}
+          </Select>
+        </Box>
+        <Box sx={{ marginBottom: '20px' }}>
+          <Typography variant="h6" component="h2" gutterBottom className="text-[#204E4A]">
+            Status
+          </Typography>
+          <InputLabel id="status-select-label">Event Status</InputLabel>
+          <Select
+            labelId="status-select-label"
+            name="status"
+            value={formData.status}
+            onChange={handleChange}
+            fullWidth
+            sx={{ mb: 2 }}
+          >
+            <MenuItem value="Scheduled">Scheduled</MenuItem>
+            <MenuItem value="Ongoing">Ongoing</MenuItem>
+            <MenuItem value="Completed">Completed</MenuItem>
+            <MenuItem value="Cancelled">Cancelled</MenuItem>
           </Select>
         </Box>
         <Box sx={{ display: 'flex', justifyContent: 'flex-end', marginTop: '20px' }}>

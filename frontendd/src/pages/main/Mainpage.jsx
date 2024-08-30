@@ -133,7 +133,7 @@ const Mainpage = () => {
       </motion.div>
 
       {/* Projects Section */}
-      <motion.div
+      {/* <motion.div
         className="container mx-auto px-4 py-16"
         initial="hidden"
         animate="visible"
@@ -145,7 +145,7 @@ const Mainpage = () => {
             <CustomCard key={index} {...project} />
           ))}
         </div>
-      </motion.div>
+      </motion.div> */}
 
       {/* Footer */}
       <footer className="bg-[#003E1F] text-[#FFFFFF] py-12">
