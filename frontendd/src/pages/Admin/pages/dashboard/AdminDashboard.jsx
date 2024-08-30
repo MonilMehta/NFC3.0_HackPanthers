@@ -1,111 +1,104 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import ApexCharts from 'react-apexcharts';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
+import CircularProgress from '@mui/material/CircularProgress';
 
 // Pie Chart Data
-const pieData = {
-  series: [70, 30],
-  options: {
-    chart: {
-      type: 'donut', // Use donut for a more 3D-like effect
-    },
-    labels: ['Staff', 'Volunteers'],
-    colors: ['#FF4560', '#00E396'],
-    legend: {
-      position: 'bottom',
-    },
-    plotOptions: {
-      pie: {
-        donut: {
-          size: '75%',
-          labels: {
-            show: true,
+const generatePieData = (event) => {
+  const staffCount = event.staff.length;
+  const volunteerCount = event.volunteers.length;
+
+  // Log staff and volunteer counts
+  console.log(`Event: ${event.eventName}`);
+  console.log(`Staff Count: ${staffCount}`);
+  console.log(`Volunteer Count: ${volunteerCount}`);
+
+  return {
+    series: [staffCount, volunteerCount],
+    options: {
+      chart: {
+        type: 'donut',
+      },
+      labels: ['Staff', 'Volunteers'],
+      colors: ['#FF4560', '#00E396'],
+      legend: {
+        position: 'bottom',
+      },
+      plotOptions: {
+        pie: {
+          donut: {
+            size: '75%',
+            labels: {
+              show: true,
+            },
           },
         },
       },
-    },
-    title: {
-      text: 'Staff and Volunteer Distribution',
-    },
-  },
-};
-
-// Line Chart Data
-const lineData = {
-  series: [
-    {
-      name: 'Funds Raised',
-      data: [5000, 6000, 7000, 8000, 5500, 7200, 6800, 7500, 7800, 8100, 7000, 7300],
-    },
-  ],
-  options: {
-    chart: {
-      type: 'line',
-      zoom: {
-        enabled: false,
+      title: {
+        text: `${event.eventName} Distribution`,
       },
     },
-    xaxis: {
-      categories: [
-        'Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 
-        'Week 6', 'Week 7', 'Week 8', 'Week 9', 'Week 10',
-        'Week 11', 'Week 12'
-      ],
-    },
-    colors: ['#FF4560'],
-    stroke: {
-      curve: 'straight', // Change to 'straight' for pointed curves
-      width: 3,
-    },
-    markers: {
-      size: 5,
-    },
-    grid: {
-      borderColor: '#e0e0e0',
-    },
-    tooltip: {
-      y: {
-        formatter: (val) => `$${val}`,
-      },
-    },
-    title: {
-      text: 'Fundraising Over Time',
-    },
-  },
+  };
 };
 
 export default function AdminDashboard() {
+  const [events, setEvents] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchEvents = async () => {
+      try {
+        const response = await fetch('http://localhost:8000/events/getEventsDetails'); // Use the correct URL
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        const ongoingEvents = data.events.filter(event => event.status === 'Ongoing');
+        setEvents(ongoingEvents);
+      } catch (error) {
+        console.error('Error fetching events:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchEvents();
+  }, []);
+
+  if (loading) {
+    return (
+      <Box sx={{ p: 2, textAlign: 'center' }}>
+        <CircularProgress />
+      </Box>
+    );
+  }
+
   return (
     <Box sx={{ p: 2 }}>
       <Typography variant="h4" component="h1" sx={{ mb: 2 }}>
         Admin Dashboard
       </Typography>
 
-      <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 2, mb: 2 }}>
-        <Box sx={{ width: '50%', height: '300px' }}>
-          <Typography variant="h6" component="h2" sx={{ mb: 1 }}>
-            Staff and Volunteer Distribution (Donut Chart)
-          </Typography>
-          <ApexCharts
-            options={pieData.options}
-            series={pieData.series}
-            type="donut"
-            height={300}
-          />
-        </Box>
-
-        <Box sx={{ width: '50%', height: '300px' }}>
-          <Typography variant="h6" component="h2" sx={{ mb: 1 }}>
-            Fundraising Over Time (Line Chart)
-          </Typography>
-          <ApexCharts
-            options={lineData.options}
-            series={lineData.series}
-            type="line"
-            height={300}
-          />
-        </Box>
+      <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 2 }}>
+        {events.length > 0 ? (
+          events.map((event) => (
+            <Box key={event._id} sx={{ width: '50%', height: '300px' }}>
+              <Typography variant="h6" component="h2" sx={{ mb: 1 }}>
+                {event.eventName} (Donut Chart)
+              </Typography>
+              <ApexCharts
+                options={generatePieData(event).options}
+                series={generatePieData(event).series}
+                type="donut"
+                height={300}
+              />
+            </Box>
+          ))
+        ) : (
+          <Typography>No ongoing events to display.</Typography>
+        )}
       </Box>
     </Box>
   );

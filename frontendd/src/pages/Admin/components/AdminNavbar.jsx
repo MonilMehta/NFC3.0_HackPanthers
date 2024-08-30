@@ -41,10 +41,10 @@ function AdminNavbar() {
   };
 
   return (
-    <AppBar position="sticky" sx={{ backgroundColor: 'darkgreen' }}>
+    <AppBar position="sticky" sx={{ backgroundColor: 'green' }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AdminPanelSettingsIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1, color: 'black' }} />
+          <AdminPanelSettingsIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1, color: 'yellow' }} />
           <Typography
             variant="h6"
             noWrap
@@ -56,7 +56,7 @@ function AdminNavbar() {
               fontFamily: 'Arial', // Set to a normal font
               fontWeight: 'normal', // Set to normal weight
               letterSpacing: '.1rem', // Adjusted for subtlety
-              color: 'black',
+              color: 'white',
               textDecoration: 'none',
             }}
           >
