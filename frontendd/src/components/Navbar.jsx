@@ -150,7 +150,7 @@ const Navbar = () => {
               sx={{ display: { xs: 'block', md: 'none' } }}
             >
               <MenuItem onClick={handleCloseNavMenu}>
-                <Link to="/donate" style={{ textDecoration: 'none', color: '#2c3e50' }}>
+                <Link to="/donation" style={{ textDecoration: 'none', color: '#2c3e50' }}>
                   <Typography sx={{ textAlign: 'center' }}>Donate</Typography>
                 </Link>
               </MenuItem>
@@ -187,7 +187,7 @@ const Navbar = () => {
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'center' }}>
-            <StyledButton component={Link} to="/donate">Donate</StyledButton>
+            <StyledButton component={Link} to="/donation">Donate</StyledButton>
             <StyledButton component={Link} to="/events">Events</StyledButton>
             <StyledButton component={Link} to="/projects">Projects</StyledButton>
           </Box>
