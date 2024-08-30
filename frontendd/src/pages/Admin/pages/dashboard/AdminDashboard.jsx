@@ -3,6 +3,8 @@ import ApexCharts from 'react-apexcharts';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import CircularProgress from '@mui/material/CircularProgress';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
 
 // Pie Chart Data
 const generatePieData = (event) => {
@@ -84,17 +86,19 @@ export default function AdminDashboard() {
       <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 2 }}>
         {events.length > 0 ? (
           events.map((event) => (
-            <Box key={event._id} sx={{ width: '50%', height: '300px' }}>
-              <Typography variant="h6" component="h2" sx={{ mb: 1 }}>
-                {event.eventName} (Donut Chart)
-              </Typography>
-              <ApexCharts
-                options={generatePieData(event).options}
-                series={generatePieData(event).series}
-                type="donut"
-                height={300}
-              />
-            </Box>
+            <Card key={event._id} sx={{ width: '48%', height: 'auto', mb: 2 }}>
+              <CardContent>
+                <Typography variant="h6" component="h2" sx={{ mb: 2 }}>
+                  {event.eventName} (Donut Chart)
+                </Typography>
+                <ApexCharts
+                  options={generatePieData(event).options}
+                  series={generatePieData(event).series}
+                  type="donut"
+                  height={300}
+                />
+              </CardContent>
+            </Card>
           ))
         ) : (
           <Typography>No ongoing events to display.</Typography>
