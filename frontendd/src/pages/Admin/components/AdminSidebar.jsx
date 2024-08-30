@@ -14,7 +14,8 @@ import PeopleIcon from "@mui/icons-material/People";
 import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 import ReportIcon from "@mui/icons-material/Report";
 import EventIcon from "@mui/icons-material/Event";
-import GroupIcon from "@mui/icons-material/Group"; // Added GroupIcon for Staff
+import GroupIcon from "@mui/icons-material/Group";
+import NotificationsIcon from "@mui/icons-material/Notifications"; // Import Notifications Icon
 
 const AdminSidebar = () => {
   return (
@@ -22,7 +23,7 @@ const AdminSidebar = () => {
       sx={{
         width: 250,
         bgcolor: "#1e1e2d",
-        height: "full",
+        height: "100vh", // Changed to full viewport height
         color: "#ecf0f1",
       }}
     >
@@ -238,10 +239,42 @@ const AdminSidebar = () => {
               },
             }}
           >
-            <GroupIcon /> {/* Added icon for Staff */}
+            <GroupIcon />
           </ListItemIcon>
           <ListItemText
             primary="Staff"
+            sx={{
+              color: 'inherit',
+              '&:hover': {
+                color: '#1e1e2d',
+              },
+            }}
+          />
+        </ListItem>
+
+        <ListItem 
+          button 
+          component={Link} 
+          to="/admin/notifications"
+          sx={{
+            '&:hover': {
+              bgcolor: '#ecf0f1',
+              color: '#1e1e2d',
+            },
+          }}
+        >
+          <ListItemIcon 
+            sx={{
+              color: 'inherit',
+              '&:hover': {
+                color: '#1e1e2d',
+              },
+            }}
+          >
+            <NotificationsIcon /> {/* Added icon for Notification Messages */}
+          </ListItemIcon>
+          <ListItemText
+            primary="Notification Messages"
             sx={{
               color: 'inherit',
               '&:hover': {

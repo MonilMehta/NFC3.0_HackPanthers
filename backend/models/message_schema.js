@@ -1,6 +1,5 @@
 import mongoose from 'mongoose';
 
-// Define the schema for the Message
 const messageSchema = new mongoose.Schema({
   message: {
     type: String,
@@ -8,16 +7,15 @@ const messageSchema = new mongoose.Schema({
   },
   date: {
     type: Date,
-    default: Date.now, // Automatically set the date to the current date if not provided
+    default: Date.now,
     required: true,
   },
   time: {
-    type: String, // Store time in a string format (HH:MM:SS)
+    type: String,
     required: true,
   }
 }, { timestamps: true });
 
-// Create the model from the schema
 const Message = mongoose.model('Message', messageSchema);
 
 export default Message;

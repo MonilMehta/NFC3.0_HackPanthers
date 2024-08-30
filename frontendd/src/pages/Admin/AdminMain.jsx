@@ -9,6 +9,7 @@ import AdminReports from './pages/reports/AdminReports';
 import AdminProjects from './pages/projects/AdminProjects';
 import AdminVolunteers from './pages/volunteers/AdminVolunteers';
 import Staff from './pages/staff/Staff';
+import AdminNotification from './pages/noti/AdminNotification';
 const AdminMain = () => {
   const navigate = useNavigate();
   useEffect(() => {
@@ -31,6 +32,7 @@ const AdminMain = () => {
             <Route path="projects" element={<AdminProjects />} />
             <Route path="reports" element={<AdminReports />} />
             <Route path="volunteers" element={<AdminVolunteers />} />
+            <Route path="notifications" element={<AdminNotification />} />
 
             <Route path="staff" element={<Staff />} />
 
