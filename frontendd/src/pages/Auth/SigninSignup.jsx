@@ -60,6 +60,9 @@ function SignupSignin() {
       document.cookie = `userId=${response.data.user._id};max-age=${
         7 * 24 * 60 * 60
       };path=/`;
+      document.cookie = `email=${response.data.user.email};max-age=${
+        7 * 24 * 60 * 60
+      };path=/`;
       console.log("Login successful:", response?.data);
       if (response.data.user.role == "normalUser") {
         navigate("/main");

@@ -1,10 +1,9 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import AspectRatio from '@mui/joy/AspectRatio';
 import Box from '@mui/joy/Box';
 import Divider from '@mui/joy/Divider';
 import FormControl from '@mui/joy/FormControl';
 import FormLabel from '@mui/joy/FormLabel';
-import Input from '@mui/joy/Input';
 import IconButton from '@mui/joy/IconButton';
 import Stack from '@mui/joy/Stack';
 import Typography from '@mui/joy/Typography';
@@ -21,7 +20,30 @@ import EventIcon from '@mui/icons-material/Event'; // Event icon
 import VolunteerActivismIcon from '@mui/icons-material/VolunteerActivism'; // Donation icon
 import Rotationdoner from './Roationdoner';
 import RotationVol from './RotationVol';
+import axios from 'axios';
+import Cookies from 'js-cookie';
+
 export default function Account() {
+  const [user, setUser] = useState(null); 
+  const [render, setRender] = useState(false);
+
+  useEffect(() => {
+    const email = Cookies.get('email');
+    axios.get(`http://localhost:8000/users/getUser/${email}`)
+      .then(response => {
+        setUser(response.data);
+        setRender(true);
+        console.log(response.data)
+      })
+      .catch(error => {
+        console.error('There was an error fetching the data!', error);
+      });
+  }, []);
+
+  if (!render) {
+    return null; // or a loading spinner
+  }
+
   return (
     <Box sx={{ flex: 1, width: '100%', bgcolor: '#ffffff', color: '#2c3e50', height: '100vh' }}>
       <Box
@@ -86,46 +108,86 @@ export default function Account() {
             <Stack spacing={2} sx={{ flexGrow: 1 }}>
               <Stack spacing={1}>
                 <FormLabel sx={{ color: '#2c3e50' }}>Name</FormLabel>
-                <FormControl
-                  sx={{ display: { sm: 'flex-column', md: 'flex-row' }, gap: 2 }}
+                <Stack
+                  direction="row"
+                  spacing={2}
+                  sx={{ display: { sm: 'flex', md: 'flex' }, gap: 2 }}
                 >
-                  <Input size="sm" placeholder="First name" sx={{ bgcolor: '#ffffff', color: '#2c3e50' }} />
-                  <Input size="sm" placeholder="Last name" sx={{ flexGrow: 1, bgcolor: '#ffffff', color: '#2c3e50' }} />
-                </FormControl>
+                  <div
+                    style={{
+                      backgroundColor: '#ffffff',
+                      color: '#2c3e50',
+                      padding: '8px',
+                      borderRadius: '4px',
+                      flex: 1,
+                    }}
+                  >
+                    {user.firstName || 'First Name'}
+                  </div>
+                  <div
+                    style={{
+                      backgroundColor: '#ffffff',
+                      color: '#2c3e50',
+                      padding: '8px',
+                      borderRadius: '4px',
+                      flex: 1,
+                    }}
+                  >
+                    {user.lastName || 'Last Name'}
+                  </div>
+                </Stack>
               </Stack>
               <Stack direction="row" spacing={2}>
-                <FormControl>
+                <div style={{ flexGrow: 1 }}>
                   <FormLabel sx={{ color: '#2c3e50' }}>Date of Birth</FormLabel>
-                  <Input
-                    size="sm"
-                    type="date"
-                    startDecorator={<CalendarTodayRoundedIcon />}
-                    sx={{ bgcolor: '#ffffff', color: '#2c3e50' }}
-                  />
-                </FormControl>
-                <FormControl sx={{ flexGrow: 1 }}>
+                  <div
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      backgroundColor: '#ffffff',
+                      color: '#2c3e50',
+                      padding: '8px',
+                      borderRadius: '4px',
+                    }}
+                  >
+                    <CalendarTodayRoundedIcon sx={{ mr: 1 }} />
+                    {user.date_of_birth ? user.date_of_birth.substring(0, 10) : 'N/A'}
+                  </div>
+                </div>
+                <div style={{ flexGrow: 1 }}>
                   <FormLabel sx={{ color: '#2c3e50' }}>Email</FormLabel>
-                  <Input
-                    size="sm"
-                    type="email"
-                    startDecorator={<EmailRoundedIcon />}
-                    placeholder="email"
-                    defaultValue="siriwatk@test.com"
-                    sx={{ flexGrow: 1, bgcolor: '#ffffff', color: '#2c3e50' }}
-                  />
-                </FormControl>
+                  <div
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      backgroundColor: '#ffffff',
+                      color: '#2c3e50',
+                      padding: '8px',
+                      borderRadius: '4px',
+                    }}
+                  >
+                    <EmailRoundedIcon sx={{ mr: 1 }} />
+                    {user.email || 'N/A'}
+                  </div>
+                </div>
               </Stack>
               <Stack direction="row" spacing={2}>
-                <FormControl sx={{ flexGrow: 1 }}>
+                <div style={{ flexGrow: 1 }}>
                   <FormLabel sx={{ color: '#2c3e50' }}>Phone Number</FormLabel>
-                  <Input
-                    size="sm"
-                    type="tel"
-                    startDecorator={<PhoneRoundedIcon />}
-                    placeholder="(123) 456-7890"
-                    sx={{ flexGrow: 1, bgcolor: '#ffffff', color: '#2c3e50' }}
-                  />
-                </FormControl>
+                  <div
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      backgroundColor: '#ffffff',
+                      color: '#2c3e50',
+                      padding: '8px',
+                      borderRadius: '4px',
+                    }}
+                  >
+                    <PhoneRoundedIcon sx={{ mr: 1 }} />
+                    {user.phone_no || 'N/A'}
+                  </div>
+                </div>
               </Stack>
             </Stack>
           </Stack>
@@ -141,8 +203,8 @@ export default function Account() {
           <Divider sx={{ bgcolor: '#2e7d32' }} />
           <Stack direction="row" spacing={2}>
             {/* Add more badge images as needed */}
-            <RotationVol/>
-            <Rotationdoner/>
+            {user.volunteeredEvents.length > 0 && <RotationVol />}
+            {user.amountDonated > 0 && <Rotationdoner />}
           </Stack>
         </Card>
 
@@ -155,9 +217,9 @@ export default function Account() {
           </Box>
           <Divider sx={{ bgcolor: '#2e7d32' }} />
           <ul>
-            <li>Hackathon 2024</li>
-            <li>CodeFest 2024</li>
-            <li>Open Source Summit</li>
+            {user.volunteeredEvents && user.volunteeredEvents.map((event, index) => (
+              <li key={index}>{event.eventName}</li>
+            ))}
           </ul>
         </Card>
 
@@ -169,7 +231,9 @@ export default function Account() {
             </Typography>
           </Box>
           <Divider sx={{ bgcolor: '#2e7d32' }} />
-          <Typography sx={{ my: 2 }}>You have donated a total of $500 to various causes this year.</Typography>
+          <Typography sx={{ my: 2 }}>
+            You have donated a total of ${user.donations || 0} to various causes this year.
+          </Typography>
         </Card>
       </Stack>
     </Box>
