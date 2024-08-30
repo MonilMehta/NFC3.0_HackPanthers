@@ -232,7 +232,7 @@ export default function Account() {
           </Box>
           <Divider sx={{ bgcolor: '#2e7d32' }} />
           <Typography sx={{ my: 2 }}>
-            You have donated a total of ${user.donations || 0} to various causes this year.
+            You have donated a total of ${user.amountDonated || 0} to various causes this year.
           </Typography>
         </Card>
       </Stack>
