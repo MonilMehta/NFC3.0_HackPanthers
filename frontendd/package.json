@@ -34,6 +34,7 @@
     "frontendd": "file:",
     "gsap": "^3.12.5",
     "jest": "^27.5.1",
+    "js-cookie": "^3.0.5",
     "jspdf": "^2.5.1",
     "jspdf-autotable": "^3.8.2",
     "lucide-react": "^0.436.0",
