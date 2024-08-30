@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { TextField, Button, Box, Typography, Container, Grid } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import jsPDF from 'jspdf';
+import displayRazorPay from './razorpay'
 
 const theme = createTheme({
   palette: {
@@ -96,6 +97,9 @@ const DonationForm = () => {
 
         await response.json();
         generatePDF(); // Call the function to generate the PDF
+
+        // Call Razorpay payment function
+        displayRazorPay(parseFloat(formData.amount));
 
         // Reset form data after successful submission
         setFormData({
