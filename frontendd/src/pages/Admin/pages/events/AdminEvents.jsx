@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import EventCard from './EventCard'; // Component to display basic event details
-import { Grid, Button } from '@mui/material';
+import EventForm from './EventForm'; // Modal form component
+import { Grid, Button, Dialog, DialogTitle, DialogContent, IconButton } from '@mui/material';
 import { useNavigate } from 'react-router-dom'; // Assuming you're using React Router for navigation
+import CloseIcon from '@mui/icons-material/Close'; // Icon to close the modal
 
 const AdminEvents = () => {
   const [events, setEvents] = useState([]);
+  const [open, setOpen] = useState(false); // State for modal visibility
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -27,6 +30,9 @@ const AdminEvents = () => {
     navigate(`/event-details/${eventId}`);
   };
 
+  const handleOpen = () => setOpen(true); // Open the modal
+  const handleClose = () => setOpen(false); // Close the modal
+
   return (
     <div>
       <h1>Admin Events</h1>
@@ -40,11 +46,30 @@ const AdminEvents = () => {
       <Button 
         variant="contained" 
         color="primary" 
-        onClick={() => navigate('/events/new')}
+        onClick={handleOpen}
         style={{ marginTop: '20px' }}
       >
         Add Event
       </Button>
+
+      {/* Modal for EventForm */}
+      <Dialog open={open} onClose={handleClose} maxWidth="md" fullWidth>
+        <DialogTitle>
+          Add New Event
+          <IconButton
+            edge="end"
+            color="inherit"
+            onClick={handleClose}
+            aria-label="close"
+            style={{ position: 'absolute', right: 8, top: 8 }}
+          >
+            <CloseIcon />
+          </IconButton>
+        </DialogTitle>
+        <DialogContent>
+          <EventForm onClose={handleClose} />
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
