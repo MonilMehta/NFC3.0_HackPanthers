@@ -94,7 +94,7 @@ const AddStaff = ({ staff, onClose }) => {
 
   const handleSubmit = async () => {
     try {
-      const method = "POST";
+      const method = staff ? "PUT" : "POST";
       
       const response = await fetch("http://localhost:8000/events/addStaff", {
         method,
@@ -130,7 +130,7 @@ const AddStaff = ({ staff, onClose }) => {
       maxWidth="xs"
       fullWidth
     >
-      <DialogTitle>{staff ? "Edit Staff" : "Add Staff"}</DialogTitle>
+      <DialogTitle className="text-xl font-bold text-204E4A">{staff ? "Edit Staff" : "Add Staff"}</DialogTitle>
       <DialogContent>
         <Divider sx={{ marginBottom: "16px" }} />
         <TextField
@@ -138,8 +138,8 @@ const AddStaff = ({ staff, onClose }) => {
           label="Email"
           name="email"
           value={staffData.email}
-          onChange={handleChange} // Handle input change
-          onBlur={handleEmailChange} // Trigger API call onBlur
+          onChange={handleChange}
+          onBlur={handleEmailChange}
           fullWidth
           variant="outlined"
           sx={{ marginBottom: "16px" }}
@@ -153,7 +153,7 @@ const AddStaff = ({ staff, onClose }) => {
           fullWidth
           variant="outlined"
           sx={{ marginBottom: "16px" }}
-          disabled={isExistingUser} // Disable editing if it's an existing user
+          disabled={isExistingUser}
         />
         <TextField
           margin="dense"
@@ -164,7 +164,7 @@ const AddStaff = ({ staff, onClose }) => {
           fullWidth
           variant="outlined"
           sx={{ marginBottom: "16px" }}
-          disabled={isExistingUser} // Disable editing if it's an existing user
+          disabled={isExistingUser}
         />
         <TextField
           margin="dense"
@@ -184,9 +184,9 @@ const AddStaff = ({ staff, onClose }) => {
           onChange={handleChange}
           fullWidth
           variant="outlined"
-          type="date" // Set type to date for calendar input
+          type="date"
           InputLabelProps={{
-            shrink: true, // Ensure label shrinks when date is entered
+            shrink: true,
           }}
           sx={{ marginBottom: "16px" }}
         />

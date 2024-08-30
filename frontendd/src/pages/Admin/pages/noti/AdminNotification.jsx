@@ -30,21 +30,14 @@ const AdminNotification = () => {
   };
 
   return (
-    <div style={{ padding: '20px' }}>
-      <h1>Admin Notifications Page</h1>
+    <div className="p-8 bg-gray-100 min-h-screen">
+      <h1 className="text-3xl font-bold text-204E4A mb-4">Admin Notifications Page</h1>
       <textarea
         value={message}
         onChange={(e) => setMessage(e.target.value)}
         rows="10"
-        cols="50"
         placeholder="Type your message here..."
-        style={{
-          width: '100%',
-          padding: '10px',
-          marginBottom: '10px',
-          border: '1px solid #ccc',
-          borderRadius: '4px',
-        }}
+        className="w-full p-4 mb-4 border border-gray-300 rounded-md resize-none"
       />
       <br />
       <button

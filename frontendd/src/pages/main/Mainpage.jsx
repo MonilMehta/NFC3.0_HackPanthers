@@ -1,26 +1,23 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Proj1 from '../../assets/Proj1.png';
 import Proj3 from '../../assets/Proj3.jpg';
 import CustomCard from './CustomCard';
 import Rotationlogo from './rotation/Rotationlogo';
 import Navbar from '../../components/Navbar';
 import Flow from './Flow';
-import {Link} from 'react-router-dom';
-// const Navbar = () => (
-//   <nav className="bg-[#003E1F] p-4">
-//     <div className="container mx-auto flex justify-between items-center">
-//       <div className="text-[#FFFFFF] font-bold text-xl">ChildCare NGO</div>
-//       <div className="space-x-4">
-//         <Link to="/donation" className="text-[#FFFFFF] hover:text-[#6BCB80]">Donations</Link>
-//         <Link to="/events" className="text-[#FFFFFF] hover:text-[#6BCB80]">Events</Link>
-//         <Link to="/badges-certifications" className="text-[#FFFFFF] hover:text-[#6BCB80]">Badges & Certificates</Link>
-//         <Link to="/event-analytics" className="text-[#FFFFFF] hover:text-[#6BCB80]">Event Analytics</Link>
-//       </div>
-//     </div>
-//   </nav>
-// );
+import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import axios from 'axios';
+
+// Define the animations
+const fadeInUp = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0 },
+};
 
 const Mainpage = () => {
+  const [projects, setProjects] = useState([]);
+
   const upcomingEvents = [
     { image: Proj1, title: "Charity Run", date: "2023-09-15", description: "Annual 5K run to raise funds for children's education" },
     { image: Proj1, title: "Art Workshop", date: "2023-09-22", description: "Creative workshop for underprivileged children" },
@@ -36,12 +33,28 @@ const Mainpage = () => {
     { image: Proj3, title: "Healthcare Initiative", isDonation: true, goal: 5000, current: 3200, description: "Support our healthcare programs for children in need" },
   ];
 
+  useEffect(() => {
+    // Fetch project data
+    axios.get('http://localhost:8000/projects')
+      .then(response => {
+        setProjects(response.data);
+      })
+      .catch(error => {
+        console.error('There was an error fetching the projects!', error);
+      });
+  }, []);
+
   return (
-    <div className="bg-[#FFFFFF] min-h-screen ">
+    <div className="bg-[#FFFFFF] min-h-screen">
       <Navbar />
 
       {/* Hero Section */}
-      <div className="bg-[#003E1F] text-[#FFFFFF] py-20 h-[100vh]">
+      <motion.div
+        className="bg-[#003E1F] text-[#FFFFFF] py-20 h-[100vh]"
+        initial="hidden"
+        animate="visible"
+        variants={fadeInUp}
+      >
         <div className="container mx-auto px-4 flex flex-col md:flex-row items-center">
           {/* Logo on the Left */}
           <div className="md:w-1/2 flex justify-center md:justify-start mb-8 md:mb-0">
@@ -50,35 +63,50 @@ const Mainpage = () => {
 
           {/* Text on the Right */}
           <div className="md:w-1/2 text-center md:text-left">
-            <h1 className="text-5xl font-bold mb-6">Empowering Children, Transforming Lives</h1>
-            <p className="text-xl mb-8 max-w-2xl">Join our mission to provide education, healthcare, and support to children in need. Together, we can create a brighter future for all.</p>
+            <h1 className="text-5xl font-bold mb-6 transition duration-500 hover:text-[#6BCB80]">Empowering Children, Transforming Lives</h1>
+            <p className="text-xl mb-8 max-w-2xl transition duration-500 hover:text-[#6BCB80]">Join our mission to provide education, healthcare, and support to children in need. Together, we can create a brighter future for all.</p>
             <button className="bg-[#4CAF50] text-[#FFFFFF] font-bold py-3 px-8 rounded-full hover:bg-[#6BCB80] transition duration-300">
               Get Involved
             </button>
           </div>
         </div>
-      </div>
+      </motion.div>
 
       {/* Flow Component */}
-      <div className="py-16 bg-gray-200">
+      <motion.div
+        className="py-16 bg-gray-200"
+        initial="hidden"
+        animate="visible"
+        variants={fadeInUp}
+      >
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold mb-8 text-center text-[#003E1F]">Donation Process Flow</h2>
           <Flow />
         </div>
-      </div>
+      </motion.div>
 
       {/* Upcoming Events */}
-      <div className="container mx-auto px-4 py-16">
+      <motion.div
+        className="container mx-auto px-4 py-16"
+        initial="hidden"
+        animate="visible"
+        variants={fadeInUp}
+      >
         <h2 className="text-3xl font-bold mb-8 text-center text-[#003E1F]">Upcoming Events</h2>
         <div className="grid md:grid-cols-2 gap-8">
           {upcomingEvents.map((event, index) => (
             <CustomCard key={index} {...event} />
           ))}
         </div>
-      </div>
+      </motion.div>
 
       {/* Completed Events */}
-      <div className="bg-gray-100 py-16">
+      <motion.div
+        className="bg-gray-100 py-16"
+        initial="hidden"
+        animate="visible"
+        variants={fadeInUp}
+      >
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold mb-8 text-center text-[#003E1F]">Successful Events</h2>
           <div className="grid md:grid-cols-2 gap-8">
@@ -87,17 +115,37 @@ const Mainpage = () => {
             ))}
           </div>
         </div>
-      </div>
+      </motion.div>
 
       {/* Help Someone Out */}
-      <div className="container mx-auto px-4 py-16">
+      <motion.div
+        className="container mx-auto px-4 py-16"
+        initial="hidden"
+        animate="visible"
+        variants={fadeInUp}
+      >
         <h2 className="text-3xl font-bold mb-8 text-center text-[#003E1F]">Help Someone Out</h2>
         <div className="grid md:grid-cols-2 gap-8">
           {donationCases.map((donation, index) => (
             <CustomCard key={index} {...donation} />
           ))}
         </div>
-      </div>
+      </motion.div>
+
+      {/* Projects Section */}
+      <motion.div
+        className="container mx-auto px-4 py-16"
+        initial="hidden"
+        animate="visible"
+        variants={fadeInUp}
+      >
+        <h2 className="text-3xl font-bold mb-8 text-center text-[#003E1F]">Our Projects</h2>
+        <div className="grid md:grid-cols-2 gap-8">
+          {projects.map((project, index) => (
+            <CustomCard key={index} {...project} />
+          ))}
+        </div>
+      </motion.div>
 
       {/* Footer */}
       <footer className="bg-[#003E1F] text-[#FFFFFF] py-12">

@@ -33,7 +33,7 @@ export default function Account() {
       .then(response => {
         setUser(response.data);
         setRender(true);
-        console.log(response.data)
+        console.log(response.data);
       })
       .catch(error => {
         console.error('There was an error fetching the data!', error);
@@ -41,7 +41,7 @@ export default function Account() {
   }, []);
 
   if (!render) {
-    return null; // or a loading spinner
+    return <Typography>Loading...</Typography>; // Simple loading message
   }
 
   return (
@@ -52,14 +52,20 @@ export default function Account() {
           top: { sm: -100, md: -110 },
           bgcolor: '#e8f5e9',
           zIndex: 9995,
+          transition: 'background-color 0.3s ease',
+          boxShadow: '0px 2px 10px rgba(0, 0, 0, 0.1)',
         }}
       >
         <Box sx={{ px: { xs: 2, md: 6 } }}>
-          <Typography level="h2" component="h1" sx={{ mt: 1, mb: 2, color: '#2e7d32' }}>
+          <Typography
+            level="h2"
+            component="h1"
+            sx={{ mt: 1, mb: 2, color: '#2e7d32', fontSize: '2rem', fontWeight: '700', transition: 'color 0.3s ease' }}
+          >
             My Profile
           </Typography>
         </Box>
-        <Tabs defaultValue={0} sx={{ bgcolor: 'transparent' }}>
+        <Tabs defaultValue={0} sx={{ bgcolor: 'transparent', transition: 'background-color 0.3s ease' }}>
           <TabList
             tabFlex={1}
             size="sm"
@@ -70,6 +76,8 @@ export default function Account() {
                 fontWeight: '600',
                 flex: 'initial',
                 color: '#2c3e50',
+                fontSize: '1rem',
+                transition: 'color 0.3s ease',
                 [`&.${tabClasses.selected}`]: {
                   bgcolor: 'transparent',
                   color: '#2e7d32',
@@ -95,9 +103,24 @@ export default function Account() {
         }}
       >
         {/* Personal Info Section */}
-        <Card sx={{ bgcolor: '#f1f8e9', color: '#2c3e50' }}>
+        <Card
+          sx={{
+            bgcolor: '#f1f8e9',
+            color: '#2c3e50',
+            transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+            '&:hover': {
+              transform: 'scale(1.02)',
+              boxShadow: '0px 4px 15px rgba(0, 0, 0, 0.2)',
+            },
+          }}
+        >
           <Box sx={{ mb: 1 }}>
-            <Typography level="title-md" sx={{ color: '#2e7d32' }}>Personal Info</Typography>
+            <Typography
+              level="title-md"
+              sx={{ color: '#2e7d32', fontSize: '1.25rem', fontWeight: '600' }}
+            >
+              Personal Info
+            </Typography>
           </Box>
           <Divider sx={{ bgcolor: '#2e7d32' }} />
           <Stack
@@ -107,7 +130,7 @@ export default function Account() {
           >
             <Stack spacing={2} sx={{ flexGrow: 1 }}>
               <Stack spacing={1}>
-                <FormLabel sx={{ color: '#2c3e50' }}>Name</FormLabel>
+                <FormLabel sx={{ color: '#2c3e50', fontSize: '1rem', fontWeight: '500' }}>Name</FormLabel>
                 <Stack
                   direction="row"
                   spacing={2}
@@ -120,6 +143,8 @@ export default function Account() {
                       padding: '8px',
                       borderRadius: '4px',
                       flex: 1,
+                      fontSize: '1rem',
+                      fontWeight: '400',
                     }}
                   >
                     {user.firstName || 'First Name'}
@@ -131,6 +156,8 @@ export default function Account() {
                       padding: '8px',
                       borderRadius: '4px',
                       flex: 1,
+                      fontSize: '1rem',
+                      fontWeight: '400',
                     }}
                   >
                     {user.lastName || 'Last Name'}
@@ -139,7 +166,7 @@ export default function Account() {
               </Stack>
               <Stack direction="row" spacing={2}>
                 <div style={{ flexGrow: 1 }}>
-                  <FormLabel sx={{ color: '#2c3e50' }}>Date of Birth</FormLabel>
+                  <FormLabel sx={{ color: '#2c3e50', fontSize: '1rem', fontWeight: '500' }}>Date of Birth</FormLabel>
                   <div
                     style={{
                       display: 'flex',
@@ -148,6 +175,8 @@ export default function Account() {
                       color: '#2c3e50',
                       padding: '8px',
                       borderRadius: '4px',
+                      fontSize: '1rem',
+                      fontWeight: '400',
                     }}
                   >
                     <CalendarTodayRoundedIcon sx={{ mr: 1 }} />
@@ -155,7 +184,7 @@ export default function Account() {
                   </div>
                 </div>
                 <div style={{ flexGrow: 1 }}>
-                  <FormLabel sx={{ color: '#2c3e50' }}>Email</FormLabel>
+                  <FormLabel sx={{ color: '#2c3e50', fontSize: '1rem', fontWeight: '500' }}>Email</FormLabel>
                   <div
                     style={{
                       display: 'flex',
@@ -164,6 +193,8 @@ export default function Account() {
                       color: '#2c3e50',
                       padding: '8px',
                       borderRadius: '4px',
+                      fontSize: '1rem',
+                      fontWeight: '400',
                     }}
                   >
                     <EmailRoundedIcon sx={{ mr: 1 }} />
@@ -173,7 +204,7 @@ export default function Account() {
               </Stack>
               <Stack direction="row" spacing={2}>
                 <div style={{ flexGrow: 1 }}>
-                  <FormLabel sx={{ color: '#2c3e50' }}>Phone Number</FormLabel>
+                  <FormLabel sx={{ color: '#2c3e50', fontSize: '1rem', fontWeight: '500' }}>Phone Number</FormLabel>
                   <div
                     style={{
                       display: 'flex',
@@ -182,6 +213,8 @@ export default function Account() {
                       color: '#2c3e50',
                       padding: '8px',
                       borderRadius: '4px',
+                      fontSize: '1rem',
+                      fontWeight: '400',
                     }}
                   >
                     <PhoneRoundedIcon sx={{ mr: 1 }} />
@@ -194,9 +227,22 @@ export default function Account() {
         </Card>
 
         {/* Badges Section */}
-        <Card sx={{ bgcolor: '#f1f8e9', color: '#2c3e50' }}>
+        <Card
+          sx={{
+            bgcolor: '#f1f8e9',
+            color: '#2c3e50',
+            transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+            '&:hover': {
+              transform: 'scale(1.02)',
+              boxShadow: '0px 4px 15px rgba(0, 0, 0, 0.2)',
+            },
+          }}
+        >
           <Box sx={{ mb: 1 }}>
-            <Typography level="title-md" sx={{ color: '#2e7d32' }}>
+            <Typography
+              level="title-md"
+              sx={{ color: '#2e7d32', fontSize: '1.25rem', fontWeight: '600' }}
+            >
               <BadgeIcon sx={{ mr: 1 }} /> Badges Earned
             </Typography>
           </Box>
@@ -209,29 +255,57 @@ export default function Account() {
         </Card>
 
         {/* Events Section */}
-        <Card sx={{ bgcolor: '#f1f8e9', color: '#2c3e50' }}>
+        <Card
+          sx={{
+            bgcolor: '#f1f8e9',
+            color: '#2c3e50',
+            transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+            '&:hover': {
+              transform: 'scale(1.02)',
+              boxShadow: '0px 4px 15px rgba(0, 0, 0, 0.2)',
+            },
+          }}
+        >
           <Box sx={{ mb: 1 }}>
-            <Typography level="title-md" sx={{ color: '#2e7d32' }}>
+            <Typography
+              level="title-md"
+              sx={{ color: '#2e7d32', fontSize: '1.25rem', fontWeight: '600' }}
+            >
               <EventIcon sx={{ mr: 1 }} /> Events Volunteered
             </Typography>
           </Box>
           <Divider sx={{ bgcolor: '#2e7d32' }} />
-          <ul>
+          <ul style={{ padding: 0, margin: 0 }}>
             {user.volunteeredEvents && user.volunteeredEvents.map((event, index) => (
-              <li key={index}>{event.eventName}</li>
+              <li key={index} style={{ listStyleType: 'none', padding: '8px 0', transition: 'background-color 0.3s ease', '&:hover': { backgroundColor: '#e8f5e9' } }}>
+                {event.eventName}
+              </li>
             ))}
           </ul>
         </Card>
 
         {/* Donations Section */}
-        <Card sx={{ bgcolor: '#f1f8e9', color: '#2c3e50' }}>
+        <Card
+          sx={{
+            bgcolor: '#f1f8e9',
+            color: '#2c3e50',
+            transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+            '&:hover': {
+              transform: 'scale(1.02)',
+              boxShadow: '0px 4px 15px rgba(0, 0, 0, 0.2)',
+            },
+          }}
+        >
           <Box sx={{ mb: 1 }}>
-            <Typography level="title-md" sx={{ color: '#2e7d32' }}>
+            <Typography
+              level="title-md"
+              sx={{ color: '#2e7d32', fontSize: '1.25rem', fontWeight: '600' }}
+            >
               <VolunteerActivismIcon sx={{ mr: 1 }} /> Donations
             </Typography>
           </Box>
           <Divider sx={{ bgcolor: '#2e7d32' }} />
-          <Typography sx={{ my: 2 }}>
+          <Typography sx={{ my: 2, fontSize: '1rem' }}>
             You have donated a total of ${user.amountDonated || 0} to various causes this year.
           </Typography>
         </Card>

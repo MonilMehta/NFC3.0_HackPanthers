@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Button, TextField, Typography, Box, Container, Grid, MenuItem, Select, InputLabel, Checkbox, ListItemText } from '@mui/material';
-const EventForm = () => {
+
+const EventForm = ({ onClose }) => {
   const [formData, setFormData] = useState({
     eventName: '',
     description: '',
@@ -74,10 +75,11 @@ const EventForm = () => {
         },
         body: JSON.stringify(dataToSend),
       });
-  
+
       if (response.ok) {
         const result = await response.json();
         console.log('Event created successfully:', result);
+        if (onClose) onClose(); // Close the modal on successful submission
       } else {
         console.error('Error creating event');
       }
@@ -85,11 +87,10 @@ const EventForm = () => {
       console.error('Error creating event:', error);
     }
   };
-  
 
   return (
-    <Container component="main" maxWidth="sm" sx={{ padding: '20px' }}>
-      <Typography variant="h4" component="h1" gutterBottom>
+    <Container component="main" maxWidth="sm" sx={{ padding: '20px', backgroundColor: '#f9f9f9', borderRadius: '8px' }}>
+      <Typography variant="h4" component="h1" gutterBottom className="text-[#204E4A]">
         Add New Event
       </Typography>
       <form onSubmit={handleSubmit}>
@@ -101,6 +102,7 @@ const EventForm = () => {
             value={formData.eventName}
             onChange={handleChange}
             required
+            sx={{ mb: 2 }}
           />
         </Box>
         <Box sx={{ marginBottom: '20px' }}>
@@ -113,6 +115,7 @@ const EventForm = () => {
             value={formData.description}
             onChange={handleChange}
             required
+            sx={{ mb: 2 }}
           />
         </Box>
         <Box sx={{ marginBottom: '20px' }}>
@@ -125,9 +128,10 @@ const EventForm = () => {
             value={formData.date}
             onChange={handleChange}
             required
+            sx={{ mb: 2 }}
           />
         </Box>
-        <Typography variant="h6" component="h2" gutterBottom>
+        <Typography variant="h6" component="h2" gutterBottom className="text-[#204E4A]">
           Location
         </Typography>
         <Grid container spacing={2}>
@@ -139,6 +143,7 @@ const EventForm = () => {
               value={formData.location.address}
               onChange={handleLocationChange}
               required
+              sx={{ mb: 2 }}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -149,6 +154,7 @@ const EventForm = () => {
               value={formData.location.city}
               onChange={handleLocationChange}
               required
+              sx={{ mb: 2 }}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -159,6 +165,7 @@ const EventForm = () => {
               value={formData.location.state}
               onChange={handleLocationChange}
               required
+              sx={{ mb: 2 }}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -169,6 +176,7 @@ const EventForm = () => {
               value={formData.location.zipCode}
               onChange={handleLocationChange}
               required
+              sx={{ mb: 2 }}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -179,10 +187,11 @@ const EventForm = () => {
               value={formData.location.country}
               onChange={handleLocationChange}
               required
+              sx={{ mb: 2 }}
             />
           </Grid>
         </Grid>
-        <Box sx={{ marginBottom: '20px', marginTop: '20px' }}>
+        <Box sx={{ marginBottom: '20px' }}>
           <TextField
             fullWidth
             label="Organizer"
@@ -190,10 +199,11 @@ const EventForm = () => {
             value={formData.organizer}
             onChange={handleChange}
             required
+            sx={{ mb: 2 }}
           />
         </Box>
         <Box sx={{ marginBottom: '20px' }}>
-          <Typography variant="h6" component="h2" gutterBottom>
+          <Typography variant="h6" component="h2" gutterBottom className="text-[#204E4A]">
             Staff
           </Typography>
           <InputLabel id="staff-select-label">Select Staff</InputLabel>
@@ -208,6 +218,7 @@ const EventForm = () => {
             }).join(', ')}
             fullWidth
             inputProps={{ 'aria-label': 'Select Staff' }}
+            sx={{ mb: 2 }}
           >
             {staffList.map((staff) => (
               <MenuItem key={staff._id} value={staff._id}>
@@ -217,7 +228,7 @@ const EventForm = () => {
             ))}
           </Select>
         </Box>
-        <Box sx={{ display: 'flex', justifyContent: 'space-between', marginTop: '20px' }}>
+        <Box sx={{ display: 'flex', justifyContent: 'flex-end', marginTop: '20px' }}>
           <Button type="submit" variant="contained" color="primary">
             Submit
           </Button>

@@ -34,25 +34,26 @@ const Staff = () => {
   };
 
   return (
-    <div style={{height: "88vh"}}>
-      <h1>Staff Page</h1>
+    <div className="p-6 bg-gray-50 min-h-screen">
+      <h1 className="text-3xl font-bold text-204E4A mb-4">Staff Page</h1>
       <Button 
         variant="contained" 
         color="primary" 
         onClick={handleOpenDialog}
+        className="mb-4 bg-204E4A hover:bg-2E933C text-white"
       >
         Add Staff
       </Button>
       {isDialogOpen && <AddStaff onClose={handleCloseDialog} />}
       
-      <TableContainer component={Paper} style={{ marginTop: 20 }}>
+      <TableContainer component={Paper} className="mt-4">
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>First Name</TableCell>
-              <TableCell>Last Name</TableCell>
-              <TableCell>Email</TableCell>
-              <TableCell>Phone Number</TableCell>
+              <TableCell className="font-semibold text-204E4A">First Name</TableCell>
+              <TableCell className="font-semibold text-204E4A">Last Name</TableCell>
+              <TableCell className="font-semibold text-204E4A">Email</TableCell>
+              <TableCell className="font-semibold text-204E4A">Phone Number</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>

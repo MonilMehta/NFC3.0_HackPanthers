@@ -11,18 +11,22 @@ const EventCard = ({ event }) => {
   };
 
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card className="max-w-sm shadow-lg border rounded-lg">
       <CardContent>
-        <Typography variant="h5" component="div">
+        <Typography variant="h5" component="div" className="text-lg font-bold text-[#204E4A]">
           {event.eventName}
         </Typography>
-        <Typography variant="body2" color="text.secondary">
+        <Typography variant="body2" color="text.secondary" className="mt-2">
           {event.description.substring(0, 100)}...
         </Typography>
-        <Typography variant="body2" color="text.secondary">
+        <Typography variant="body2" color="text.secondary" className="mt-2">
           Date: {new Date(event.date).toLocaleDateString()}
         </Typography>
-        <Button variant="outlined" onClick={handleViewDetails} sx={{ marginTop: '10px' }}>
+        <Button 
+          variant="outlined" 
+          onClick={handleViewDetails} 
+          className="mt-4 border-[#204E4A] text-[#204E4A] hover:bg-[#204E4A] hover:text-white"
+        >
           View Details
         </Button>
       </CardContent>
