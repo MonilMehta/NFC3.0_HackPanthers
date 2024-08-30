@@ -95,38 +95,6 @@ const AdminSidebar = () => {
         <ListItem 
           button 
           component={Link} 
-          to="/admin/volunteers"
-          sx={{
-            '&:hover': {
-              bgcolor: '#ecf0f1',
-              color: '#1e1e2d',
-            },
-          }}
-        >
-          <ListItemIcon 
-            sx={{
-              color: 'inherit',
-              '&:hover': {
-                color: '#1e1e2d',
-              },
-            }}
-          >
-            <PeopleIcon />
-          </ListItemIcon>
-          <ListItemText
-            primary="Volunteers"
-            sx={{
-              color: 'inherit',
-              '&:hover': {
-                color: '#1e1e2d',
-              },
-            }}
-          />
-        </ListItem>
-
-        <ListItem 
-          button 
-          component={Link} 
           to="/admin/donations"
           sx={{
             '&:hover': {
