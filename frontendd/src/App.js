@@ -25,7 +25,6 @@ const App = () => {
         {/* <Route path="/razorpay" element={<RazorpayForm />} /> */}
         <Route path="/event-details/:eventId" element={<EventInfoDetailsPage />} />
         <Route path="/projects" element={<Projects />} />
-
       </Routes>
     </Router>
   );
