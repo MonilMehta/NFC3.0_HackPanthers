@@ -10,7 +10,7 @@ const AdminProjects = () => {
     // Fetch projects data
     const fetchProjects = async () => {
       try {
-        const response = await fetch('http://localhost:8000/projects/getProjectDetails');
+        const response = await fetch('https://nurturenest-cvqz.onrender.com/projects/getProjectDetails');
         const data = await response.json();
         setProjects(data.projects || []);
       } catch (error) {

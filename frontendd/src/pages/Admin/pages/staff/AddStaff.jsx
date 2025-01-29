@@ -54,7 +54,7 @@ const AddStaff = ({ staff, onClose }) => {
 
     setIsLoading(true);
     try {
-      const response = await fetch(`http://localhost:8000/users/getUser/${value.trim()}`);
+      const response = await fetch(`https://nurturenest-cvqz.onrender.com/users/getUser/${value.trim()}`);
       if (response.ok) {
         const userData = await response.json();
         // Convert date to YYYY-MM-DD format
@@ -96,7 +96,7 @@ const AddStaff = ({ staff, onClose }) => {
     try {
       const method = staff ? "PUT" : "POST";
       
-      const response = await fetch("http://localhost:8000/events/addStaff", {
+      const response = await fetch("https://nurturenest-cvqz.onrender.com/events/addStaff", {
         method,
         headers: {
           "Content-Type": "application/json",

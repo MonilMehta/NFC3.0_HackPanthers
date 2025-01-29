@@ -50,7 +50,7 @@ const SignupSignin = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:8000/users/signIn",
+        "https://nurturenest-cvqz.onrender.com/users/signIn",
         loginData
       );
       document.cookie = `accessToken=${response.data.accessToken};max-age=${
@@ -82,7 +82,7 @@ const SignupSignin = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:8000/users/signUp",
+        "https://nurturenest-cvqz.onrender.com/users/signUp",
         signupData
       );
       console.log("Signup successful:", response.data);

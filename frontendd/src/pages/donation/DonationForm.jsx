@@ -83,7 +83,7 @@ const DonationForm = () => {
     if (Object.keys(errors).length === 0) {
       try {
         setIsSubmitting(true);
-        const response = await fetch('http://localhost:8000/donates/donate', {
+        const response = await fetch('https://nurturenest-cvqz.onrender.com/donates/donate', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

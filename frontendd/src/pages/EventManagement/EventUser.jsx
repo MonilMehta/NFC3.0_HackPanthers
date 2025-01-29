@@ -10,7 +10,7 @@ const EventUser = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get('http://localhost:8000/events/getEventsDetails')
+    axios.get('https://nurturenest-cvqz.onrender.com/events/getEventsDetails')
       .then(response => {
         setEvents(response.data.events);
       })
@@ -27,7 +27,7 @@ const EventUser = () => {
       return;
     }
 
-    axios.post('http://localhost:8000/events/addVolunteer', {
+    axios.post('https://nurturenest-cvqz.onrender.com/events/addVolunteer', {
       userId,
       eventId
     })

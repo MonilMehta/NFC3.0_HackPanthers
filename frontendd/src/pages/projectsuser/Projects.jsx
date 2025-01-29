@@ -10,7 +10,7 @@ const Projects = () => {
   useEffect(() => {
     const fetchProjectDetails = async () => {
       try {
-        const response = await fetch('http://localhost:8000/projects/getProjectDetails');
+        const response = await fetch('https://nurturenest-cvqz.onrender.com/projects/getProjectDetails');
         
         if (response.ok) {
           const data = await response.json();

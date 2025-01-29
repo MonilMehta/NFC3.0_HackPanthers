@@ -7,7 +7,7 @@ const AdminNotification = () => {
 
   const handleSendMessage = async () => {
     try {
-      const response = await fetch('http://localhost:8000/message/sendMessage', {  // Change to HTTP if needed
+      const response = await fetch('https://nurturenest-cvqz.onrender.com/message/sendMessage', {  // Change to HTTP if needed
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

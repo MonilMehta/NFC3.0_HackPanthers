@@ -37,7 +37,7 @@ const ProjectForm = ({ onProjectAdded }) => {
   useEffect(() => {
     const fetchStaffList = async () => {
       try {
-        const response = await fetch('http://localhost:8000/events/getStaff');
+        const response = await fetch('https://nurturenest-cvqz.onrender.com/events/getStaff');
         if (response.ok) {
           const staffData = await response.json();
           setStaffList(staffData);
@@ -67,7 +67,7 @@ const ProjectForm = ({ onProjectAdded }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:8000/projects/createProject', {
+      const response = await fetch('https://nurturenest-cvqz.onrender.com/projects/createProject', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

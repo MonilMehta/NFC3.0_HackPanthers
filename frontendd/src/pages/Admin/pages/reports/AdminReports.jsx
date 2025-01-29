@@ -152,7 +152,7 @@ const AdminReports = () => {
   useEffect(() => {
     const fetchStaffList = async () => {
       try {
-        const response = await fetch('http://localhost:8000/events/getStaff');
+        const response = await fetch('https://nurturenest-cvqz.onrender.com/events/getStaff');
         if (response.ok) {
           const staffData = await response.json();
           setStaffList(staffData);

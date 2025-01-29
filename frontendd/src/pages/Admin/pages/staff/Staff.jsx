@@ -10,7 +10,7 @@ const Staff = () => {
     // Fetch the list of all staff members when the component mounts
     const fetchStaffList = async () => {
       try {
-        const response = await fetch('http://localhost:8000/events/getStaff'); // Adjust the API endpoint as necessary
+        const response = await fetch('https://nurturenest-cvqz.onrender.com/events/getStaff'); // Adjust the API endpoint as necessary
         const data = await response.json();
         setStaffList(data);
       } catch (error) {

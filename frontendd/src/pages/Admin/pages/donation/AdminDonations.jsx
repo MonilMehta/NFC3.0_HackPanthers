@@ -72,7 +72,7 @@ const AdminDonations = () => {
   useEffect(() => {
     const fetchDonations = async () => {
       try {
-        const response = await fetch('http://localhost:8000/donates/getDonarDetails');
+        const response = await fetch('https://nurturenest-cvqz.onrender.com/donates/getDonarDetails');
         if (!response.ok) {
           throw new Error('Failed to fetch donation details');
         }

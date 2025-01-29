@@ -57,7 +57,7 @@ export default function AdminDashboard() {
     const fetchEvents = async () => {
       try {
         const response = await fetch(
-          "http://localhost:8000/events/getEventsDetails"
+          "https://nurturenest-cvqz.onrender.com/events/getEventsDetails"
         ); // Use the correct URL
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);

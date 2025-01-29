@@ -75,7 +75,7 @@ const Navbar = () => {
 
     if (!openNotification) {
       try {
-        const response = await fetch('http://localhost:8000/message/getMessage');
+        const response = await fetch('https://nurturenest-cvqz.onrender.com/message/getMessage');
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }

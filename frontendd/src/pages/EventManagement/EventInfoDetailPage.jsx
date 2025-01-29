@@ -10,7 +10,7 @@ const EventInfoDetailsPage = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8000/events/getEvent/${eventId}`)
+      .get(`https://nurturenest-cvqz.onrender.com/events/getEvent/${eventId}`)
       .then((response) => {
         if (response.data) {
           console.log(response)
