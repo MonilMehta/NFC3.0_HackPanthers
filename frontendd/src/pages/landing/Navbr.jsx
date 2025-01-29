@@ -5,7 +5,7 @@ import { Menu, X, HeartHandshake } from 'lucide-react';
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const projectName = "SafeHaven Guardians"; // Suggested project name
+  const projectName = "NurtureNest"; // Suggested project name
 
   // Scroll handler with smoother transitions
   useEffect(() => {

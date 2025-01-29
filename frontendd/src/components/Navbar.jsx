@@ -142,7 +142,7 @@ const Navbar = () => {
               '&:hover': { opacity: 0.9 }
             }}
           >
-            HopeHaven Collective
+            NurtureNest
           </Typography>
 
           {/* Mobile menu */}
