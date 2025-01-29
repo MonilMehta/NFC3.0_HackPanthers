@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Book, Users, Globe } from 'lucide-react';
 import Mis1 from '../../assets/Mis1.jpg';
 import Mis2 from '../../assets/Mis2.jpg';
@@ -8,6 +8,26 @@ import Mis5 from '../../assets/Mis5.jpeg';
 import Mis6 from '../../assets/Mis6.jpg';
 
 const MissionAction = () => {
+  useEffect(() => {
+    const revealElements = document.querySelectorAll('.reveal');
+    
+    const reveal = () => {
+      revealElements.forEach(element => {
+        const elementTop = element.getBoundingClientRect().top;
+        const windowHeight = window.innerHeight;
+        
+        if (elementTop < windowHeight - 150) {
+          element.classList.add('active');
+        }
+      });
+    };
+
+    window.addEventListener('scroll', reveal);
+    reveal(); // Initial check
+
+    return () => window.removeEventListener('scroll', reveal);
+  }, []);
+
   const cardItems = [
     {
       icon: Book,
@@ -54,8 +74,8 @@ const MissionAction = () => {
   ];
 
   return (
-    <div className="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:py-24 lg:px-8 bg-white-100">
-      <div className="text-center">
+    <div className="max-w-full mx-auto py-16 px-16 sm:px-6 lg:py-24 lg:px-8 bg-gradient-to-br from-[#f0f4f8] to-[#e1eaf1]">
+      <div className="text-center reveal">
         <h2 className="text-5xl font-extrabold text-[#003E1F] sm:text-5xl">
           Our Mission
         </h2>
@@ -63,12 +83,12 @@ const MissionAction = () => {
           We strive to create lasting change through education, community development, and sustainable initiatives.
         </p>
       </div>
-      <div className="mt-20">
+      <div className="mt-20 mx-16">
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {cardItems.map((item, index) => (
-            <div key={index} className="bg-white rounded-lg shadow-lg overflow-hidden">
+            <div key={index} className="reveal bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-xl">
               <img
-                className="h-56 w-full object-cover"
+                className="h-40 w-full object-cover"
                 src={item.backgroundImage}
                 alt={item.title}
               />

@@ -1,19 +1,27 @@
 import React from 'react';
-import { FanIcon } from 'lucide-react';
+import { FanIcon, Facebook, Twitter, Instagram, Heart } from 'lucide-react';
 
 const Footer = () => (
-  <footer className="bg-[#003E1F] text-[#000000]">
-    <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+  <footer className="bg-[#003E1F] text-white relative overflow-hidden">
+    <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8">
       <div className="xl:grid xl:grid-cols-3 xl:gap-8">
         <div className="space-y-8 xl:col-span-1">
-          <span className="text-white font-bold text-6xl"><italic>ChildCare NGO</italic></span>
-          <p className="text-white hover:text-[#4CAF50] text-base">
-            NGO is a non-profit organization dedicated to making a positive impact in communities around the world.
+          <span className="text-white font-bold text-6xl hover-float inline-block">
+            <i>ChildCare NGO</i>
+          </span>
+          <p className="text-gray-300 text-base hover:text-white transition-colors duration-300">
+            Making a difference in communities worldwide through sustainable development and education.
           </p>
           <div className="flex space-x-6">
-            <FanIcon className="h-6 w-6 text-white hover:text-[#4CAF50]" />
-            <FanIcon className="h-6 w-6 text-white hover:text-[#4CAF50]" />
-            <FanIcon className="h-6 w-6 text-white hover:text-[#4CAF50]" />
+            {[Facebook, Twitter, Instagram].map((Icon, index) => (
+              <a
+                key={index}
+                href="#"
+                className="text-gray-300 hover:text-white transform transition-all duration-300 hover:scale-110"
+              >
+                <Icon className="h-6 w-6" />
+              </a>
+            ))}
           </div>
         </div>
         <div className="mt-12 grid grid-cols-2 gap-8 xl:mt-0 xl:col-span-2">
@@ -53,13 +61,42 @@ const Footer = () => (
             </div>
           </div>
         </div>
+        <div className="mt-12 xl:mt-0">
+          <h3 className="text-xl font-semibold text-white tracking-wider uppercase">
+            Subscribe to our newsletter
+          </h3>
+          <p className="mt-4 text-base text-gray-300">
+            Stay updated with our latest projects and initiatives.
+          </p>
+          <form className="mt-4 sm:flex sm:max-w-md">
+            <input
+              type="email"
+              className="w-full min-w-0 px-4 py-2 text-base text-gray-900 placeholder-gray-500 bg-white border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+              placeholder="Enter your email"
+            />
+            <button
+              type="submit"
+              className="mt-3 w-full px-6 py-2 text-base font-medium text-white bg-green-600 border border-transparent rounded-lg hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 sm:mt-0 sm:ml-3 sm:w-auto hover-float"
+            >
+              Subscribe
+            </button>
+          </form>
+        </div>
       </div>
-      <div className="mt-12 border-t border-black-700 pt-8">
-        <p className="text-base text-black-300 xl:text-center">
-          &copy; 2024 ChildCare NGO. All rights reserved.
+      <div className="mt-12 border-t border-gray-700 pt-8">
+        <p className="text-base text-gray-300 xl:text-center flex items-center justify-center">
+          &copy; 2024 ChildCare NGO. Made with <Heart className="mx-2 text-red-500" /> All rights reserved.
         </p>
       </div>
     </div>
+    <div 
+      className="absolute inset-0 opacity-5 pointer-events-none" 
+      style={{
+        backgroundImage: 'url(/pattern.png)',
+        backgroundSize: '200px',
+        mixBlendMode: 'overlay'
+      }}
+    />
   </footer>
 );
 

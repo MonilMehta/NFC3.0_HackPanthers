@@ -1,19 +1,21 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
+import { Eye, EyeOff } from 'lucide-react';
 import { useNavigate } from "react-router-dom";
-import "./SigninSignup.css";
-import "@fortawesome/fontawesome-free/css/all.min.css";
 import axios from "axios";
 
-function SignupSignin() {
+const SignupSignin = () => {
+  const navigate = useNavigate();
   const [isFlipped, setIsFlipped] = useState(false);
   const [showPasswordLogin, setShowPasswordLogin] = useState(false);
   const [showPasswordSignup, setShowPasswordSignup] = useState(false);
-  const navigate = useNavigate();
 
   const [loginData, setLoginData] = useState({
     email: "",
     password: "",
   });
+  const flip = () => {
+    setIsFlipped(!isFlipped);
+  };
 
   const [signupData, setSignupData] = useState({
     firstName: "",
@@ -24,16 +26,16 @@ function SignupSignin() {
     password: "",
   });
 
-  const flip = () => {
-    setIsFlipped(!isFlipped);
+  const testUser = {
+    email: "milan@gmail.com",
+    password: "Pass@123"
   };
 
-  const togglePasswordVisibilityLogin = () => {
-    setShowPasswordLogin(!showPasswordLogin);
-  };
-
-  const togglePasswordVisibilitySignup = () => {
-    setShowPasswordSignup(!showPasswordSignup);
+  const fillTestCredentials = () => {
+    setLoginData({
+      email: testUser.email,
+      password: testUser.password
+    });
   };
 
   const handleLoginInputChange = (e) => {
@@ -70,11 +72,13 @@ function SignupSignin() {
         navigate("/admin");
       }
     } catch (error) {
-      console.error("Login failed:", error.response.data);
+      console.error("Login failed:", error.response ? error.response.data : error.message);
+      alert(`Login failed: ${error.response ? error.response.data.message : "Network error"}`);
     }
   };
 
   const handleSignupSubmit = async (e) => {
+    e.preventDefault();
     e.preventDefault();
     try {
       const response = await axios.post(
@@ -84,171 +88,190 @@ function SignupSignin() {
       console.log("Signup successful:", response.data);
       flip();
     } catch (error) {
-      console.error("Signup failed:", error.response.data);
+      console.error("Signup failed:", error.response ? error.response.data : error.message);
+      alert(`Signup failed: ${error.response ? error.response.data.message : "Network error"}`);
     }
   };
-
   return (
-    <div className="body">
-      <div className="box">
-        <div
-          className={`flip-card-inner ${isFlipped ? "flipped" : ""}`}
-          style={{
-            transform: isFlipped ? "rotateY(180deg)" : "rotateY(0deg)",
-          }}
-        >
-          <div className="box-login">
-            <ul>
-              <form onSubmit={handleLoginSubmit}>
-                <h1>LOGIN</h1>
-                <div className="email-login">
+    <div className="min-h-screen w-full bg-gradient-to-b from-emerald-50 to-white flex items-center justify-center p-4">
+      <div className="w-full max-w-md mx-auto relative h-[560px]">
+        <div className={`relative w-full h-full preserve-3d transition-transform duration-700 ${isFlipped ? 'rotate-y-180' : ''}`}>
+          {/* Login Form - Front Side */}
+          <div className={`absolute w-full h-full backface-hidden ${isFlipped ? 'invisible' : 'visible'}`}>
+            <div className="bg-white rounded-2xl shadow-lg p-8 border border-emerald-100">
+              <div className="text-center mb-8">
+                <h2 className="text-3xl font-bold text-emerald-800 mb-2">Welcome Back</h2>
+                <p className="text-emerald-600">Together we grow our community</p>
+              </div>
+
+              <form onSubmit={handleLoginSubmit} className="space-y-6">
+                <div>
                   <input
-                    className="inpt"
                     type="email"
                     name="email"
                     placeholder="Email"
-                    required
+                    className="w-full px-4 py-3 rounded-lg border border-emerald-200 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 transition placeholder-emerald-400 text-emerald-800"
                     value={loginData.email}
                     onChange={handleLoginInputChange}
                   />
                 </div>
-
-                <div className="password-login">
+                
+                <div className="relative">
                   <input
-                    className="inpt"
                     type={showPasswordLogin ? "text" : "password"}
                     name="password"
-                    id="password-login"
                     placeholder="Password"
-                    required
+                    className="w-full px-4 py-3 rounded-lg border border-emerald-200 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 transition placeholder-emerald-400 text-emerald-800"
                     value={loginData.password}
                     onChange={handleLoginInputChange}
                   />
-                  <i
-                    id="eye-login"
-                    className={`fa ${
-                      showPasswordLogin ? "fa-eye" : "fa-eye-slash"
-                    }`}
-                    onClick={togglePasswordVisibilityLogin}
-                    style={{ color: showPasswordLogin ? "cyan" : "white" }}
-                  ></i>
+                  <button
+                    type="button"
+                    onClick={() => setShowPasswordLogin(!showPasswordLogin)}
+                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-emerald-500 hover:text-emerald-600"
+                  >
+                    {showPasswordLogin ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                  </button>
                 </div>
-                <button type="submit" className="btn">
-                  LOGIN
+
+                <button
+                  type="button"
+                  onClick={fillTestCredentials}
+                  className="w-full bg-emerald-100 text-emerald-800 py-3 rounded-lg hover:bg-emerald-200 transition-all font-medium"
+                >
+                  Use Test Account
+                </button>
+
+                <button
+                  type="submit"
+                  className="w-full bg-emerald-600 text-white py-3 rounded-lg hover:bg-emerald-700 transition-all font-semibold shadow-md hover:shadow-emerald-200"
+                >
+                  Login
                 </button>
               </form>
-              <div className="register-link">
-                <p>
-                  Don't have an account?{" "}
-                  <a id="anchor1" onClick={flip}>
-                    Sign Up
-                  </a>
+
+              <div className="mt-6 text-center">
+                <p className="text-emerald-600">
+                  New volunteer?{' '}
+                  <button
+                    onClick={() => setIsFlipped(true)}
+                    className="text-emerald-800 hover:text-emerald-900 font-medium underline underline-offset-2"
+                  >
+                    Join us
+                  </button>
                 </p>
               </div>
-            </ul>
+            </div>
           </div>
-          <div className="box-signup">
-            <ul>
-              <form onSubmit={handleSignupSubmit}>
-                <h1>SIGN UP</h1>
-                <div className="user-signup">
+
+          {/* Signup Form - Back Side */}
+          <div className={`absolute w-full h-full backface-hidden rotate-y-180 ${isFlipped ? 'visible' : 'invisible'}`}>
+            <div className="bg-white rounded-2xl shadow-lg p-8 border border-emerald-100">
+              <div className="text-center mb-8">
+                <h2 className="text-3xl font-bold text-emerald-800 mb-2">Join Our Community</h2>
+                <p className="text-emerald-600">Cultivate positive change</p>
+              </div>
+
+              <form onSubmit={handleSignupSubmit} className="space-y-4">
+                <div className="flex gap-4">
                   <input
-                    className="inpt"
                     type="text"
                     name="firstName"
-                    id="firstName"
                     placeholder="First Name"
-                    value={signupData.firstname}
+                    className="flex-1 px-4 py-3 max-w-40 rounded-lg border border-emerald-200 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 transition placeholder-emerald-400 text-emerald-800"
+                    value={signupData.firstName}
                     onChange={handleSignupInputChange}
                   />
                   <input
-                    className="inpt"
                     type="text"
                     name="lastName"
-                    id="lastName"
                     placeholder="Last Name"
-                    value={signupData.lastname}
+                    className="flex-1 ml-12 px-4 py-3 max-w-40 rounded-lg border border-emerald-200 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 transition placeholder-emerald-400 text-emerald-800"
+                    value={signupData.lastName}
                     onChange={handleSignupInputChange}
                   />
                 </div>
 
-                <div className="email-signup">
-                  <input
-                    className="inpt"
-                    type="email"
-                    name="email"
-                    id="email-signup"
-                    placeholder="Email"
-                    required
-                    value={signupData.email}
-                    onChange={handleSignupInputChange}
-                  />
-                </div>
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="Email"
+                  className="w-full px-4 py-3 rounded-lg border border-emerald-200 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 transition placeholder-emerald-400 text-emerald-800"
+                  value={signupData.email}
+                  onChange={handleSignupInputChange}
+                />
 
-                <div className="phone-signup">
-                  <input
-                    className="inpt"
-                    type="tel"
-                    name="phone_no"
-                    id="phone-signup"
-                    placeholder="Phone"
-                    required
-                    value={signupData.phone}
-                    onChange={handleSignupInputChange}
-                  />
-                </div>
+                <input
+                  type="tel"
+                  name="phone_no"
+                  placeholder="Phone Number"
+                  className="w-full px-4 py-3 rounded-lg border border-emerald-200 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 transition placeholder-emerald-400 text-emerald-800"
+                  value={signupData.phone_no}
+                  onChange={handleSignupInputChange}
+                />
 
-                <div className="dob-signup">
-                  <input
-                    className="inpt"
-                    type="date"
-                    name="date_of_birth"
-                    id="dob-signup"
-                    placeholder="Date of birth"
-                    required
-                    value={signupData.dob}
-                    onChange={handleSignupInputChange}
-                  />
-                </div>
+                <input
+                  type="date"
+                  name="date_of_birth"
+                  className="w-full px-4 py-3 rounded-lg border border-emerald-200 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 transition text-emerald-800"
+                  value={signupData.date_of_birth}
+                  onChange={handleSignupInputChange}
+                />
 
-                <div className="password-signup">
+                <div className="relative">
                   <input
-                    className="inpt"
                     type={showPasswordSignup ? "text" : "password"}
                     name="password"
-                    id="password-signup"
                     placeholder="Password"
-                    required
+                    className="w-full px-4 py-3 rounded-lg border border-emerald-200 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 transition placeholder-emerald-400 text-emerald-800"
                     value={signupData.password}
                     onChange={handleSignupInputChange}
                   />
-                  <i
-                    id="eye-signup"
-                    className={`fa ${
-                      showPasswordSignup ? "fa-eye" : "fa-eye-slash"
-                    }`}
-                    onClick={togglePasswordVisibilitySignup}
-                    style={{ color: showPasswordSignup ? "cyan" : "white" }}
-                  ></i>
+                  <button
+                    type="button"
+                    onClick={() => setShowPasswordSignup(!showPasswordSignup)}
+                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-emerald-500 hover:text-emerald-600"
+                  >
+                    {showPasswordSignup ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                  </button>
                 </div>
-                <button type="submit" className="btn">
-                  SIGN UP
+
+                <button
+                  type="submit"
+                  className="w-full bg-emerald-600 text-white py-3 rounded-lg hover:bg-emerald-700 transition-all font-semibold shadow-md hover:shadow-emerald-200"
+                >
+                  Sign Up
                 </button>
               </form>
-              <div className="register-link">
-                <p>
-                  Already have an account?{" "}
-                  <a id="anchor2" onClick={flip}>
-                    Log In
-                  </a>
+
+              <div className="mt-6 text-center">
+                <p className="text-emerald-600">
+                  Already a member?{' '}
+                  <button
+                    onClick={() => setIsFlipped(false)}
+                    className="text-emerald-800 hover:text-emerald-900 font-medium underline underline-offset-2"
+                  >
+                    Login
+                  </button>
                 </p>
               </div>
-            </ul>
+            </div>
           </div>
         </div>
       </div>
+      <style jsx>{`
+        .rotate-y-180 {
+          transform: rotateY(180deg);
+        }
+        .preserve-3d {
+          transform-style: preserve-3d;
+        }
+        .backface-hidden {
+          backface-visibility: hidden;
+        }
+      `}</style>
     </div>
   );
-}
+};
 
 export default SignupSignin;

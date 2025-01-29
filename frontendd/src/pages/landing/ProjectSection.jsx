@@ -8,7 +8,7 @@ import Proj5 from '../../assets/Proj5.jpg';
 import Proj6 from '../../assets/Proj6.jpg';
 
 const ProjectsSection = () => (
-  <div className="bg-gray-50">
+  <div className="bg-gradient-to-br from-[#f0f4f8] to-[#e1eaf1]">
     <div className="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:py-24 lg:px-8">
       <div className="text-center">
         <h2 className="text-4xl font-extrabold text-[#003E1F] sm:text-5xl">
