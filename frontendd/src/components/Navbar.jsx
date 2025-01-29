@@ -12,26 +12,41 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import VolunteerActivismIcon from '@mui/icons-material/VolunteerActivism';
-import NotificationsIcon from '@mui/icons-material/Notifications';
 import { styled } from '@mui/material/styles';
+import { HeartHandshake, Bell, X } from 'lucide-react'; // Lucide icons
+
+// Color scheme
+const themeColors = {
+  primary: '#2A6B48',
+  secondary: '#83C5BE',
+  accent: '#FFD166',
+  background: '#F8F9FA',
+  text: '#343A40'
+};
 
 const StyledAppBar = styled(AppBar)({
-  backgroundColor: '#1e1e2d',
-  boxShadow: 'none',
-  borderBottom: '1px solid #34495e',
+  backgroundColor: themeColors.primary,
+  backgroundImage: 'linear-gradient(135deg, #2A6B48 0%, #83C5BE 100%)',
+  boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)',
+  transition: 'all 0.3s ease',
 });
 
-const StyledButton = styled(Button)({
-  color: '#ecf0f1',
-  fontWeight: '500',
-  fontSize: '14px',
+const StyledButton = styled(Button)(({ theme }) => ({
+  color: themeColors.background,
+  fontWeight: '600',
+  fontSize: '15px',
+  letterSpacing: '0.5px',
+  margin: '0 12px',
+  padding: '8px 20px',
+  borderRadius: '8px',
+  transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
   '&:hover': {
-    backgroundColor: '#ecf0f1',
-    color: '#1e1e2d',
+    backgroundColor: themeColors.accent,
+    color: themeColors.text,
+    transform: 'translateY(-2px)',
+    boxShadow: `0 4px 12px ${themeColors.accent}40`
   },
-  margin: '0 10px',
-});
+}));
 
 const Navbar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -84,26 +99,33 @@ const Navbar = () => {
 
   const notificationStyle = {
     position: 'absolute',
-    top: '60px', // Adjust as needed
-    right: '0',
-    backgroundColor: '#333',
-    color: '#fff',
-    padding: '20px', // Increased padding
-    borderRadius: '8px', // Increased border radius
-    boxShadow: '0 4px 15px rgba(0, 0, 0, 0.3)', // Increased shadow
-    width: '300px',
-    height: '350px', // Increased width
-    fontSize: '16px', // Increased font size
+    top: '60px',
+    right: '20px',
+    backgroundColor: themeColors.background,
+    color: themeColors.text,
+    padding: '24px',
+    borderRadius: '16px',
+    boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
+    width: '360px',
+    maxHeight: '480px',
+    fontSize: '15px',
     display: openNotification ? 'block' : 'none',
-    zIndex: 1300, // Ensure it appears above other content
-    overflowY: 'auto', // Allow scrolling if content overflows
+    zIndex: 1300,
+    overflowY: 'auto',
+    border: `1px solid ${themeColors.secondary}20`
   };
 
   return (
     <StyledAppBar position="sticky">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <VolunteerActivismIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1, color: '#f39c12' }} />
+          <HeartHandshake 
+            size={32}
+            strokeWidth={2}
+            color={themeColors.accent}
+            style={{ marginRight: 16 }}
+          />
+          
           <Typography
             variant="h6"
             noWrap
@@ -112,140 +134,185 @@ const Navbar = () => {
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
-              fontFamily: 'Roboto, sans-serif',
+              fontFamily: "'Poppins', sans-serif",
               fontWeight: 700,
-              letterSpacing: '.1rem',
-              color: 'inherit',
+              letterSpacing: '0.05em',
+              color: themeColors.background,
               textDecoration: 'none',
+              '&:hover': { opacity: 0.9 }
             }}
           >
-            ChildCare NGO
+            HopeHaven Collective
           </Typography>
 
+          {/* Mobile menu */}
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"
-              aria-label="menu"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenNavMenu}
               color="inherit"
+              onClick={handleOpenNavMenu}
             >
               <MenuIcon />
             </IconButton>
             <Menu
               id="menu-appbar"
               anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
-              }}
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
               sx={{ display: { xs: 'block', md: 'none' } }}
+              PaperProps={{
+                sx: {
+                  borderRadius: '12px',
+                  padding: '8px 0',
+                  boxShadow: '0 8px 24px rgba(0, 0, 0, 0.1)'
+                }
+              }}
             >
-              <MenuItem onClick={handleCloseNavMenu}>
-                <Link to="/donation" style={{ textDecoration: 'none', color: '#2c3e50' }}>
-                  <Typography sx={{ textAlign: 'center' }}>Donate</Typography>
-                </Link>
-              </MenuItem>
-              <MenuItem onClick={handleCloseNavMenu}>
-                <Link to="/events" style={{ textDecoration: 'none', color: '#2c3e50' }}>
-                  <Typography sx={{ textAlign: 'center' }}>Events</Typography>
-                </Link>
-              </MenuItem>     
-              <MenuItem onClick={handleCloseNavMenu}>
-                <Link to="/projects" style={{ textDecoration: 'none', color: '#2c3e50' }}>
-                  <Typography sx={{ textAlign: 'center' }}>Projects</Typography>
-                </Link>
-              </MenuItem>
+              {['Donate', 'Events', 'Projects'].map((item) => (
+                <MenuItem key={item} onClick={handleCloseNavMenu}>
+                  <Link 
+                    to={`/${item.toLowerCase()}`} 
+                    style={{ 
+                      textDecoration: 'none',
+                      width: '100%',
+                      padding: '12px 24px'
+                    }}
+                  >
+                    <Typography 
+                      sx={{ 
+                        color: themeColors.text,
+                        fontWeight: 500,
+                        '&:hover': { color: themeColors.primary }
+                      }}
+                    >
+                      {item}
+                    </Typography>
+                  </Link>
+                </MenuItem>
+              ))}
             </Menu>
           </Box>
-          <VolunteerActivismIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1, color: '#ecf0f1' }} />
-          <Typography
-            variant="h5"
-            noWrap
-            component={Link}
-            to="/"
-            sx={{
-              mr: 2,
-              display: { xs: 'flex', md: 'none' },
-              flexGrow: 1,
-              fontFamily: 'Roboto, sans-serif',
-              fontWeight: 700,
-              letterSpacing: '.1rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-            NGOFlow
-          </Typography>
 
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'center' }}>
+          {/* Mobile logo */}
+          <Box sx={{ 
+            display: { xs: 'flex', md: 'none' }, 
+            flexGrow: 1,
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}>
+            <HeartHandshake 
+              size={28}
+              strokeWidth={2}
+              color={themeColors.accent}
+              style={{ marginRight: 8 }}
+            />
+            <Typography
+              variant="h6"
+              component={Link}
+              to="/"
+              sx={{
+                fontFamily: "'Poppins', sans-serif",
+                fontWeight: 700,
+                color: themeColors.background,
+                textDecoration: 'none'
+              }}
+            >
+              HopeHaven
+            </Typography>
+          </Box>
+
+          {/* Desktop navigation */}
+          <Box sx={{ 
+            flexGrow: 1, 
+            display: { xs: 'none', md: 'flex' },
+            justifyContent: 'center',
+            gap: 2
+          }}>
             <StyledButton component={Link} to="/donation">Donate</StyledButton>
             <StyledButton component={Link} to="/events">Events</StyledButton>
             <StyledButton component={Link} to="/projects">Projects</StyledButton>
           </Box>
 
-          <Box sx={{ flexGrow: 0, display: 'flex', alignItems: 'center', position: 'relative' }}>
-            <IconButton size="large" color="inherit" onClick={handleNotificationClick}>
-              <NotificationsIcon />
-            </IconButton>
-            <Box sx={notificationStyle}>
-              {notificationMessages.length > 0 ? (
-                notificationMessages.map((msg, index) => (
-                  <Typography key={msg._id || index} sx={{ marginBottom: '10px' }}>
-                    {msg.message}
-                  </Typography>
-                ))
-              ) : (
-                <Typography>No new notifications</Typography>
-              )}
-              <IconButton
-                size="small"
-                onClick={handleCloseNotification}
-                sx={{ position: 'absolute', top: '5px', right: '5px' }}
+          {/* Right side icons */}
+          <Box sx={{ 
+            flexGrow: 0, 
+            display: 'flex', 
+            alignItems: 'center',
+            gap: 2
+          }}>
+            <Tooltip title="Notifications">
+              <IconButton 
+                onClick={handleNotificationClick}
+                sx={{ color: themeColors.background }}
               >
-                &times;
-              </IconButton>
-            </Box>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="User Profile" src="/static/images/avatar/2.jpg" />
+                <Bell size={24} strokeWidth={1.5} />
               </IconButton>
             </Tooltip>
-            <Menu
-              sx={{ mt: '45px' }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              <MenuItem onClick={handleCloseUserMenu}>
-                <Link to="/account" style={{ textDecoration: 'none', color: '#2c3e50' }}>
-                  <Typography sx={{ textAlign: 'center' }}>Account</Typography>
-                </Link>
-              </MenuItem>
-              <MenuItem onClick={handleCloseUserMenu}>
-                <Link to="/" style={{ textDecoration: 'none', color: '#2c3e50' }}>
-                  <Typography sx={{ textAlign: 'center' }}>Logout</Typography>
-                </Link>
-              </MenuItem>
-            </Menu>
+
+            {/* Notification panel */}
+            <Box sx={notificationStyle}>
+              <Box sx={{ 
+                display: 'flex', 
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                marginBottom: 16
+              }}>
+                <Typography variant="h6" sx={{ fontWeight: 600 }}>
+                  Notifications
+                </Typography>
+                <IconButton onClick={handleCloseNotification} size="small">
+                  <X size={20} color={themeColors.text} />
+                </IconButton>
+              </Box>
+              
+              {notificationMessages.length > 0 ? (
+                notificationMessages.map((msg, index) => (
+                  <Box
+                    key={msg._id || index}
+                    sx={{
+                      padding: 12,
+                      marginBottom: 12,
+                      borderRadius: 8,
+                      backgroundColor: `${themeColors.secondary}10`,
+                      borderLeft: `4px solid ${themeColors.primary}`
+                    }}
+                  >
+                    <Typography variant="body2">
+                      {msg.message}
+                    </Typography>
+                  </Box>
+                ))
+              ) : (
+                <Box sx={{ 
+                  display: 'flex', 
+                  justifyContent: 'center', 
+                  alignItems: 'center',
+                  height: 100
+                }}>
+                  <Typography variant="body2" sx={{ color: themeColors.text }}>
+                    No new notifications
+                  </Typography>
+                </Box>
+              )}
+            </Box>
+
+            {/* User menu */}
+            <Tooltip title="Account settings">
+              <IconButton onClick={handleOpenUserMenu}>
+                <Avatar 
+                  sx={{ 
+                    bgcolor: themeColors.accent,
+                    width: 40,
+                    height: 40,
+                    '&:hover': { transform: 'scale(1.05)' }
+                  }}
+                >
+                  <Typography sx={{ color: themeColors.text, fontWeight: 500 }}>
+                    U
+                  </Typography>
+                </Avatar>
+              </IconButton>
+            </Tooltip>
           </Box>
         </Toolbar>
       </Container>

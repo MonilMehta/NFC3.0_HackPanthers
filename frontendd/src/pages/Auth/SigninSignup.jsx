@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Eye, EyeOff } from 'lucide-react';
-import { useNavigate } from "react-router-dom";
+import { useNavigate,Link } from 'react-router-dom';
 import axios from "axios";
 
 const SignupSignin = () => {
@@ -94,6 +94,11 @@ const SignupSignin = () => {
   };
   return (
     <div className="min-h-screen w-full bg-gradient-to-b from-emerald-50 to-white flex items-center justify-center p-4">
+    <Link to="/" className="absolute top-4 left-4 text-emerald-600 hover:text-emerald-800 transition">
+        <button className="px-4 py-2 bg-emerald-200 rounded-lg shadow-md hover:bg-emerald-300">
+          Back to Home
+        </button>
+      </Link>
       <div className="w-full max-w-md mx-auto relative h-[560px]">
         <div className={`relative w-full h-full preserve-3d transition-transform duration-700 ${isFlipped ? 'rotate-y-180' : ''}`}>
           {/* Login Form - Front Side */}
