@@ -30,11 +30,21 @@ const SignupSignin = () => {
     email: "milan@gmail.com",
     password: "Pass@123"
   };
+  const normalUser = {
+    email: "monilmehta5@gmail.com",
+    password: "Pass123"
+  };
 
   const fillTestCredentials = () => {
     setLoginData({
       email: testUser.email,
       password: testUser.password
+    });
+  };
+  const fillNormalCredentials = () => {
+    setLoginData({
+      email: normalUser.email,
+      password: normal.password
     });
   };
 
@@ -144,7 +154,14 @@ const SignupSignin = () => {
                   onClick={fillTestCredentials}
                   className="w-full bg-emerald-100 text-emerald-800 py-3 rounded-lg hover:bg-emerald-200 transition-all font-medium"
                 >
-                  Use Test Account
+                  Use Admin Account
+                </button>
+                <button
+                  type="button"
+                  onClick={fillNormalCredentials}
+                  className="w-full bg-emerald-100 text-emerald-800 py-3 rounded-lg hover:bg-emerald-200 transition-all font-medium"
+                >
+                  Use Normal Account
                 </button>
 
                 <button
