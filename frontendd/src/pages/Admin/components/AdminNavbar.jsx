@@ -14,7 +14,7 @@ import MenuItem from '@mui/material/MenuItem';
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import { Link } from 'react-router-dom';
 
-const pages = ['Dashboard', 'Users', 'Reports'];
+const pages = ['Dashboard', 'Staff', 'Reports'];
 const settings = [
   { label: 'Profile', path: '/admin/profile' },
   { label: 'Settings', path: '/admin/settings' },
@@ -39,7 +39,7 @@ function AdminNavbar() {
   };
 
   return (
-    <AppBar position="sticky" sx={{ backgroundColor: '#1a237e' }}>
+    <AppBar position="sticky" sx={{ backgroundColor: '#96c283' }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <AdminPanelSettingsIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1, color: '#ffd700' }} />
@@ -47,7 +47,7 @@ function AdminNavbar() {
             variant="h6"
             noWrap
             component={Link}
-            to="/admin/dashboard"
+            to="/admin"
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
@@ -107,7 +107,7 @@ function AdminNavbar() {
             variant="h5"
             noWrap
             component={Link}
-            to="/admin/dashboard"
+            to="/admin"
             sx={{
               mr: 2,
               display: { xs: 'flex', md: 'none' },
