@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link } from 'react-router-dom'; 
+import React, { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom'; 
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -13,7 +13,7 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import { styled } from '@mui/material/styles';
-import { HeartHandshake, Bell, X } from 'lucide-react'; // Lucide icons
+import { HeartHandshake, Bell, X, LogOut } from 'lucide-react'; // Lucide icons
 
 // Color scheme
 const themeColors = {
@@ -21,7 +21,9 @@ const themeColors = {
   secondary: '#83C5BE',
   accent: '#FFD166',
   background: '#F8F9FA',
-  text: '#343A40'
+  text: '#343A40',
+  success: '#4CAF50',
+  warning: '#FFA000',
 };
 
 const StyledAppBar = styled(AppBar)({
@@ -49,10 +51,27 @@ const StyledButton = styled(Button)(({ theme }) => ({
 }));
 
 const Navbar = () => {
+  const navigate = useNavigate();
+  const [userName, setUserName] = useState('');
+  const [userRole, setUserRole] = useState('');
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [openNotification, setOpenNotification] = React.useState(false);
   const [notificationMessages, setNotificationMessages] = React.useState([]);
+
+  useEffect(() => {
+    const email = localStorage.getItem('email');
+    const role = localStorage.getItem('role');
+    if (email) {
+      setUserName(email.split('@')[0]);
+      setUserRole(role);
+    }
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.clear();
+    navigate('/login');
+  };
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -101,19 +120,28 @@ const Navbar = () => {
     position: 'absolute',
     top: '60px',
     right: '20px',
-    backgroundColor: themeColors.background,
+    backgroundColor: 'rgba(255, 255, 255, 0.95)',
+    backdropFilter: 'blur(8px)',
     color: themeColors.text,
     padding: '24px',
     borderRadius: '16px',
-    boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
+    boxShadow: '0 8px 32px rgba(0, 0, 0, 0.15)',
     width: '360px',
     maxHeight: '480px',
     fontSize: '15px',
     display: openNotification ? 'block' : 'none',
     zIndex: 1300,
     overflowY: 'auto',
-    border: `1px solid ${themeColors.secondary}20`
+    border: '1px solid rgba(131, 197, 190, 0.2)'
   };
+
+  const getRoleMessage = () => {
+    if (userRole === 'admin') return 'Admin Dashboard';
+    if (userRole === 'normalUser') return 'Welcome Volunteer';
+    return 'Welcome Guest';
+  };
+
+  const navItems = ['Donate', 'Events', 'Projects', 'Accounts'];
 
   return (
     <StyledAppBar position="sticky">
@@ -168,7 +196,7 @@ const Navbar = () => {
                 }
               }}
             >
-              {['Donate', 'Events', 'Projects'].map((item) => (
+              {navItems.map((item) => (
                 <MenuItem key={item} onClick={handleCloseNavMenu}>
                   <Link 
                     to={`/${item.toLowerCase()}`} 
@@ -228,9 +256,25 @@ const Navbar = () => {
             justifyContent: 'center',
             gap: 2
           }}>
-            <StyledButton component={Link} to="/donation">Donate</StyledButton>
-            <StyledButton component={Link} to="/events">Events</StyledButton>
-            <StyledButton component={Link} to="/projects">Projects</StyledButton>
+            {userRole && (
+              <>
+                <StyledButton component={Link} to="/donation">Donate</StyledButton>
+                <StyledButton component={Link} to="/events">Events</StyledButton>
+                <StyledButton component={Link} to="/projects">Projects</StyledButton>
+                <StyledButton 
+                  component={Link} 
+                  to="/accounts"
+                  sx={{
+                    backgroundColor: themeColors.accent,
+                    '&:hover': {
+                      backgroundColor: `${themeColors.accent}dd`,
+                    }
+                  }}
+                >
+                  Accounts
+                </StyledButton>
+              </>
+            )}
           </Box>
 
           {/* Right side icons */}
@@ -240,27 +284,58 @@ const Navbar = () => {
             alignItems: 'center',
             gap: 2
           }}>
-            <Tooltip title="Notifications">
-              <IconButton 
-                onClick={handleNotificationClick}
-                sx={{ color: themeColors.background }}
+            {userRole && (
+              <Typography
+                sx={{
+                  color: themeColors.accent,
+                  fontWeight: 600,
+                  mr: 2,
+                  display: { xs: 'none', md: 'block' }
+                }}
               >
-                <Bell size={24} strokeWidth={1.5} />
-              </IconButton>
-            </Tooltip>
+                {getRoleMessage()}
+              </Typography>
+            )}
 
-            {/* Notification panel */}
+            {userRole && (
+              <Tooltip title="Notifications">
+                <IconButton 
+                  onClick={handleNotificationClick}
+                  sx={{
+                    color: themeColors.background,
+                    '&:hover': {
+                      backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                    }
+                  }}
+                >
+                  <Bell size={24} strokeWidth={1.5} />
+                </IconButton>
+              </Tooltip>
+            )}
+
+            {/* Notification panel with improved styling */}
             <Box sx={notificationStyle}>
               <Box sx={{ 
                 display: 'flex', 
                 justifyContent: 'space-between',
                 alignItems: 'center',
-                marginBottom: 16
+                marginBottom: 16,
+                borderBottom: `2px solid ${themeColors.secondary}30`,
+                paddingBottom: 2
               }}>
-                <Typography variant="h6" sx={{ fontWeight: 600 }}>
+                <Typography variant="h6" sx={{ 
+                  fontWeight: 600,
+                  color: themeColors.primary 
+                }}>
                   Notifications
                 </Typography>
-                <IconButton onClick={handleCloseNotification} size="small">
+                <IconButton 
+                  onClick={handleCloseNotification} 
+                  size="small"
+                  sx={{
+                    '&:hover': { backgroundColor: `${themeColors.secondary}20` }
+                  }}
+                >
                   <X size={20} color={themeColors.text} />
                 </IconButton>
               </Box>
@@ -270,14 +345,19 @@ const Navbar = () => {
                   <Box
                     key={msg._id || index}
                     sx={{
-                      padding: 12,
-                      marginBottom: 12,
-                      borderRadius: 8,
-                      backgroundColor: `${themeColors.secondary}10`,
-                      borderLeft: `4px solid ${themeColors.primary}`
+                      padding: '16px',
+                      marginBottom: '12px',
+                      borderRadius: '12px',
+                      backgroundColor: `${themeColors.secondary}15`,
+                      borderLeft: `4px solid ${themeColors.primary}`,
+                      transition: 'all 0.2s ease',
+                      '&:hover': {
+                        transform: 'translateX(4px)',
+                        backgroundColor: `${themeColors.secondary}25`,
+                      }
                     }}
                   >
-                    <Typography variant="body2">
+                    <Typography variant="body2" sx={{ lineHeight: 1.6 }}>
                       {msg.message}
                     </Typography>
                   </Box>
@@ -287,9 +367,10 @@ const Navbar = () => {
                   display: 'flex', 
                   justifyContent: 'center', 
                   alignItems: 'center',
-                  height: 100
+                  height: 100,
+                  color: themeColors.text
                 }}>
-                  <Typography variant="body2" sx={{ color: themeColors.text }}>
+                  <Typography variant="body2">
                     No new notifications
                   </Typography>
                 </Box>
@@ -297,22 +378,63 @@ const Navbar = () => {
             </Box>
 
             {/* User menu */}
-            <Tooltip title="Account settings">
-              <IconButton onClick={handleOpenUserMenu}>
-                <Avatar 
-                  sx={{ 
-                    bgcolor: themeColors.accent,
-                    width: 40,
-                    height: 40,
-                    '&:hover': { transform: 'scale(1.05)' }
-                  }}
-                >
-                  <Typography sx={{ color: themeColors.text, fontWeight: 500 }}>
-                    U
-                  </Typography>
-                </Avatar>
-              </IconButton>
-            </Tooltip>
+            {userRole ? (
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                <Tooltip title="Account settings">
+                  <IconButton onClick={handleOpenUserMenu}>
+                    <Avatar 
+                      sx={{ 
+                        bgcolor: themeColors.accent,
+                        width: 40,
+                        height: 40,
+                        transition: 'transform 0.2s ease',
+                        '&:hover': { 
+                          transform: 'scale(1.05)',
+                          boxShadow: '0 2px 8px rgba(0,0,0,0.15)'
+                        }
+                      }}
+                    >
+                      <Typography sx={{ 
+                        color: themeColors.text, 
+                        fontWeight: 600,
+                        textTransform: 'uppercase'
+                      }}>
+                        {userName[0]}
+                      </Typography>
+                    </Avatar>
+                  </IconButton>
+                </Tooltip>
+                <Tooltip title="Logout">
+                  <IconButton 
+                    onClick={handleLogout}
+                    sx={{
+                      color: themeColors.background,
+                      '&:hover': {
+                        backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                        color: themeColors.accent
+                      }
+                    }}
+                  >
+                    <LogOut size={20} />
+                  </IconButton>
+                </Tooltip>
+              </Box>
+            ) : (
+              <StyledButton 
+                component={Link} 
+                to="/login"
+                sx={{
+                  backgroundColor: themeColors.accent,
+                  color: themeColors.text,
+                  '&:hover': {
+                    backgroundColor: themeColors.accent,
+                    opacity: 0.9
+                  }
+                }}
+              >
+                Login
+              </StyledButton>
+            )}
           </Box>
         </Toolbar>
       </Container>
