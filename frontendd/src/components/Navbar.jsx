@@ -82,6 +82,7 @@ const Navbar = () => {
 
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
+     navigate('/account');
   };
 
   const handleCloseNavMenu = () => {
@@ -144,7 +145,7 @@ const Navbar = () => {
     return 'Welcome Guest';
   };
 
-  const navItems = ['Donate', 'Events', 'Projects', 'Accounts'];
+  const navItems = ['Donate', 'Events', 'Projects', 'Account'];
 
   return (
     <StyledAppBar position="sticky">
