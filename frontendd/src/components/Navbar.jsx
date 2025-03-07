@@ -14,6 +14,7 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import { styled } from '@mui/material/styles';
 import { HeartHandshake, Bell, X, LogOut } from 'lucide-react'; // Lucide icons
+import Cookies from 'js-cookie';
 
 // Color scheme
 const themeColors = {
@@ -60,8 +61,8 @@ const Navbar = () => {
   const [notificationMessages, setNotificationMessages] = React.useState([]);
 
   useEffect(() => {
-    const email = localStorage.getItem('email');
-    const role = localStorage.getItem('role');
+    const email = Cookies.get('email');
+    const role = Cookies.get('role');
     console.log('Email:', email, 'Role:', role);
     if (email) {
       setUserName(email.split('@')[0]);
@@ -70,7 +71,8 @@ const Navbar = () => {
   }, []);
 
   const handleLogout = () => {
-    localStorage.clear();
+    Cookies.remove('email');
+    Cookies.remove('role');
     navigate('/auth');
   };
 
