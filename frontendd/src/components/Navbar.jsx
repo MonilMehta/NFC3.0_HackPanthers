@@ -62,6 +62,7 @@ const Navbar = () => {
   useEffect(() => {
     const email = localStorage.getItem('email');
     const role = localStorage.getItem('role');
+    console.log('Email:', email, 'Role:', role);
     if (email) {
       setUserName(email.split('@')[0]);
       setRole(role);
@@ -70,7 +71,7 @@ const Navbar = () => {
 
   const handleLogout = () => {
     localStorage.clear();
-    navigate('/login');
+    navigate('/auth');
   };
 
   const handleOpenNavMenu = (event) => {
