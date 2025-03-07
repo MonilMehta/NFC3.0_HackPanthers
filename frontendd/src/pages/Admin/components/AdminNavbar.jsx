@@ -14,9 +14,10 @@ import MenuItem from '@mui/material/MenuItem';
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import { Link } from 'react-router-dom';
 
-const pages = [''];
+const pages = ['Dashboard', 'Users', 'Reports'];
 const settings = [
-  { label: 'Account', path: '/account' },
+  { label: 'Profile', path: '/admin/profile' },
+  { label: 'Settings', path: '/admin/settings' },
   { label: 'Logout', path: '/' },
 ];
 
@@ -27,46 +28,42 @@ function AdminNavbar() {
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
-
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
-
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
-
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
 
   return (
-    <AppBar position="sticky" sx={{ backgroundColor: '#2E933C' }}>
+    <AppBar position="sticky" sx={{ backgroundColor: '#1a237e' }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AdminPanelSettingsIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1, color: 'yellow' }} />
+          <AdminPanelSettingsIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1, color: '#ffd700' }} />
           <Typography
             variant="h6"
             noWrap
-            component="a"
-            href="#"
+            component={Link}
+            to="/admin/dashboard"
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
-              fontFamily: 'Arial', // Set to a normal font
-              fontWeight: 'normal', // Set to normal weight
-              letterSpacing: '.1rem', // Adjusted for subtlety
+              fontFamily: 'Roboto',
+              fontWeight: 600,
               color: 'white',
               textDecoration: 'none',
             }}
           >
-            Admin Panel
+            Admin Portal
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"
-              aria-label="menu"
+              aria-label="account of current user"
               aria-controls="menu-appbar"
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
@@ -88,41 +85,56 @@ function AdminNavbar() {
               }}
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
-              sx={{ display: { xs: 'block', md: 'none' } }}
+              sx={{
+                display: { xs: 'block', md: 'none' },
+              }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography sx={{ textAlign: 'center', color: '#ecf0f1' }}>{page}</Typography>
+                <MenuItem 
+                  key={page} 
+                  onClick={handleCloseNavMenu}
+                  component={Link}
+                  to={`/admin/${page.toLowerCase()}`}
+                >
+                  <Typography textAlign="center">{page}</Typography>
                 </MenuItem>
               ))}
             </Menu>
           </Box>
-          <AdminPanelSettingsIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1, color: '#f39c12' }} />
+
+          <AdminPanelSettingsIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1, color: '#ffd700' }} />
           <Typography
             variant="h5"
             noWrap
-            component="a"
-            href="#"
+            component={Link}
+            to="/admin/dashboard"
             sx={{
               mr: 2,
               display: { xs: 'flex', md: 'none' },
               flexGrow: 1,
-              fontFamily: 'Arial', // Set to a normal font
-              fontWeight: 'normal', // Set to normal weight
-              letterSpacing: '.1rem', // Adjusted for subtlety
-              color: '#ecf0f1',
+              fontFamily: 'Roboto',
+              fontWeight: 600,
+              color: 'white',
               textDecoration: 'none',
             }}
           >
-            Admin Panel
+            Admin Portal
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
               <Button
                 key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: '#ecf0f1', display: 'block' }}
+                component={Link}
+                to={`/admin/${page.toLowerCase()}`}
+                sx={{
+                  my: 2,
+                  color: 'white',
+                  display: 'block',
+                  '&:hover': {
+                    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                  }
+                }}
               >
                 {page}
               </Button>
@@ -130,9 +142,16 @@ function AdminNavbar() {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
+            <Tooltip title="Admin settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Admin Profile" src="/static/images/avatar/1.jpg" />
+                <Avatar 
+                  sx={{ 
+                    bgcolor: '#ffd700',
+                    color: '#1a237e'
+                  }}
+                >
+                  A
+                </Avatar>
               </IconButton>
             </Tooltip>
             <Menu
@@ -152,15 +171,13 @@ function AdminNavbar() {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting.label} onClick={handleCloseUserMenu}>
-                  <Link
-                    to={setting.path}
-                    style={{ textDecoration: 'none', color: '#2c3e50' }}
-                  >
-                    <Typography sx={{ textAlign: 'center' }}>
-                      {setting.label}
-                    </Typography>
-                  </Link>
+                <MenuItem 
+                  key={setting.label} 
+                  onClick={handleCloseUserMenu}
+                  component={Link}
+                  to={setting.path}
+                >
+                  <Typography textAlign="center">{setting.label}</Typography>
                 </MenuItem>
               ))}
             </Menu>
