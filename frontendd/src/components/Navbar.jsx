@@ -53,7 +53,7 @@ const StyledButton = styled(Button)(({ theme }) => ({
 const Navbar = () => {
   const navigate = useNavigate();
   const [userName, setUserName] = useState('');
-  const [userRole, setUserRole] = useState('');
+  const [role, setRole] = useState('');
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [openNotification, setOpenNotification] = React.useState(false);
@@ -64,7 +64,7 @@ const Navbar = () => {
     const role = localStorage.getItem('role');
     if (email) {
       setUserName(email.split('@')[0]);
-      setUserRole(role);
+      setRole(role);
     }
   }, []);
 
@@ -136,8 +136,8 @@ const Navbar = () => {
   };
 
   const getRoleMessage = () => {
-    if (userRole === 'admin') return 'Admin Dashboard';
-    if (userRole === 'normalUser') return 'Welcome Volunteer';
+    if (role === 'admin') return 'Admin Dashboard';
+    if (role === 'normalUser') return 'Welcome Volunteer';
     return 'Welcome Guest';
   };
 
@@ -256,7 +256,7 @@ const Navbar = () => {
             justifyContent: 'center',
             gap: 2
           }}>
-            {userRole && (
+            {role && (
               <>
                 <StyledButton component={Link} to="/donation">Donate</StyledButton>
                 <StyledButton component={Link} to="/events">Events</StyledButton>
@@ -284,7 +284,7 @@ const Navbar = () => {
             alignItems: 'center',
             gap: 2
           }}>
-            {userRole && (
+            {role && (
               <Typography
                 sx={{
                   color: themeColors.accent,
@@ -297,7 +297,7 @@ const Navbar = () => {
               </Typography>
             )}
 
-            {userRole && (
+            {role && (
               <Tooltip title="Notifications">
                 <IconButton 
                   onClick={handleNotificationClick}
@@ -378,7 +378,7 @@ const Navbar = () => {
             </Box>
 
             {/* User menu */}
-            {userRole ? (
+            {role ? (
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                 <Tooltip title="Account settings">
                   <IconButton onClick={handleOpenUserMenu}>
