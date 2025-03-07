@@ -44,7 +44,7 @@ const SignupSignin = () => {
   const fillNormalCredentials = () => {
     setLoginData({
       email: normalUser.email,
-      password: normal.password
+      password: normalUser.password
     });
   };
 
