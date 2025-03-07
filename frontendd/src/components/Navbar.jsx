@@ -267,7 +267,7 @@ const Navbar = () => {
                 <StyledButton component={Link} to="/projects">Projects</StyledButton>
                 <StyledButton 
                   component={Link} 
-                  to="/accounts"
+                  to="/account"
                   sx={{
                     backgroundColor: themeColors.accent,
                     '&:hover': {
