@@ -174,7 +174,7 @@ const MobileMenuButton = styled(IconButton)({
 const MobileMenu = styled('div')(({ isOpen }) => ({
   display: 'block',
   overflow: 'hidden',
-  maxHeight: isOpen ? '400px' : '0',
+  maxHeight: isOpen ? '500px' : '0',
   transition: 'max-height 0.3s ease',
   '@media (min-width: 768px)': {
     display: 'none',
@@ -201,6 +201,42 @@ const MobileNavLink = styled(Link)({
     color: themeColors.text,
     backgroundColor: themeColors.hover,
   },
+});
+
+const MobileAdminSection = styled('div')({
+  borderTop: `1px solid ${themeColors.border}`,
+  marginTop: '16px',
+  paddingTop: '16px',
+});
+
+const MobileAdminHeader = styled('div')({
+  display: 'flex',
+  alignItems: 'center',
+  gap: '8px',
+  padding: '12px 16px',
+  marginBottom: '8px',
+  backgroundColor: '#f8f9fa',
+  borderRadius: '8px',
+  border: '1px solid #e9ecef',
+});
+
+const MobileAdminAvatar = styled('div')({
+  width: '28px',
+  height: '28px',
+  backgroundColor: '#000000',
+  borderRadius: '50%',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  color: '#ffffff',
+  fontSize: '12px',
+  fontWeight: 600,
+});
+
+const MobileAdminText = styled('span')({
+  fontSize: '14px',
+  fontWeight: 600,
+  color: themeColors.text,
 });
 
 const DropdownMenu = styled('div')({
@@ -247,8 +283,8 @@ const AdminNavbar = () => {
 
   const pages = ['Dashboard', 'Staff', 'Reports','Events', 'Projects', 'Notifications','Donations'];
   const settings = [
-    { label: 'Logout', path: '/' },
-    { label: 'Account', path: '/admin/adminAccount' }
+    { label: 'Account', path: '/admin/adminAccount' },
+    { label: 'Logout', path: '/' }
   ];
 
   // Scroll handler
@@ -276,7 +312,6 @@ const AdminNavbar = () => {
         <NavbarInner>
           {/* Logo Section */}
           <LogoSection>
-    
             <LogoText to="/admin">
               Admin Portal
             </LogoText>
@@ -322,6 +357,7 @@ const AdminNavbar = () => {
         {/* Mobile Menu */}
         <MobileMenu isOpen={isOpen}>
           <MobileMenuContent>
+            {/* Navigation Links */}
             {pages.map((page) => (
               <MobileNavLink 
                 key={page} 
@@ -331,7 +367,14 @@ const AdminNavbar = () => {
                 {page}
               </MobileNavLink>
             ))}
-            <div style={{ borderTop: `1px solid ${themeColors.border}`, marginTop: '16px', paddingTop: '16px' }}>
+            
+            {/* Admin Section for Mobile */}
+            <MobileAdminSection>
+              <MobileAdminHeader>
+                <MobileAdminAvatar>A</MobileAdminAvatar>
+                <MobileAdminText>Admin</MobileAdminText>
+              </MobileAdminHeader>
+              
               {settings.map((setting) => (
                 <MobileNavLink 
                   key={setting.label} 
@@ -341,7 +384,7 @@ const AdminNavbar = () => {
                   {setting.label}
                 </MobileNavLink>
               ))}
-            </div>
+            </MobileAdminSection>
           </MobileMenuContent>
         </MobileMenu>
       </NavbarContent>
