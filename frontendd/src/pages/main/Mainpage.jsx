@@ -75,7 +75,7 @@ const Mainpage = () => {
 
   useEffect(() => {
     // Fetch project data
-    axios.get('https://localhost:8000/projects')
+    axios.get('https://nurturenest-backend.onrender.com/projects')
       .then(response => {
         setProjects(response.data);
       })

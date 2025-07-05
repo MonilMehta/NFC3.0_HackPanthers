@@ -25,7 +25,7 @@ const AdminEvents = () => {
     const fetchEvents = async () => {
       try {
         const response = await fetch(
-          "http://localhost:8000/events/getEventsDetails"
+          "https://nurturenest-backend.onrender.com/events/getEventsDetails"
         ); // Adjust the API endpoint as needed
         const data = await response.json();
         setEvents(data.events);

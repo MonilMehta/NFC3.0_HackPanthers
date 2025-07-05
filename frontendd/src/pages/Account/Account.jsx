@@ -34,7 +34,7 @@ export default function Account() {
 
   useEffect(() => {
     const email = Cookies.get('email');
-    axios.get(`http://localhost:8000/users/getUser/${email}`)
+    axios.get(`https://nurturenest-backend.onrender.com/users/getUser/${email}`)
       .then(response => {
         setUser(response.data);
         setRender(true);

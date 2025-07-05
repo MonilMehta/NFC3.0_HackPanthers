@@ -40,7 +40,7 @@ const ProjectForm = ({ onClose, onProjectAdded }) => {
   useEffect(() => {
     const fetchStaffList = async () => {
       try {
-        const response = await fetch('http://localhost:8000/events/getStaff');
+        const response = await fetch('https://nurturenest-backend.onrender.com/events/getStaff');
         if (response.ok) {
           const staffData = await response.json();
           setStaffList(staffData);
@@ -75,7 +75,7 @@ const ProjectForm = ({ onClose, onProjectAdded }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:8000/projects/createProject', {
+      const response = await fetch('https://nurturenest-backend.onrender.com/projects/createProject', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -287,7 +287,7 @@ const AdminProjects = () => {
     const fetchProjects = async () => {
       try {
         const response = await fetch(
-          "http://localhost:8000/projects/getProjectsDetails"
+          "https://nurturenest-backend.onrender.com/projects/getProjectsDetails"
         ); // Adjust the API endpoint as needed
         const data = await response.json();
         setProjects(data.projects || data); // Adjust based on your API response structure
@@ -317,7 +317,7 @@ const AdminProjects = () => {
   const fetchProjects = async () => {
     try {
       const response = await fetch(
-        "http://localhost:8000/projects/getProjectsDetails"
+        "https://nurturenest-backend.onrender.com/projects/getProjectsDetails"
       );
       const data = await response.json();
       setProjects(data.projects || data);

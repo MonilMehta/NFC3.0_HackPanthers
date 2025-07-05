@@ -54,7 +54,7 @@ const AdminNotification = () => {
     setSuccess('');
 
     try {
-      const response = await fetch('http://localhost:8000/message/sendMessage', {
+      const response = await fetch('https://nurturenest-backend.onrender.com/message/sendMessage', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

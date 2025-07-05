@@ -22,7 +22,7 @@ const EventForm = ({ onClose }) => {
     // Fetch staff list from API
     const fetchStaffList = async () => {
       try {
-        const response = await fetch('http://localhost:8000/events/getStaff');
+        const response = await fetch('https://nurturenest-backend.onrender.com/events/getStaff');
         if (response.ok) {
           const staffData = await response.json();
           setStaffList(staffData);
@@ -73,7 +73,7 @@ const EventForm = ({ onClose }) => {
       staff: selectedStaff // Array of staff IDs
     };
     try {
-      const response = await fetch('http://localhost:8000/events/createEvent', {
+      const response = await fetch('https://nurturenest-backend.onrender.com/events/createEvent', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
