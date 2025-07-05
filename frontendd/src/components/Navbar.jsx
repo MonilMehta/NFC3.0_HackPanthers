@@ -472,7 +472,14 @@ const Navbar = () => {
     return 'Welcome Guest';
   };
 
-  const navItems = ['Donate', 'Events', 'Projects', 'Account'];
+  // Define navigation items with their correct URLs
+  const navItems = [
+    { label: 'Home', url: '/main' },
+    { label: 'Events', url: '/events' },
+    { label: 'Projects', url: '/projects' },
+    { label: 'Donate', url: '/donationuser' },
+    { label: 'Account', url: '/account' }
+  ];
 
   return (
     <NavbarContainer isScrolled={isScrolled}>
@@ -575,11 +582,11 @@ const Navbar = () => {
           <MobileMenuContent>
             {role && navItems.map((item) => (
               <MobileNavLink 
-                key={item} 
-                to={`/${item.toLowerCase()}`} 
+                key={item.label} 
+                to={item.url} 
                 onClick={() => setIsOpen(false)}
               >
-                {item}
+                {item.label}
               </MobileNavLink>
             ))}
             {role && (
