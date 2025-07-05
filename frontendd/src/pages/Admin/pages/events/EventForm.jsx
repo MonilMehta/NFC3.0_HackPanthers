@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Button, TextField, Typography, Box, Container, Grid, MenuItem, Select, InputLabel, Checkbox, ListItemText } from '@mui/material';
 
 const EventForm = ({ onClose }) => {
   const [formData, setFormData] = useState({
@@ -23,7 +22,7 @@ const EventForm = ({ onClose }) => {
     // Fetch staff list from API
     const fetchStaffList = async () => {
       try {
-        const response = await fetch('https://nurturenest-cvqz.onrender.com/events/getStaff');
+        const response = await fetch('http://localhost:8000/events/getStaff');
         if (response.ok) {
           const staffData = await response.json();
           setStaffList(staffData);
@@ -58,7 +57,12 @@ const EventForm = ({ onClose }) => {
   };
 
   const handleStaffChange = (event) => {
-    setSelectedStaff(event.target.value);
+    const { value, checked } = event.target;
+    if (checked) {
+      setSelectedStaff(prev => [...prev, value]);
+    } else {
+      setSelectedStaff(prev => prev.filter(id => id !== value));
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -69,7 +73,7 @@ const EventForm = ({ onClose }) => {
       staff: selectedStaff // Array of staff IDs
     };
     try {
-      const response = await fetch('https://nurturenest-cvqz.onrender.com/events/createEvent', {
+      const response = await fetch('http://localhost:8000/events/createEvent', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -90,171 +94,232 @@ const EventForm = ({ onClose }) => {
   };
 
   return (
-    <Container component="main" maxWidth="sm" sx={{ padding: '20px', backgroundColor: '#f9f9f9', borderRadius: '8px' }}>
-      <Typography variant="h4" component="h1" gutterBottom className="text-[#204E4A]">
-        Add New Event
-      </Typography>
-      <form onSubmit={handleSubmit}>
-        <Box sx={{ marginBottom: '20px' }}>
-          <TextField
-            fullWidth
-            label="Event Name"
+    <div className="p-8 bg-white rounded-3xl shadow-xl border-2" style={{ borderColor: '#003E1F' }}>
+      <form onSubmit={handleSubmit} className="space-y-8">
+        {/* Event Name */}
+        <div>
+          <label className="block text-sm font-semibold mb-3" style={{ color: '#003E1F' }}>
+            Event Name *
+          </label>
+          <input
+            type="text"
             name="eventName"
             value={formData.eventName}
             onChange={handleChange}
             required
-            sx={{ mb: 2 }}
+            className="w-full px-6 py-4 border-2 rounded-2xl focus:ring-4 focus:ring-green-400 focus:border-green-400 outline-none transition-all duration-300 bg-white placeholder-gray-400"
+            style={{ borderColor: '#003E1F', color: '#003E1F' }}
+            placeholder="Enter event name"
           />
-        </Box>
-        <Box sx={{ marginBottom: '20px' }}>
-          <TextField
-            fullWidth
-            label="Description"
+        </div>
+
+        {/* Description */}
+        <div>
+          <label className="block text-sm font-semibold mb-3" style={{ color: '#003E1F' }}>
+            Description *
+          </label>
+          <textarea
             name="description"
-            multiline
-            rows={4}
             value={formData.description}
             onChange={handleChange}
             required
-            sx={{ mb: 2 }}
+            rows={4}
+            className="w-full px-6 py-4 border-2 rounded-2xl focus:ring-4 focus:ring-green-400 focus:border-green-400 outline-none transition-all duration-300 resize-none bg-white placeholder-gray-400"
+            style={{ borderColor: '#003E1F', color: '#003E1F' }}
+            placeholder="Enter event description"
           />
-        </Box>
-        <Box sx={{ marginBottom: '20px' }}>
-          <TextField
-            fullWidth
-            label="Date"
+        </div>
+
+        {/* Date */}
+        <div>
+          <label className="block text-sm font-semibold mb-3" style={{ color: '#003E1F' }}>
+            Date *
+          </label>
+          <input
             type="date"
             name="date"
-            InputLabelProps={{ shrink: true }}
             value={formData.date}
             onChange={handleChange}
             required
-            sx={{ mb: 2 }}
+            className="w-full px-6 py-4 border-2 rounded-2xl focus:ring-4 focus:ring-green-400 focus:border-green-400 outline-none transition-all duration-300 bg-white"
+            style={{ borderColor: '#003E1F', color: '#003E1F' }}
           />
-        </Box>
-        <Typography variant="h6" component="h2" gutterBottom className="text-[#204E4A]">
-          Location
-        </Typography>
-        <Grid container spacing={2}>
-          <Grid item xs={12}>
-            <TextField
-              fullWidth
-              label="Address"
-              name="address"
-              value={formData.location.address}
-              onChange={handleLocationChange}
-              required
-              sx={{ mb: 2 }}
-            />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              fullWidth
-              label="City"
-              name="city"
-              value={formData.location.city}
-              onChange={handleLocationChange}
-              required
-              sx={{ mb: 2 }}
-            />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              fullWidth
-              label="State"
-              name="state"
-              value={formData.location.state}
-              onChange={handleLocationChange}
-              required
-              sx={{ mb: 2 }}
-            />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              fullWidth
-              label="Zip Code"
-              name="zipCode"
-              value={formData.location.zipCode}
-              onChange={handleLocationChange}
-              required
-              sx={{ mb: 2 }}
-            />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              fullWidth
-              label="Country"
-              name="country"
-              value={formData.location.country}
-              onChange={handleLocationChange}
-              required
-              sx={{ mb: 2 }}
-            />
-          </Grid>
-        </Grid>
-        <Box sx={{ marginBottom: '20px' }}>
-          <TextField
-            fullWidth
-            label="Organizer"
+        </div>
+
+        {/* Location Section */}
+        <div className="bg-white rounded-3xl p-6 shadow-lg border-2" style={{ borderColor: '#003E1F' }}>
+          <h3 className="text-xl font-bold mb-6 flex items-center gap-3" style={{ color: '#003E1F' }}>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M21 10C21 17 12 23 12 23S3 17 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z" stroke="#003E1F" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              <circle cx="12" cy="10" r="3" stroke="#003E1F" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+            Location
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="md:col-span-2">
+              <label className="block text-sm font-semibold mb-3" style={{ color: '#003E1F' }}>
+                Address *
+              </label>
+              <input
+                type="text"
+                name="address"
+                value={formData.location.address}
+                onChange={handleLocationChange}
+                required
+                className="w-full px-6 py-4 border-2 rounded-2xl focus:ring-4 focus:ring-green-400 focus:border-green-400 outline-none transition-all duration-300 bg-white placeholder-gray-400"
+                style={{ borderColor: '#003E1F', color: '#003E1F' }}
+                placeholder="Enter address"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-semibold mb-3" style={{ color: '#003E1F' }}>
+                City *
+              </label>
+              <input
+                type="text"
+                name="city"
+                value={formData.location.city}
+                onChange={handleLocationChange}
+                required
+                className="w-full px-6 py-4 border-2 rounded-2xl focus:ring-4 focus:ring-green-400 focus:border-green-400 outline-none transition-all duration-300 bg-white placeholder-gray-400"
+                style={{ borderColor: '#003E1F', color: '#003E1F' }}
+                placeholder="Enter city"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-semibold mb-3" style={{ color: '#003E1F' }}>
+                State *
+              </label>
+              <input
+                type="text"
+                name="state"
+                value={formData.location.state}
+                onChange={handleLocationChange}
+                required
+                className="w-full px-6 py-4 border-2 rounded-2xl focus:ring-4 focus:ring-green-400 focus:border-green-400 outline-none transition-all duration-300 bg-white placeholder-gray-400"
+                style={{ borderColor: '#003E1F', color: '#003E1F' }}
+                placeholder="Enter state"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-semibold mb-3" style={{ color: '#003E1F' }}>
+                Zip Code *
+              </label>
+              <input
+                type="text"
+                name="zipCode"
+                value={formData.location.zipCode}
+                onChange={handleLocationChange}
+                required
+                className="w-full px-6 py-4 border-2 rounded-2xl focus:ring-4 focus:ring-green-400 focus:border-green-400 outline-none transition-all duration-300 bg-white placeholder-gray-400"
+                style={{ borderColor: '#003E1F', color: '#003E1F' }}
+                placeholder="Enter zip code"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-semibold mb-3" style={{ color: '#003E1F' }}>
+                Country *
+              </label>
+              <input
+                type="text"
+                name="country"
+                value={formData.location.country}
+                onChange={handleLocationChange}
+                required
+                className="w-full px-6 py-4 border-2 rounded-2xl focus:ring-4 focus:ring-green-400 focus:border-green-400 outline-none transition-all duration-300 bg-white placeholder-gray-400"
+                style={{ borderColor: '#003E1F', color: '#003E1F' }}
+                placeholder="Enter country"
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* Organizer */}
+        <div>
+          <label className="block text-sm font-semibold mb-3" style={{ color: '#003E1F' }}>
+            Organizer *
+          </label>
+          <input
+            type="text"
             name="organizer"
             value={formData.organizer}
             onChange={handleChange}
             required
-            sx={{ mb: 2 }}
+            className="w-full px-6 py-4 border-2 rounded-2xl focus:ring-4 focus:ring-green-400 focus:border-green-400 outline-none transition-all duration-300 bg-white placeholder-gray-400"
+            style={{ borderColor: '#003E1F', color: '#003E1F' }}
+            placeholder="Enter organizer name"
           />
-        </Box>
-        <Box sx={{ marginBottom: '20px' }}>
-          <Typography variant="h6" component="h2" gutterBottom className="text-[#204E4A]">
+        </div>
+
+        {/* Staff Selection */}
+        <div className="bg-white rounded-3xl p-6 shadow-lg border-2" style={{ borderColor: '#003E1F' }}>
+          <h3 className="text-xl font-bold mb-6 flex items-center gap-3" style={{ color: '#003E1F' }}>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M17 21V19C17 17.9391 16.5786 16.9217 15.8284 16.1716C15.0783 15.4214 14.0609 15 13 15H5C3.93913 15 2.92172 15.4214 2.17157 16.1716C1.42143 16.9217 1 17.9391 1 19V21" stroke="#003E1F" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              <circle cx="9" cy="7" r="4" stroke="#003E1F" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M23 21V19C23 18.1645 22.7155 17.3541 22.2094 16.6977C21.7033 16.0414 20.9996 15.5743 20.2 15.3706" stroke="#003E1F" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M16 3.13C16.8003 3.33256 17.5056 3.79955 18.0134 4.45606C18.5212 5.11256 18.8066 5.92299 18.8066 6.76C18.8066 7.59701 18.5212 8.40744 18.0134 9.06394C17.5056 9.72045 16.8003 10.1874 16 10.39" stroke="#003E1F" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
             Staff
-          </Typography>
-          <InputLabel id="staff-select-label">Select Staff</InputLabel>
-          <Select
-            labelId="staff-select-label"
-            multiple
-            value={selectedStaff}
-            onChange={handleStaffChange}
-            renderValue={(selected) => selected.map(id => {
-              const staff = staffList.find(staff => staff._id === id);
-              return staff ? `${staff.firstName} ${staff.lastName}` : '';
-            }).join(', ')}
-            fullWidth
-            inputProps={{ 'aria-label': 'Select Staff' }}
-            sx={{ mb: 2 }}
-          >
+          </h3>
+          <div className="max-h-64 overflow-y-auto border-2 rounded-2xl p-6 bg-white shadow-lg space-y-3" style={{ borderColor: '#003E1F' }}>
             {staffList.map((staff) => (
-              <MenuItem key={staff._id} value={staff._id}>
-                <Checkbox checked={selectedStaff.includes(staff._id)} />
-                <ListItemText primary={`${staff.firstName} ${staff.lastName}`} />
-              </MenuItem>
+              <div key={staff._id} className="flex items-center p-3 rounded-xl bg-gray-50 hover:bg-gray-100 transition-all duration-300 shadow-sm">
+                <input
+                  type="checkbox"
+                  id={`staff-${staff._id}`}
+                  value={staff._id}
+                  checked={selectedStaff.includes(staff._id)}
+                  onChange={handleStaffChange}
+                  className="w-5 h-5 border-2 rounded-lg focus:ring-green-500 focus:ring-2 transition-all duration-300"
+                  style={{ accentColor: '#003E1F', borderColor: '#003E1F' }}
+                />
+                <label 
+                  htmlFor={`staff-${staff._id}`} 
+                  className="ml-4 text-sm font-medium cursor-pointer"
+                  style={{ color: '#003E1F' }}
+                >
+                  {staff.firstName} {staff.lastName}
+                </label>
+              </div>
             ))}
-          </Select>
-        </Box>
-        <Box sx={{ marginBottom: '20px' }}>
-          <Typography variant="h6" component="h2" gutterBottom className="text-[#204E4A]">
-            Status
-          </Typography>
-          <InputLabel id="status-select-label">Event Status</InputLabel>
-          <Select
-            labelId="status-select-label"
+          </div>
+        </div>
+
+        {/* Status */}
+        <div>
+          <label className="block text-sm font-semibold mb-3" style={{ color: '#003E1F' }}>
+            Event Status
+          </label>
+          <select
             name="status"
             value={formData.status}
             onChange={handleChange}
-            fullWidth
-            sx={{ mb: 2 }}
+            className="w-full px-6 py-4 border-2 rounded-2xl focus:ring-4 focus:ring-green-400 focus:border-green-400 outline-none transition-all duration-300 bg-white"
+            style={{ borderColor: '#003E1F', color: '#003E1F' }}
           >
-            <MenuItem value="Scheduled">Scheduled</MenuItem>
-            <MenuItem value="Ongoing">Ongoing</MenuItem>
-            <MenuItem value="Completed">Completed</MenuItem>
-            <MenuItem value="Cancelled">Cancelled</MenuItem>
-          </Select>
-        </Box>
-        <Box sx={{ display: 'flex', justifyContent: 'flex-end', marginTop: '20px' }}>
-          <Button type="submit" variant="contained" color="primary">
-            Submit
-          </Button>
-        </Box>
+            <option value="Scheduled">Scheduled</option>
+            <option value="Ongoing">Ongoing</option>
+            <option value="Completed">Completed</option>
+            <option value="Cancelled">Cancelled</option>
+          </select>
+        </div>
+
+        {/* Submit Button */}
+        <div className="flex justify-end pt-6">
+          <button
+            type="submit"
+            className="text-white font-bold py-4 px-10 rounded-2xl shadow-xl transition-all duration-300 transform hover:scale-105 hover:shadow-2xl flex items-center gap-3"
+            style={{ backgroundColor: '#003E1F' }}
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 5V19M5 12H19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+            Create Event
+          </button>
+        </div>
       </form>
-    </Container>
+    </div>
   );
 };
 

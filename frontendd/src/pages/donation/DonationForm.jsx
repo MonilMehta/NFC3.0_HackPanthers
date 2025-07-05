@@ -1,31 +1,6 @@
 import React, { useState } from 'react';
-import { TextField, Button, Box, Typography, Container, Grid } from '@mui/material';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 import jsPDF from 'jspdf';
-import displayRazorPay from './razorpay'
-
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: '#4CAF50', // Soft green
-    },
-    secondary: {
-      main: '#FFC107', // Amber
-    },
-    background: {
-      default: '#FAFAFA', // Light gray background
-    },
-    text: {
-      primary: '#333333', // Darker text for readability
-    },
-  },
-  typography: {
-    fontFamily: 'Roboto, sans-serif',
-    h5: {
-      fontWeight: 700,
-    },
-  },
-});
+import displayRazorPay from './razorpay';
 
 const DonationForm = () => {
   const [formData, setFormData] = useState({
@@ -83,7 +58,7 @@ const DonationForm = () => {
     if (Object.keys(errors).length === 0) {
       try {
         setIsSubmitting(true);
-        const response = await fetch('https://nurturenest-cvqz.onrender.com/donates/donate', {
+        const response = await fetch('http://localhost:8000/donates/donate', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -137,133 +112,201 @@ const DonationForm = () => {
   };
 
   return (
-    <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="md">
-        <Box
-          sx={{
-            padding: '2rem 3rem',
-            backgroundColor: '#e9ecef',
-            marginTop: '2rem',
-            marginBottom: '2rem',
-          }}
-        >
-          <Typography
-            component="h1"
-            variant="h5"
-            align="center"
-            sx={{
-              color: '#333333',
-              marginBottom: '1.5rem',
-              fontWeight: 'bold',
-            }}
-          >
-            Donation Form
-          </Typography>
-          <Box component="form" noValidate onSubmit={handleSubmit}>
-            <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
-                <TextField
+    <div className="h-full py-8">
+      <div className="max-w-2xl mx-auto px-6">
+        {/* Header */}
+        <div className="text-center mb-8">
+          <h1 className="text-3xl font-bold mb-4" style={{ color: '#003E1F' }}>
+            Make a Donation
+          </h1>
+          <p className="text-gray-600 text-base">
+            Your generous contribution helps us make a positive impact in the lives of children in need
+          </p>
+        </div>
+
+        {/* Main Form Container */}
+        <div className="bg-white rounded-3xl p-6 shadow-xl border-2" style={{ borderColor: '#003E1F' }}>
+          <h2 className="text-xl font-bold mb-6 flex items-center gap-3" style={{ color: '#003E1F' }}>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2L13.09 8.26L20 9L13.09 9.74L12 16L10.91 9.74L4 9L10.91 8.26L12 2Z" stroke="#003E1F" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+            Donation Information
+          </h2>
+
+          <div className="space-y-4">
+            {/* Personal Information */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-semibold mb-2" style={{ color: '#003E1F' }}>
+                  First Name *
+                </label>
+                <input
+                  type="text"
                   name="firstName"
-                  required
-                  fullWidth
-                  label="First Name"
                   value={formData.firstName}
                   onChange={handleChange}
-                  error={!!validationErrors.firstName}
-                  helperText={validationErrors.firstName}
+                  placeholder="Enter your first name"
+                  className="w-full px-4 py-3 border-2 rounded-2xl focus:ring-4 focus:ring-green-400 focus:border-green-400 outline-none transition-all duration-300 bg-white placeholder-gray-400"
+                  style={{ 
+                    borderColor: validationErrors.firstName ? '#EF4444' : '#003E1F', 
+                    color: '#003E1F' 
+                  }}
                 />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
+                {validationErrors.firstName && (
+                  <p className="text-red-500 text-sm mt-1">{validationErrors.firstName}</p>
+                )}
+              </div>
+
+              <div>
+                <label className="block text-sm font-semibold mb-2" style={{ color: '#003E1F' }}>
+                  Last Name *
+                </label>
+                <input
+                  type="text"
                   name="lastName"
-                  required
-                  fullWidth
-                  label="Last Name"
                   value={formData.lastName}
                   onChange={handleChange}
-                  error={!!validationErrors.lastName}
-                  helperText={validationErrors.lastName}
+                  placeholder="Enter your last name"
+                  className="w-full px-4 py-3 border-2 rounded-2xl focus:ring-4 focus:ring-green-400 focus:border-green-400 outline-none transition-all duration-300 bg-white placeholder-gray-400"
+                  style={{ 
+                    borderColor: validationErrors.lastName ? '#EF4444' : '#003E1F', 
+                    color: '#003E1F' 
+                  }}
                 />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  name="donarEmail"
-                  required
-                  fullWidth
-                  label="Email Address"
-                  value={formData.donarEmail}
-                  onChange={handleChange}
-                  error={!!validationErrors.donarEmail}
-                  helperText={validationErrors.donarEmail}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  name="donarPhoneNo"
-                  required
-                  fullWidth
-                  label="Phone Number"
-                  type="tel"
-                  value={formData.donarPhoneNo}
-                  onChange={handleChange}
-                  error={!!validationErrors.donarPhoneNo}
-                  helperText={validationErrors.donarPhoneNo}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  name="amount"
-                  required
-                  fullWidth
-                  label="Donation Amount"
-                  type="number"
-                  value={formData.amount}
-                  onChange={handleChange}
-                  error={!!validationErrors.amount}
-                  helperText={validationErrors.amount}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  name="message"
-                  fullWidth
-                  label="Message (optional)"
-                  multiline
-                  rows={4}
-                  value={formData.message}
-                  onChange={handleChange}
-                />
-              </Grid>
-            </Grid>
-            
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                sx={{
-                  mt: 3,
-                  backgroundColor: '#4CAF50',
-                  color: '#ffffff',
-                  fontWeight: 600,
-                  '&:hover': {
-                    backgroundColor: '#388E3C',
-                    transform: 'translateY(-2px)',
-                  },
-                }}
-                disabled={isSubmitting}
-              >
-                {isSubmitting ? 'Submitting...' : 'Submit'}
-              </Button>
+                {validationErrors.lastName && (
+                  <p className="text-red-500 text-sm mt-1">{validationErrors.lastName}</p>
+                )}
+              </div>
+            </div>
 
-              {submissionError && (
-                <Typography color="error" align="center" sx={{ mt: 2 }}>
-                  {submissionError}
-                </Typography>
+            {/* Contact Information */}
+            <div>
+              <label className="block text-sm font-semibold mb-2" style={{ color: '#003E1F' }}>
+                Email Address *
+              </label>
+              <input
+                type="email"
+                name="donarEmail"
+                value={formData.donarEmail}
+                onChange={handleChange}
+                placeholder="Enter your email address"
+                className="w-full px-4 py-3 border-2 rounded-2xl focus:ring-4 focus:ring-green-400 focus:border-green-400 outline-none transition-all duration-300 bg-white placeholder-gray-400"
+                style={{ 
+                  borderColor: validationErrors.donarEmail ? '#EF4444' : '#003E1F', 
+                  color: '#003E1F' 
+                }}
+              />
+              {validationErrors.donarEmail && (
+                <p className="text-red-500 text-sm mt-1">{validationErrors.donarEmail}</p>
               )}
-          </Box>
-        </Box>
-      </Container>
-    </ThemeProvider>
+            </div>
+
+            <div>
+              <label className="block text-sm font-semibold mb-2" style={{ color: '#003E1F' }}>
+                Phone Number *
+              </label>
+              <input
+                type="tel"
+                name="donarPhoneNo"
+                value={formData.donarPhoneNo}
+                onChange={handleChange}
+                placeholder="Enter your phone number"
+                className="w-full px-4 py-3 border-2 rounded-2xl focus:ring-4 focus:ring-green-400 focus:border-green-400 outline-none transition-all duration-300 bg-white placeholder-gray-400"
+                style={{ 
+                  borderColor: validationErrors.donarPhoneNo ? '#EF4444' : '#003E1F', 
+                  color: '#003E1F' 
+                }}
+              />
+              {validationErrors.donarPhoneNo && (
+                <p className="text-red-500 text-sm mt-1">{validationErrors.donarPhoneNo}</p>
+              )}
+            </div>
+
+            {/* Donation Amount */}
+            <div>
+              <label className="block text-sm font-semibold mb-2" style={{ color: '#003E1F' }}>
+                Donation Amount ($) *
+              </label>
+              <input
+                type="number"
+                name="amount"
+                value={formData.amount}
+                onChange={handleChange}
+                placeholder="Enter donation amount"
+                min="1"
+                step="0.01"
+                className="w-full px-4 py-3 border-2 rounded-2xl focus:ring-4 focus:ring-green-400 focus:border-green-400 outline-none transition-all duration-300 bg-white placeholder-gray-400"
+                style={{ 
+                  borderColor: validationErrors.amount ? '#EF4444' : '#003E1F', 
+                  color: '#003E1F' 
+                }}
+              />
+              {validationErrors.amount && (
+                <p className="text-red-500 text-sm mt-1">{validationErrors.amount}</p>
+              )}
+            </div>
+
+            {/* Message */}
+            <div>
+              <label className="block text-sm font-semibold mb-2" style={{ color: '#003E1F' }}>
+                Message (Optional)
+              </label>
+              <textarea
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
+                placeholder="Leave a message with your donation"
+                rows={3}
+                className="w-full px-4 py-3 border-2 rounded-2xl focus:ring-4 focus:ring-green-400 focus:border-green-400 outline-none transition-all duration-300 resize-none bg-white placeholder-gray-400"
+                style={{ borderColor: '#003E1F', color: '#003E1F' }}
+              />
+            </div>
+
+            {/* Submit Button */}
+            <div className="flex justify-center pt-4">
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                onClick={handleSubmit}
+                className="text-white font-bold py-3 px-8 rounded-2xl shadow-xl transition-all duration-300 transform hover:scale-105 hover:shadow-2xl flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+                style={{ backgroundColor: '#003E1F' }}
+              >
+                {isSubmitting ? (
+                  <>
+                    <svg className="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    Processing...
+                  </>
+                ) : (
+                  <>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M12 2L13.09 8.26L20 9L13.09 9.74L12 16L10.91 9.74L4 9L10.91 8.26L12 2Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                    Submit Donation
+                  </>
+                )}
+              </button>
+            </div>
+
+            {/* Error Message */}
+            {submissionError && (
+              <div className="mt-4 p-3 bg-red-50 border-2 border-red-200 rounded-2xl">
+                <p className="text-red-600 text-center font-medium">{submissionError}</p>
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Additional Information */}
+        <div className="mt-6 text-center">
+          <p className="text-gray-600">
+            Your donation is secure and will be processed safely. Thank you for your generosity!
+          </p>
+        </div>
+      </div>
+    </div>
   );
 };
 

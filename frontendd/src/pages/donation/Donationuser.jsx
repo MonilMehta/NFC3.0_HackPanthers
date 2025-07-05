@@ -3,9 +3,9 @@ import { motion } from 'framer-motion';
 import { Link as Lk } from 'react-router-dom';
 import DonationText from './DonationText';
 import DonationForm from './DonationForm';
-import Navbar from '../landing/Navbr.jsx';
+import Navbar from '../../components/Navbar';
 
-const Donation = () => {
+const Donationuser = () => {
   return (
     <div className="min-h-screen bg-white">
       <Navbar />
@@ -36,4 +36,4 @@ const Donation = () => {
   );
 };
 
-export default Donation;
+export default Donationuser;

@@ -1,4 +1,4 @@
-
+import Navbar from '../landing/Navbr';
 import React, { useState, useEffect } from 'react';
 import AspectRatio from '@mui/joy/AspectRatio';
 import Box from '@mui/joy/Box';
@@ -24,9 +24,9 @@ import Rotationdoner from './Roationdoner';
 import RotationVol from './RotationVol';
 import axios from 'axios';
 import Cookies from 'js-cookie';
-import Navbar from '../../components/Navbar';
 
-export default function Account() {
+
+export default function AccountAdmin() {
   const [user, setUser] = useState(null); 
   const [render, setRender] = useState(false);
   const [showEvents, setShowEvents] = useState(false);

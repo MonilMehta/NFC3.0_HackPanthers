@@ -1,191 +1,357 @@
 import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
-import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
-import MenuItem from '@mui/material/MenuItem';
-import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import { Link } from 'react-router-dom';
+import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
+import MenuIcon from '@mui/icons-material/Menu';
+import CloseIcon from '@mui/icons-material/Close';
+import { styled } from '@mui/material/styles';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import IconButton from '@mui/material/IconButton';
+import Avatar from '@mui/material/Avatar';
 
-const pages = ['Dashboard', 'Staff', 'Reports'];
-const settings = [
-  { label: 'Profile', path: '/admin/profile' },
-  { label: 'Settings', path: '/admin/settings' },
-  { label: 'Logout', path: '/' },
-];
+// Modern color scheme
+const themeColors = {
+  primary: '#2A6B48',
+  secondary: '#83C5BE',
+  accent: '#FFD166',
+  background: '#FFFFFF',
+  text: '#1F2937',
+  textSecondary: '#6B7280',
+  border: '#E5E7EB',
+  hover: '#F9FAFB',
+};
 
-function AdminNavbar() {
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
+const NavbarContainer = styled('nav')(({ isScrolled }) => ({
+  position: 'fixed',
+  top: 0,
+  left: 0,
+  right: 0,
+  zIndex: 1000,
+  backgroundColor: isScrolled ? 'rgba(255, 255, 255, 0.95)' : '#FFFFFF',
+  backdropFilter: isScrolled ? 'blur(12px)' : 'none',
+  borderBottom: '3px solid black',
+  transition: 'all 0.3s ease',
+  boxShadow: isScrolled ? '0 1px 3px rgba(0, 0, 0, 0.1)' : 'none',
+}));
+
+const NavbarContent = styled('div')({
+  maxWidth: '1280px',
+  margin: '0 auto',
+  padding: '0 16px',
+  '@media (min-width: 640px)': {
+    padding: '0 24px',
+  },
+  '@media (min-width: 1024px)': {
+    padding: '0 32px',
+  },
+});
+
+const NavbarInner = styled('div')({
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+  height: '80px',
+});
+
+const LogoSection = styled('div')({
+  display: 'flex',
+  alignItems: 'center',
+  gap: '8px',
+  flex: 1,
+});
+
+const LogoIcon = styled('div')({
+  background: `linear-gradient(135deg, ${themeColors.primary} 0%, ${themeColors.secondary} 100%)`,
+  padding: '8px',
+  borderRadius: '8px',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+});
+
+const LogoText = styled(Link)({
+  fontSize: '24px',
+  fontWeight: 700,
+  color: themeColors.text,
+  textDecoration: 'none',
+  transition: 'color 0.2s ease',
+  '&:hover': {
+    color: themeColors.primary,
+  },
+});
+
+const DesktopNav = styled('div')({
+  display: 'none',
+  gap: '32px',
+  flex: 1,
+  justifyContent: 'center',
+  '@media (min-width: 768px)': {
+    display: 'flex',
+  },
+});
+
+const NavLink = styled(Link)({
+  color: '000000',
+  textDecoration: 'none',
+  padding: '12px 16px',
+  fontSize: '16px',
+  fontWeight: 500,
+  position: 'relative',
+  transition: 'color 0.2s ease',
+  '&:hover': {
+    color: themeColors.text,
+  },
+  '&::after': {
+    content: '""',
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    width: '0%',
+    height: '2px',
+    backgroundColor: themeColors.primary,
+    transition: 'width 0.3s ease',
+  },
+  '&:hover::after': {
+    width: '100%',
+  },
+});
+
+const AdminSection = styled('div')({
+  display: 'none',
+  flex: 1,
+  justifyContent: 'flex-end',
+  position: 'relative',
+  '@media (min-width: 768px)': {
+    display: 'flex',
+  },
+});
+
+const AdminButton = styled('button')({
+  display: 'flex',
+  alignItems: 'center',
+  gap: '8px',
+  background: 'black',
+  color: 'white',
+  padding: '8px 16px',
+  borderRadius: '24px',
+  border: 'none',
+  borderBottom: '3px solid black',
+  cursor: 'pointer',
+  fontWeight: 500,
+  transition: 'all 0.2s ease',
+  '&:hover': {
+    backgroundColor: '#333333',
+    borderBottomColor: '#333333',
+  },
+});
+
+const AdminAvatar = styled('div')({
+  width: '32px',
+  height: '32px',
+  backgroundColor: '#ffffff',
+  borderRadius: '50%',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  color: '#000000',
+  fontSize: '14px',
+  fontWeight: 600,
+});
+
+const MobileMenuButton = styled(IconButton)({
+  display: 'block',
+  padding: '8px',
+  borderRadius: '8px',
+  color: themeColors.textSecondary,
+  '&:hover': {
+    backgroundColor: themeColors.hover,
+  },
+  '@media (min-width: 768px)': {
+    display: 'none',
+  },
+});
+
+const MobileMenu = styled('div')(({ isOpen }) => ({
+  display: 'block',
+  overflow: 'hidden',
+  maxHeight: isOpen ? '400px' : '0',
+  transition: 'max-height 0.3s ease',
+  '@media (min-width: 768px)': {
+    display: 'none',
+  },
+}));
+
+const MobileMenuContent = styled('div')({
+  paddingTop: '16px',
+  paddingBottom: '24px',
+  borderTop: `1px solid ${themeColors.border}`,
+});
+
+const MobileNavLink = styled(Link)({
+  display: 'block',
+  padding: '16px',
+  color: themeColors.textSecondary,
+  textDecoration: 'none',
+  fontSize: '16px',
+  fontWeight: 500,
+  borderRadius: '8px',
+  margin: '4px 0',
+  transition: 'all 0.2s ease',
+  '&:hover': {
+    color: themeColors.text,
+    backgroundColor: themeColors.hover,
+  },
+});
+
+const DropdownMenu = styled('div')({
+  position: 'absolute',
+  top: '100%',
+  right: 0,
+  marginTop: '8px',
+  width: '192px',
+  backgroundColor: 'white',
+  borderRadius: '8px',
+  boxShadow: '0 10px 25px rgba(0, 0, 0, 0.1)',
+  border: `1px solid ${themeColors.border}`,
+  padding: '8px 0',
+  zIndex: 1001,
+});
+
+const DropdownItem = styled(Link)({
+  display: 'block',
+  padding: '12px 16px',
+  color: themeColors.textSecondary,
+  textDecoration: 'none',
+  fontSize: '14px',
+  fontWeight: 500,
+  transition: 'all 0.2s ease',
+  '&:hover': {
+    color: themeColors.text,
+    backgroundColor: themeColors.hover,
+  },
+});
+
+const Overlay = styled('div')({
+  position: 'fixed',
+  top: 0,
+  left: 0,
+  right: 0,
+  bottom: 0,
+  zIndex: 1000,
+});
+
+const AdminNavbar = () => {
+  const [isOpen, setIsOpen] = React.useState(false);
+  const [isScrolled, setIsScrolled] = React.useState(false);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
-  const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
-  };
+  const pages = ['Dashboard', 'Staff', 'Reports','Events', 'Projects', 'Notifications','Donations'];
+  const settings = [
+    { label: 'Logout', path: '/' },
+    { label: 'Account', path: '/admin/adminAccount' }
+  ];
+
+  // Scroll handler
+  React.useEffect(() => {
+    const handleScroll = () => {
+      const offset = window.scrollY;
+      setIsScrolled(offset > 50);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
+
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
 
   return (
-    <AppBar position="sticky" sx={{ backgroundColor: '#96c283' }}>
-      <Container maxWidth="xl">
-        <Toolbar disableGutters>
-          <AdminPanelSettingsIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1, color: '#ffd700' }} />
-          <Typography
-            variant="h6"
-            noWrap
-            component={Link}
-            to="/admin"
-            sx={{
-              mr: 2,
-              display: { xs: 'none', md: 'flex' },
-              fontFamily: 'Roboto',
-              fontWeight: 600,
-              color: 'white',
-              textDecoration: 'none',
-            }}
-          >
-            Admin Portal
-          </Typography>
+    <NavbarContainer isScrolled={isScrolled}>
+      <NavbarContent>
+        <NavbarInner>
+          {/* Logo Section */}
+          <LogoSection>
+    
+            <LogoText to="/admin">
+              Admin Portal
+            </LogoText>
+          </LogoSection>
 
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenNavMenu}
-              color="inherit"
-            >
-              <MenuIcon />
-            </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: 'block', md: 'none' },
-              }}
-            >
-              {pages.map((page) => (
-                <MenuItem 
-                  key={page} 
-                  onClick={handleCloseNavMenu}
-                  component={Link}
-                  to={`/admin/${page.toLowerCase()}`}
-                >
-                  <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box>
-
-          <AdminPanelSettingsIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1, color: '#ffd700' }} />
-          <Typography
-            variant="h5"
-            noWrap
-            component={Link}
-            to="/admin"
-            sx={{
-              mr: 2,
-              display: { xs: 'flex', md: 'none' },
-              flexGrow: 1,
-              fontFamily: 'Roboto',
-              fontWeight: 600,
-              color: 'white',
-              textDecoration: 'none',
-            }}
-          >
-            Admin Portal
-          </Typography>
-
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+          {/* Desktop Navigation */}
+          <DesktopNav>
             {pages.map((page) => (
-              <Button
-                key={page}
-                component={Link}
-                to={`/admin/${page.toLowerCase()}`}
-                sx={{
-                  my: 2,
-                  color: 'white',
-                  display: 'block',
-                  '&:hover': {
-                    backgroundColor: 'rgba(255, 255, 255, 0.1)',
-                  }
-                }}
+              <NavLink key={page} to={`/admin/${page.toLowerCase()}`}>
+                {page}
+              </NavLink>
+            ))}
+          </DesktopNav>
+
+          {/* Admin Section */}
+          <AdminSection>
+            <AdminButton onClick={handleOpenUserMenu}>
+              <AdminAvatar>A</AdminAvatar>
+              <span>Admin</span>
+            </AdminButton>
+            
+            {anchorElUser && (
+              <DropdownMenu>
+                {settings.map((setting) => (
+                  <DropdownItem
+                    key={setting.label}
+                    to={setting.path}
+                    onClick={handleCloseUserMenu}
+                  >
+                    {setting.label}
+                  </DropdownItem>
+                ))}
+              </DropdownMenu>
+            )}
+          </AdminSection>
+
+          {/* Mobile Menu Button */}
+          <MobileMenuButton onClick={() => setIsOpen(!isOpen)}>
+            {isOpen ? <CloseIcon /> : <MenuIcon />}
+          </MobileMenuButton>
+        </NavbarInner>
+
+        {/* Mobile Menu */}
+        <MobileMenu isOpen={isOpen}>
+          <MobileMenuContent>
+            {pages.map((page) => (
+              <MobileNavLink 
+                key={page} 
+                to={`/admin/${page.toLowerCase()}`} 
+                onClick={() => setIsOpen(false)}
               >
                 {page}
-              </Button>
+              </MobileNavLink>
             ))}
-          </Box>
-
-          <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Admin settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar 
-                  sx={{ 
-                    bgcolor: '#ffd700',
-                    color: '#1a237e'
-                  }}
-                >
-                  A
-                </Avatar>
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: '45px' }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
+            <div style={{ borderTop: `1px solid ${themeColors.border}`, marginTop: '16px', paddingTop: '16px' }}>
               {settings.map((setting) => (
-                <MenuItem 
+                <MobileNavLink 
                   key={setting.label} 
-                  onClick={handleCloseUserMenu}
-                  component={Link}
-                  to={setting.path}
+                  to={setting.path} 
+                  onClick={() => setIsOpen(false)}
                 >
-                  <Typography textAlign="center">{setting.label}</Typography>
-                </MenuItem>
+                  {setting.label}
+                </MobileNavLink>
               ))}
-            </Menu>
-          </Box>
-        </Toolbar>
-      </Container>
-    </AppBar>
+            </div>
+          </MobileMenuContent>
+        </MobileMenu>
+      </NavbarContent>
+      
+      {/* Overlay for dropdown */}
+      {anchorElUser && (
+        <Overlay onClick={handleCloseUserMenu} />
+      )}
+    </NavbarContainer>
   );
-}
+};
 
 export default AdminNavbar;

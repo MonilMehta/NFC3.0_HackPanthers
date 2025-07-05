@@ -7,7 +7,7 @@ const Footer = () => (
       <div className="xl:grid xl:grid-cols-3 xl:gap-8">
         <div className="space-y-8 xl:col-span-1">
           <span className="text-white font-bold text-6xl hover-float inline-block">
-            <i>ChildCare NGO</i>
+            <i>NurtureNest</i>
           </span>
           <p className="text-gray-300 text-base hover:text-white transition-colors duration-300">
             Making a difference in communities worldwide through sustainable development and education.

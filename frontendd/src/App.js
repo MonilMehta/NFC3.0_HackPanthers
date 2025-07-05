@@ -6,6 +6,7 @@ import Mainpage from './pages/main/Mainpage';
 import AdminMain from './pages/Admin/AdminMain';
 import Account from './pages/Account/Account';
 import Donation from './pages/donation/Donation';
+import Donationuser from './pages/donation/Donationuser';
 import EventUser from './pages/EventManagement/EventUser';
 // import RazorpayForm from './pages/donation/RazorpayForm';
 import EventInfoDetailsPage from './pages/EventManagement/EventInfoDetailPage';
@@ -21,6 +22,7 @@ const App = () => {
         <Route path="/admin/*" element={<AdminMain />} />
         <Route path="/account" element={<Account />} />
         <Route path="/donation" element={<Donation />} />
+        <Route path="/donationuser" element={<Donationuser />} />
         <Route path="/events" element={<EventUser />} />
         {/* <Route path="/razorpay" element={<RazorpayForm />} /> */}
         <Route path="/event-details/:eventId" element={<EventInfoDetailsPage />} />
