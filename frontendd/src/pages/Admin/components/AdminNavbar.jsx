@@ -174,8 +174,9 @@ const MobileMenuButton = styled(IconButton)({
 const MobileMenu = styled('div')(({ isOpen }) => ({
   display: 'block',
   overflow: 'hidden',
-  maxHeight: isOpen ? '500px' : '0',
+  maxHeight: isOpen ? '900px' : '0',
   transition: 'max-height 0.3s ease',
+  backgroundColor: '#ffffff',
   '@media (min-width: 768px)': {
     display: 'none',
   },
@@ -183,7 +184,7 @@ const MobileMenu = styled('div')(({ isOpen }) => ({
 
 const MobileMenuContent = styled('div')({
   paddingTop: '16px',
-  paddingBottom: '24px',
+  paddingBottom: '40px',
   borderTop: `1px solid ${themeColors.border}`,
 });
 
@@ -204,39 +205,71 @@ const MobileNavLink = styled(Link)({
 });
 
 const MobileAdminSection = styled('div')({
-  borderTop: `1px solid ${themeColors.border}`,
-  marginTop: '16px',
-  paddingTop: '16px',
+  borderTop: `2px solid ${themeColors.border}`,
+  marginTop: '20px',
+  paddingTop: '20px',
 });
 
 const MobileAdminHeader = styled('div')({
   display: 'flex',
   alignItems: 'center',
-  gap: '8px',
+  justifyContent: 'space-between',
+  gap: '12px',
   padding: '12px 16px',
-  marginBottom: '8px',
-  backgroundColor: '#f8f9fa',
+  marginBottom: '12px',
+  backgroundColor: '#000000',
   borderRadius: '8px',
-  border: '1px solid #e9ecef',
+  border: '2px solid #333333',
+  cursor: 'pointer',
+  transition: 'all 0.2s ease',
+  '&:hover': {
+    backgroundColor: '#333333',
+  },
 });
 
+const MobileAdminContent = styled('div')({
+  display: 'flex',
+  alignItems: 'center',
+  gap: '12px',
+});
+
+const MobileAdminArrow = styled('div')({
+  color: '#ffffff',
+  fontSize: '18px',
+  transition: 'transform 0.2s ease',
+  transform: 'rotate(0deg)',
+  '&.open': {
+    transform: 'rotate(180deg)',
+  },
+});
+
+const MobileAdminOptions = styled('div')(({ isOpen }) => ({
+  overflow: 'visible',
+  maxHeight: isOpen ? '200px' : '0',
+  transition: 'max-height 0.3s ease',
+  marginTop: '8px',
+  backgroundColor: '#ffffff',
+  borderRadius: '8px',
+  border: '1px solid #e5e7eb',
+}));
+
 const MobileAdminAvatar = styled('div')({
-  width: '28px',
-  height: '28px',
-  backgroundColor: '#000000',
+  width: '32px',
+  height: '32px',
+  backgroundColor: '#ffffff',
   borderRadius: '50%',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  color: '#ffffff',
-  fontSize: '12px',
+  color: '#000000',
+  fontSize: '14px',
   fontWeight: 600,
 });
 
 const MobileAdminText = styled('span')({
-  fontSize: '14px',
+  fontSize: '16px',
   fontWeight: 600,
-  color: themeColors.text,
+  color: '#ffffff',
 });
 
 const DropdownMenu = styled('div')({
@@ -368,13 +401,8 @@ const AdminNavbar = () => {
               </MobileNavLink>
             ))}
             
-            {/* Admin Section for Mobile */}
+            {/* Admin Section for Mobile - Direct Links */}
             <MobileAdminSection>
-              <MobileAdminHeader>
-                <MobileAdminAvatar>A</MobileAdminAvatar>
-                <MobileAdminText>Admin</MobileAdminText>
-              </MobileAdminHeader>
-              
               {settings.map((setting) => (
                 <MobileNavLink 
                   key={setting.label} 
