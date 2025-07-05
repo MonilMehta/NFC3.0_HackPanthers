@@ -7,7 +7,7 @@ import MissionSection from './MissionAction';
 import ProjectsSection from './ProjectSection';
 import Footer from './footer';
 import CallToAction from './CalltoAction';
-
+import Flow from '../main/Flow';
 const LandingPage = () => {
   const [showScrollTop, setShowScrollTop] = useState(false);
 
@@ -30,6 +30,7 @@ const LandingPage = () => {
       <HeroSection />
       <MissionSection />
       <ProjectsSection />
+       <Flow />
       <CallToAction />
       <Footer />
       
